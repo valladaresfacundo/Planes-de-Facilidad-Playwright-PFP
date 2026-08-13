@@ -38,6 +38,43 @@ const CONTRIBUYENTES = {
 const SIGN_CCT = 'eRZ2xq6a0bAirY+CvHbcFgmNGCqmN+g9iBywKvN2RpdLGjz67zqKNf9C78JQh3sNtpwNfVdc6JIS43jC0jjDcnKqB5nfd/+P753gMz7DFbhLJkh5kzdJ2I9wAC/fxXgoxi940qXBHtZkg+h/QNNMQSnIi1ZtS90vtO5wKWYQDwM=';
 const CUIT_AUTENTICADO = '30686855860';
 
+// ─── Ambientes de la API PFP (Fase 2 — lib/pfpApiClient.js) ──────────────────
+// Host/protocolo documentados por la herramienta HTML de trabajo del usuario
+// ("pfp_flujo_completo (26).html", no versionada — ver memoria pfp-api-endpoints),
+// que la describe como ya validada en vivo contra el ambiente real.
+// ⚠ SIN CONFIRMAR TODAVÍA por esta suite: el único tráfico observado en vivo en
+// esta sesión pegó a "https://api-cct-qa.agip.gob.ar" (sin ".apps.ocp-test-hc"),
+// para un endpoint distinto (ObtenerDeudasParaAcogerNuevo2025, llamado por el
+// frontend del portal). Podrían ser dos gateways al mismo backend. Confirmar
+// con tests/api/TC_API_000_smoke.spec.js antes de asumir que esto es correcto.
+// 2026-08-13: primer intento con host "api-cct-{a}.apps.ocp-test-hc.agip.gob.ar"
+// sobre HTTPS devolvió el 503 genérico de OpenShift "Application is not
+// available" — falsa alarma. El usuario volvió a pasar la herramienta HTML de
+// trabajo ("pfp_flujo_completo (26).html") y confirma que TODOS los hosts son
+// justo ese patrón "apps.ocp-test-hc.agip.gob.ar", pero sobre **HTTP, no
+// HTTPS** (igual que AMBIENTES/AMBIENTES_AGENTE de más arriba, que también son
+// http://). El 503 era el router de OpenShift respondiendo con su página por
+// defecto porque esas rutas no tienen TLS configurado — probarlas por HTTPS
+// pega contra el vhost por defecto del router, no contra el servicio real.
+// Confirmado en vivo con TC_API_000_smoke.spec.js tras el cambio. "publicador"
+// conecta bien (DNS + TCP ok) pero GenerarCancelaciones específicamente tardó
+// 30s+ y devolvió 504 Gateway Timeout por curl directo — es un batch pesado
+// (probablemente recorre todos los planes elegibles del ambiente, no uno
+// puntual), no un host equivocado. Los métodos que la llaman en
+// lib/pfpApiClient.js usan un timeout explícito más generoso por esto.
+const AMBIENTES_API = {
+  qa: {
+    cct:        'http://api-cct-qa.apps.ocp-test-hc.agip.gob.ar',
+    publicador: 'http://api-publicador-qa.apps.ocp-test-hc.agip.gob.ar',
+    txsapi:     'http://txsapi-txs-core-qa.apps.ocp-test-hc.agip.gob.ar',
+  },
+  'qa-av': {
+    cct:        'http://api-cct-qa-av.apps.ocp-test-hc.agip.gob.ar',
+    publicador: 'http://api-publicador-qa-av.apps.ocp-test-hc.agip.gob.ar',
+    txsapi:     'http://txsapi-txs-core-qa-av.apps.ocp-test-hc.agip.gob.ar',
+  },
+};
+
 // ─── Parámetros reales del PFP (Plan de Facilidades de Pago / Moratoria) ─────
 // Extraídos de la parametría oficial del sistema
 const PFP = {
@@ -141,4 +178,4 @@ const EXPEDIENTE_REVERSA = {
   reparticion: 'DGR',
 };
 
-module.exports = { AMBIENTES, AMBIENTES_AGENTE, CONTRIBUYENTES, SIGN_CCT, CUIT_AUTENTICADO, PFP, AGENTE, SIGN_AGENTE, PLANES_CONOCIDOS, EXPEDIENTE_REVERSA };
+module.exports = { AMBIENTES, AMBIENTES_AGENTE, AMBIENTES_API, CONTRIBUYENTES, SIGN_CCT, CUIT_AUTENTICADO, PFP, AGENTE, SIGN_AGENTE, PLANES_CONOCIDOS, EXPEDIENTE_REVERSA };
