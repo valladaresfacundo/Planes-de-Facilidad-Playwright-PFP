@@ -107,4 +107,38 @@ const AGENTE = {
 };
 
 const SIGN_AGENTE = 'hbx9zff2MNCa/s3DvvECFPv60gsSoNNVtlpQim5Xq/qk3Z4KVesCnjonER6X52/PBiWIxWE4jC2kn3N5hxuzxpRtXxa/LPQM8WqTVjOOjpdaBzwMqm5A+Zwn4SLsG6laALYP8TLgZ/FmEtOgH5ju8weJpG4dqAerPsKokiiv/f8=';
-module.exports = { AMBIENTES, AMBIENTES_AGENTE, CONTRIBUYENTES, SIGN_CCT, CUIT_AUTENTICADO, PFP, AGENTE, SIGN_AGENTE };
+
+// ─── Planes conocidos para pruebas post-acogimiento (Fase 1 — F3005/F3006/F3007/F3013) ─────
+// Estos tests necesitan un Nro. de solicitud real de un plan ya existente en el estado
+// correspondiente (no se puede fabricar en el momento sin la capa API de Fase 2).
+// Completar con datos reales de QA_HOMO — los tests que los usan se saltean solos
+// (test.skip) mientras estos campos queden en null.
+const PLANES_CONOCIDOS = {
+  // Plan real VIGENTE, CUIT 30686855860, impuesto "Sellos - AR RELIT", confirmado en QA_HOMO el 2026-08-12.
+  // Cuota 1 en estado "No Vencida" (sin pagar) — habilita F3007 (Cambiar CBU) pero NO F3005
+  // (la Cancelación Anticipada exige la 1° cuota paga; con este plan se prueba el caso negativo).
+  vigente: '1783000149',
+  // Planes reales CADUCO/NULO, mismo CUIT 30686855860.
+  // ⚠ Si se corre el flujo de reversa hasta el final (Continuar → Confirmar), el plan pasa
+  // a VIGENTE de verdad y deja de servir como fixture CADUCO/NULO — pedir un reemplazo si eso pasa.
+  // caduco: confirmado solo en DEV20 (2026-08-12) — falta reconfirmar que existe en QA_HOMO.
+  caduco: '1523072913', // → F3006 Reversa de Caducidad (Portal Agente)
+  // nulo: reemplazo provisto por el usuario el 2026-08-12 — el anterior (1523072944) se
+  // consumió validando F3013 end-to-end y quedó VIGENTE. Mismo cuidado: si TC_AGPFP_008
+  // corre hasta el final, este número también queda VIGENTE y hay que pedir otro reemplazo.
+  nulo: '1523000121',
+};
+
+// Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y
+// validado end-to-end en QA_HOMO el 2026-08-12 (flujo F3013 completo, ver PLANES_CONOCIDOS.nulo).
+// ⚠ Completar el formulario con estos datos y confirmar hasta el final SÍ ejecuta la reversa
+// de verdad (el plan pasa a VIGENTE) — ver PLANES_CONOCIDOS.caduco arriba.
+const EXPEDIENTE_REVERSA = {
+  tipoActuacion: 'EXPEDIENTES', // texto real de la opción del dropdown, en mayúsculas
+  anio: '2022',
+  numero: '00146527',
+  ente: 'GCABA',
+  reparticion: 'DGR',
+};
+
+module.exports = { AMBIENTES, AMBIENTES_AGENTE, CONTRIBUYENTES, SIGN_CCT, CUIT_AUTENTICADO, PFP, AGENTE, SIGN_AGENTE, PLANES_CONOCIDOS, EXPEDIENTE_REVERSA };

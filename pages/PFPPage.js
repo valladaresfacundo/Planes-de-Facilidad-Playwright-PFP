@@ -106,6 +106,52 @@ class PFPPage {
       fullPage: true,
     });
   }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Fase 1 — Operaciones sobre un plan ya existente (F3005/F3006/F3007/F3013)
+  // Navegación y selectores confirmados en vivo contra QA_HOMO (2026-08-12)
+  // usando el plan real 1783000149 (ver fixtures/test-data.js → PLANES_CONOCIDOS).
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // Navega a Cuenta Corriente > Planes de Facilidades — pantalla de búsqueda de
+  // planes existentes (distinta de "Operaciones > Planes/Moratoria", que es el
+  // wizard de alta de un plan nuevo).
+  async irAPlanesDeFacilidades() {
+    await this.page.waitForLoadState('networkidle');
+    await this.page.getByText('Cuenta Corriente').first().click();
+    await this.page.waitForLoadState('networkidle');
+    await this.page.getByText('Planes de Facilidades', { exact: false }).first().click();
+    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(1000);
+  }
+
+  // Busca un plan puntual por Nro. de solicitud, y entra a su pantalla de detalle
+  // (la lista solo muestra los datos generales; los botones de acción — Cambiar
+  // CBU / Cancelación Anticipada — están en el detalle, al hacer click en el
+  // Nº de solicitud de la fila).
+  async buscarPlanPorNroSolicitud(nroSolicitud) {
+    await this.page.getByRole('textbox', { name: 'Nro. de solicitud' }).fill(String(nroSolicitud));
+    await this.page.getByRole('button', { name: 'Consultar' }).click();
+    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(1000);
+    await this.page.getByText(String(nroSolicitud), { exact: false }).first().click();
+    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(1000);
+  }
+
+  // F3007 — Abre el modal "Cambiar CBU" sobre el plan encontrado.
+  async abrirCambioCBU() {
+    await this.page.getByRole('button', { name: 'Cambiar CBU' }).click();
+    await this.page.waitForTimeout(800);
+  }
+
+  // F3005 — Inicia el flujo de Cancelación Anticipada sobre el plan encontrado.
+  // Precondición real confirmada: la 1° cuota del plan debe estar PAGADA, si no
+  // el wizard ("Operaciones / Pagar") bloquea en el paso 1 con un mensaje de error.
+  async iniciarCancelacionAnticipada() {
+    await this.page.getByRole('button', { name: 'Cancelación Anticipada' }).click();
+    await this.page.waitForLoadState('networkidle');
+  }
 }
 
 module.exports = { PFPPage };
