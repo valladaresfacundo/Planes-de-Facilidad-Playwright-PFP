@@ -152,8 +152,13 @@ const SIGN_AGENTE = 'hbx9zff2MNCa/s3DvvECFPv60gsSoNNVtlpQim5Xq/qk3Z4KVesCnjonER6
 // (test.skip) mientras estos campos queden en null.
 const PLANES_CONOCIDOS = {
   // Plan real VIGENTE, CUIT 30686855860, impuesto "Sellos - AR RELIT", confirmado en QA_HOMO el 2026-08-12.
-  // Cuota 1 en estado "No Vencida" (sin pagar) — habilita F3007 (Cambiar CBU) pero NO F3005
-  // (la Cancelación Anticipada exige la 1° cuota paga; con este plan se prueba el caso negativo).
+  // ⚠ 2026-08-13: la cuota 1 se pagó DE VERDAD vía F3010 real (Fase 2, lib/pfpApiClient.js —
+  // ver tests/api/TC_API_010_pago_cuota1_f3010.spec.js, confirmado PAGADA tras el pago).
+  // Ya NO sirve para el caso negativo de F3005 que cubre TC_REG_009 en
+  // tests/regression/TC_REG_003_ca_cbu.spec.js (ese test asumía 1° cuota sin pagar) —
+  // pedirle al usuario un plan VIGENTE nuevo si hace falta reproducir ese caso negativo.
+  // En cambio, este plan ahora SÍ sirve para probar el caso POSITIVO de F3005 (Cancelación
+  // Anticipada aceptada), que estaba bloqueado en Fase 1.
   vigente: '1783000149',
   // Planes reales CADUCO/NULO, mismo CUIT 30686855860.
   // ⚠ Si se corre el flujo de reversa hasta el final (Continuar → Confirmar), el plan pasa
