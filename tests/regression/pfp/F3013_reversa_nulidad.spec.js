@@ -1,38 +1,21 @@
-// tests/regression/TC_AGENTE_003_reversas.spec.js
-// Regresión — Portal Agente (perfil AgentePFP): Reversa de Caducidad (F3006) y
-// Reversa de Nulidad (F3013). Fase 1 de la matriz de cobertura de formularios PFP.
+// tests/regression/pfp/F3013_reversa_nulidad.spec.js
+// F3013 — Reversa de Nulidad (NULO → VIGENTE), Portal Agente perfil
+// AgentePFP, Consultas → Consultar PF. Ver memoria pfp-formularios-catalogo.
+// Reorganizado 2026-08-19 (antes: TC_AGPFP_008 en TC_AGENTE_003_reversas.spec.js)
+// para agrupar la regresión por formulario. Ver F3006_reversa_caducidad.spec.js
+// para el mismo componente de "Expediente" aplicado a Caducidad.
 //
-// Ambiente: QA_HOMO (AMBIENTES_AGENTE.QA_HOMO) — DEV20 ya no es el ambiente de
-// regresión real, solo se usa para los smoke tests de migración NodeJS 20
-// (tests/smoke/TC_MIGRACION_NodeJS20.spec.js).
-//
-// Ambas reversas comparten el mismo componente de "Expediente" (3 pasos:
-// Expediente → Confirmación → Resultado) con 5 campos: Tipo Actuación
-// (dropdown, botón — no label), Año (4 dígitos), Número (8 dígitos), Ente
-// (5 caracteres), Repartición (2 a 9 caracteres).
-//
-// Ambos flujos se grabaron con Codegen por el usuario contra QA_HOMO real el
-// 2026-08-12 (la automatización vía Bash no abre ventana visible en su
-// escritorio — login manual + grabación de su lado). De ahí salieron los
-// nombres reales de botón, irregulares entre sí:
-//   - F3013: "Reversa de nulidad" (minúscula)
-//   - F3006: "Reversa caducidad" (sin "de")
-// y el resto del formulario, común a ambos: "Tipo Actuación" es un
-// getByRole('button') (no label), la opción del dropdown es "EXPEDIENTES" en
-// mayúsculas, y cada campo de texto lleva un Tab después del fill (parece
-// necesario para que la validación habilite "Continuar").
-//
-// El flujo F3013 se corrió hasta confirmar de verdad una vez (ver memoria
-// pfp-roadmap-fases) — quedó probado que funciona end-to-end. Estos dos tests
-// quedan parados en "Continuar habilitado" y NO confirman, para que sean
-// repetibles sin consumir un plan CADUCO/NULO nuevo en cada corrida.
+// Este flujo SÍ se corrió hasta confirmar de verdad una vez (ver memoria
+// pfp-roadmap-fases) — quedó probado que funciona end-to-end. El test de acá
+// queda parado en "Continuar habilitado" y NO confirma, para ser repetible
+// sin consumir un plan NULO nuevo en cada corrida.
 const { test, expect } = require('@playwright/test');
-const { LoginAgentePage } = require('../../pages/LoginAgentePage');
-const { AMBIENTES_AGENTE, AGENTE, SIGN_AGENTE, PLANES_CONOCIDOS, EXPEDIENTE_REVERSA } = require('../../fixtures/test-data');
+const { LoginAgentePage } = require('../../../pages/LoginAgentePage');
+const { AMBIENTES_AGENTE, AGENTE, SIGN_AGENTE, PLANES_CONOCIDOS, EXPEDIENTE_REVERSA } = require('../../../fixtures/test-data');
 
 const URL_AGENTE_QA = AMBIENTES_AGENTE.QA_HOMO;
 
-test.describe('Regresión — Portal Agente: Reversas de plan (AgentePFP)', () => {
+test.describe('F3013 — Reversa de Nulidad (Portal Agente)', () => {
 
   async function loginYBuscarPlan(page, nroSolicitud) {
     const loginPage = new LoginAgentePage(page);
@@ -66,16 +49,10 @@ test.describe('Regresión — Portal Agente: Reversas de plan (AgentePFP)', () =
     ]);
   }
 
-  // Completa los 5 campos del expediente con EXPEDIENTE_REVERSA — confirmado
-  // real contra QA_HOMO (F3013 y F3006, 2026-08-12). El Tab después de cada
-  // campo replica exacto lo grabado con Codegen.
-  //
-  // "Tipo Actuación" es una lista larga y alfabética con scroll virtualizado
-  // (confirmado visualmente: al abrirla solo se renderizan los primeros ítems
-  // — ACORDADA, ACTA, ACTO ADMINISTRATIVO... — "EXPEDIENTES" no existe en el
-  // DOM hasta hacer scroll de verdad). getByText().scrollIntoViewIfNeeded() no
-  // alcanza porque el nodo todavía no está renderizado; hace falta simular
-  // rueda de mouse dentro del menú para que la lista lo vaya montando.
+  // "Tipo Actuación" es una lista larga y alfabética con scroll virtualizado —
+  // hace falta simular rueda de mouse dentro del menú. pressSequentially en
+  // vez de fill() porque la validación de estos campos necesita eventos de
+  // teclado reales. Ver memoria pfp-roadmap-fases para el detalle completo.
   async function completarExpediente(portalPage) {
     const btnTipoActuacion = portalPage.getByRole('button', { name: 'Tipo Actuación' });
     await btnTipoActuacion.click();
@@ -83,8 +60,6 @@ test.describe('Regresión — Portal Agente: Reversas de plan (AgentePFP)', () =
 
     const opcion = portalPage.getByText(EXPEDIENTE_REVERSA.tipoActuacion, { exact: true });
 
-    // Posicionamos el mouse dentro del menú desplegable (debajo del botón que
-    // lo abre) para que mouse.wheel scrollee la lista y no la página de fondo.
     const triggerBox = await btnTipoActuacion.boundingBox();
     if (triggerBox) {
       await portalPage.mouse.move(triggerBox.x + triggerBox.width / 2, triggerBox.y + triggerBox.height + 60);
@@ -103,12 +78,6 @@ test.describe('Regresión — Portal Agente: Reversas de plan (AgentePFP)', () =
     await opcion.click();
     await portalPage.waitForTimeout(300);
 
-    // pressSequentially en vez de fill() — simula tecla por tecla. fill() pega
-    // el valor de una sola vez y algunos campos de este form (validados por
-    // Vue vía eventos de teclado reales) no llegan a marcarse como válidos con
-    // eso, aunque el valor visible sea correcto — "Continuar" queda
-    // deshabilitado igual. Confirmado comparando contra el llenado manual del
-    // usuario con los mismos datos.
     await portalPage.getByRole('textbox', { name: 'Año' }).pressSequentially(EXPEDIENTE_REVERSA.anio);
     await portalPage.getByRole('textbox', { name: 'Año' }).press('Tab');
     await portalPage.getByRole('textbox', { name: 'Número' }).pressSequentially(EXPEDIENTE_REVERSA.numero);
@@ -120,28 +89,7 @@ test.describe('Regresión — Portal Agente: Reversas de plan (AgentePFP)', () =
     await portalPage.waitForTimeout(500);
   }
 
-  test('TC_AGPFP_007 — Reversa de Caducidad (F3006): expediente completo, "Continuar" habilitado', async ({ page }) => {
-    test.skip(!PLANES_CONOCIDOS.caduco, 'Requiere PLANES_CONOCIDOS.caduco en fixtures/test-data.js — ver memoria pfp-roadmap-fases');
-
-    const { portalPage } = await loginYBuscarPlan(page, PLANES_CONOCIDOS.caduco);
-    await expect(portalPage.getByText('Caduco')).toBeVisible();
-    await portalPage.screenshot({ path: 'screenshots/TC_AGPFP_007_plan_caduco.png', fullPage: true });
-
-    await portalPage.getByRole('button', { name: 'Reversa caducidad' }).click();
-    await portalPage.waitForLoadState('networkidle');
-
-    await expect(portalPage.getByText('Ingresá el expediente que avala la reversa de caducidad')).toBeVisible();
-    await verificarPasoExpediente(portalPage);
-
-    await completarExpediente(portalPage);
-    const btnContinuar007 = portalPage.getByRole('button', { name: 'Continuar' });
-    await btnContinuar007.scrollIntoViewIfNeeded();
-    await portalPage.screenshot({ path: 'screenshots/TC_AGPFP_007_form_expediente.png', fullPage: true });
-    await expect(btnContinuar007).toBeEnabled();
-    console.log('TC_AGPFP_007 — Expediente F3006 completo y "Continuar" habilitado (sin confirmar envío)');
-  });
-
-  test('TC_AGPFP_008 — Reversa de Nulidad (F3013): expediente completo, "Continuar" habilitado', async ({ page }) => {
+  test('TC_AGPFP_008 — Expediente completo, "Continuar" habilitado', async ({ page }) => {
     test.skip(!PLANES_CONOCIDOS.nulo, 'Requiere PLANES_CONOCIDOS.nulo en fixtures/test-data.js — ver memoria pfp-roadmap-fases');
 
     const { portalPage } = await loginYBuscarPlan(page, PLANES_CONOCIDOS.nulo);

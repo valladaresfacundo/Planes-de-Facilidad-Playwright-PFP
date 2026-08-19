@@ -4,8 +4,8 @@
 // (migrado de DEV20 el 2026-08-19 — DEV20 ya no se prueba más, ver memoria pfp-roadmap-fases)
 
 const { test, expect } = require('@playwright/test');
-const { LoginAgentePage } = require('../../pages/LoginAgentePage');
-const { AMBIENTES_AGENTE, AGENTE, SIGN_AGENTE } = require('../../fixtures/test-data');
+const { LoginAgentePage } = require('../../../pages/LoginAgentePage');
+const { AMBIENTES_AGENTE, AGENTE, SIGN_AGENTE } = require('../../../fixtures/test-data');
 
 const URL_AGENTE_QA_AV = AMBIENTES_AGENTE.QA_AV;
 

@@ -182,6 +182,10 @@ const PLANES_CONOCIDOS = {
   // consumió validando F3013 end-to-end y quedó VIGENTE. Mismo cuidado: si TC_AGPFP_008
   // corre hasta el final, este número también queda VIGENTE y hay que pedir otro reemplazo.
   nulo: '1523000121',
+  // Plan real en estado CA_PENDIENTE (necesario para probar F3009 solo, sin
+  // tener que rehacer todo el flujo F3005 real cada vez) — sin completar
+  // todavía. tests/regression/pfp-api/F3009_debito_ca.spec.js se saltea solo.
+  caPendiente: null,
 };
 
 // Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y
