@@ -151,25 +151,30 @@ const SIGN_AGENTE = 'hbx9zff2MNCa/s3DvvECFPv60gsSoNNVtlpQim5Xq/qk3Z4KVesCnjonER6
 // Completar con datos reales de QA_HOMO — los tests que los usan se saltean solos
 // (test.skip) mientras estos campos queden en null.
 const PLANES_CONOCIDOS = {
-  // Plan real VIGENTE, CUIT 30686855860, provisto por el usuario el 2026-08-19 —
-  // reemplazo de 1783000149, que quedó consumido en CA_PAGADA validando el flujo
-  // completo de Cancelación Anticipada de Fase 2 (ver historial abajo y memoria
-  // pfp-roadmap-fases). Este plan nuevo se usa también para probar F3012
-  // (rehabilitar cuota, Fase 2): rechazar 1° y 2° vencimiento de la cuota 2 para
-  // dejarla en A_REHABILITAR y después pasarla a REHABILITADA.
-  vigente: '1543000153',
+  // ⚠ 2026-08-19: NINGÚN plan "vigente" disponible por ahora. El último
+  // (1543000153) se usó a propósito para validar F3003 (Caducidad) end-to-end
+  // por API real y quedó CADUCO — ver "caduco" abajo. Pedirle al usuario un
+  // plan VIGENTE nuevo antes de reusar TC_REG_009/TC_REG_010 de Fase 1 o
+  // seguir probando F3012 (rehabilitar cuota, que sigue pendiente).
+  vigente: null,
   // Histórico — 1783000149 (CUIT 30686855860, impuesto "Sellos - AR RELIT"):
   // usado 2026-08-13 para validar el flujo de Cancelación Anticipada COMPLETO de
   // verdad (Fase 2). Secuencia real: F3010 (pago cuota 1) → F3005 (CA real, UI) →
   // F3009 (débito CA) → pago CA → CA_PAGADA. El cierre final (F3008,
-  // GenerarCancelaciones → estado CA) quedó pendiente por un 504 Gateway Timeout
-  // consistente (~30s, límite de infra/gateway). Ya NO sirve como fixture
-  // "vigente" — no reusar en TC_REG_009/TC_REG_010.
+  // GenerarCancelaciones → estado CA) quedó bloqueado — GenerarCancelaciones NO
+  // es un endpoint puntual, procesa TODOS los planes con cuotas pagas del
+  // ambiente, por eso el 504 (confirmado por el usuario, no es transitorio).
   // Planes reales CADUCO/NULO, mismo CUIT 30686855860.
   // ⚠ Si se corre el flujo de reversa hasta el final (Continuar → Confirmar), el plan pasa
   // a VIGENTE de verdad y deja de servir como fixture CADUCO/NULO — pedir un reemplazo si eso pasa.
-  // caduco: confirmado solo en DEV20 (2026-08-12) — falta reconfirmar que existe en QA_HOMO.
-  caduco: '1523072913', // → F3006 Reversa de Caducidad (Portal Agente)
+  // caduco: 1543000153 — CONFIRMADO REAL en QA_HOMO el 2026-08-19 (reemplaza al
+  // anterior 1523072913, que solo estaba confirmado en DEV20). Generado por Fase 2
+  // 100% vía API: F3010 pagó la cuota 1, F3010 rechazó cuota 2 y cuota 3, se
+  // backdatearon a mano (Mongo, Tracers.TracerInstance) las fechas de cuota 2/3 a
+  // abril/mayo 2026, y GenerarCaducidadPorSolicitud (F3003 puntual, ver
+  // lib/pfpApiClient.js) confirmó el plan CADUCO de verdad. Ver memoria
+  // pfp-roadmap-fases para el detalle completo del proceso.
+  caduco: '1543000153', // → F3006 Reversa de Caducidad (Portal Agente)
   // nulo: reemplazo provisto por el usuario el 2026-08-12 — el anterior (1523072944) se
   // consumió validando F3013 end-to-end y quedó VIGENTE. Mismo cuidado: si TC_AGPFP_008
   // corre hasta el final, este número también queda VIGENTE y hay que pedir otro reemplazo.
