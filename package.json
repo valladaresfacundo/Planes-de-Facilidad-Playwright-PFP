@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {"test:dev20":"playwright test tests/smoke/TC_MIGRACION_NodeJS20.spec.js --config=playwright.config.dev20.js",
-  "test:regresion:dev20": "playwright test --config=playwright.config.dev20.js"},
+  "scripts": {
+    "test:dev20": "playwright test tests/smoke/TC_MIGRACION_NodeJS20.spec.js --config=playwright.config.dev20.js",
+    "test:regresion:dev20": "playwright test --config=playwright.config.dev20.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.59.1",
-    "@types/node": "^25.6.0"
+    "@types/node": "^25.6.0",
+    "mongodb": "^7.5.0"
   },
   "dependencies": {
     "dotenv": "^17.4.2"
