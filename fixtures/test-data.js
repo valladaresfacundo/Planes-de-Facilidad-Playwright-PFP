@@ -151,19 +151,20 @@ const SIGN_AGENTE = 'hbx9zff2MNCa/s3DvvECFPv60gsSoNNVtlpQim5Xq/qk3Z4KVesCnjonER6
 // Completar con datos reales de QA_HOMO — los tests que los usan se saltean solos
 // (test.skip) mientras estos campos queden en null.
 const PLANES_CONOCIDOS = {
-  // Plan real VIGENTE, CUIT 30686855860, impuesto "Sellos - AR RELIT", confirmado en QA_HOMO el 2026-08-12.
-  // ⚠ 2026-08-13: este plan se usó para validar el flujo de Cancelación Anticipada
-  // COMPLETO de verdad (Fase 2, lib/pfpApiClient.js) y quedó consumido — YA NO ESTÁ
-  // VIGENTE. Secuencia real ejecutada: F3010 (pago cuota 1) → F3005 (CA real, UI) →
+  // Plan real VIGENTE, CUIT 30686855860, provisto por el usuario el 2026-08-19 —
+  // reemplazo de 1783000149, que quedó consumido en CA_PAGADA validando el flujo
+  // completo de Cancelación Anticipada de Fase 2 (ver historial abajo y memoria
+  // pfp-roadmap-fases). Este plan nuevo se usa también para probar F3012
+  // (rehabilitar cuota, Fase 2): rechazar 1° y 2° vencimiento de la cuota 2 para
+  // dejarla en A_REHABILITAR y después pasarla a REHABILITADA.
+  vigente: '1543000153',
+  // Histórico — 1783000149 (CUIT 30686855860, impuesto "Sellos - AR RELIT"):
+  // usado 2026-08-13 para validar el flujo de Cancelación Anticipada COMPLETO de
+  // verdad (Fase 2). Secuencia real: F3010 (pago cuota 1) → F3005 (CA real, UI) →
   // F3009 (débito CA) → pago CA → CA_PAGADA. El cierre final (F3008,
-  // GenerarCancelaciones → estado CA) quedó pendiente: el endpoint da 504 Gateway
-  // Timeout consistente a los ~30s (confirmado con curl directo y desde el cliente,
-  // es un límite de infra/gateway, no del cliente) — ver memoria pfp-roadmap-fases.
-  // Este plan ya NO sirve como fixture "vigente" para ningún test de Fase 1
-  // (TC_REG_009/TC_REG_010 en tests/regression/TC_REG_003_ca_cbu.spec.js van a
-  // fallar si se corren contra este número) — pedirle al usuario un plan VIGENTE
-  // nuevo antes de reusar esos tests.
-  vigente: '1783000149',
+  // GenerarCancelaciones → estado CA) quedó pendiente por un 504 Gateway Timeout
+  // consistente (~30s, límite de infra/gateway). Ya NO sirve como fixture
+  // "vigente" — no reusar en TC_REG_009/TC_REG_010.
   // Planes reales CADUCO/NULO, mismo CUIT 30686855860.
   // ⚠ Si se corre el flujo de reversa hasta el final (Continuar → Confirmar), el plan pasa
   // a VIGENTE de verdad y deja de servir como fixture CADUCO/NULO — pedir un reemplazo si eso pasa.
