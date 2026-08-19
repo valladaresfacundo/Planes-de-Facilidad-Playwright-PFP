@@ -4,14 +4,17 @@
 // ─── Ambientes ────────────────────────────────────────────────────────────────
 const AMBIENTES = {
   QA_HOMO: 'http://portal-cct-qa.apps.ocp-test-hc.agip.gob.ar/login',
-  QA_AV:   'http://portal-cct-qa-av.apps.ocp-test-hc.agip.gob.ar/login',
-  DEV20:   'http://portal-cct20-dev.apps.ocp-test-hc.agip.gob.ar/login', // NodeJS 20.3+
+  QA_AV:   'http://portal-cct-qa-av.apps.ocp-test-hc.agip.gob.ar/login', // NodeJS 20.3+ — reemplaza a DEV20 (2026-08-19)
+  // DEV20 ya NO se prueba más (confirmado por el usuario 2026-08-19) — se deja
+  // definido solo por si hace falta acceder manualmente, ningún test lo usa.
+  DEV20:   'http://portal-cct20-dev.apps.ocp-test-hc.agip.gob.ar/login',
 };
 
 const AMBIENTES_AGENTE = {
   QA_HOMO: 'http://portal-agente-qa.apps.ocp-test-hc.agip.gob.ar/',
-  QA_AV:   'http://portal-agente-qa-av.apps.ocp-test-hc.agip.gob.ar/',
-  DEV20:   'http://portal-agente20-dev.apps.ocp-test-hc.agip.gob.ar/', // NodeJS 20.3+
+  QA_AV:   'http://portal-agente-qa-av.apps.ocp-test-hc.agip.gob.ar/', // NodeJS 20.3+ — reemplaza a DEV20 (2026-08-19)
+  // Ídem — sin uso en ningún test, se deja solo de referencia.
+  DEV20:   'http://portal-agente20-dev.apps.ocp-test-hc.agip.gob.ar/',
 };
 
 // ─── Contribuyentes de prueba ─────────────────────────────────────────────────

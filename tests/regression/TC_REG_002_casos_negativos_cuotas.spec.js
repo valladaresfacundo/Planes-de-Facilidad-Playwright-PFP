@@ -15,19 +15,15 @@ test.describe('Regresión — Casos negativos y variantes de cuotas', () => {
     return { portalPage, pfpPage };
   }
 
-  async function seleccionarDropdown(portalPage, labelTexto, opcionTexto) {
-    await portalPage.locator(`label:text-is("${labelTexto}")`).click();
-    await portalPage.waitForTimeout(500);
-    await portalPage.locator(`.v-list-item__title:text-is("${opcionTexto}")`).click();
-    await portalPage.waitForTimeout(300);
-  }
-
-  async function consultarDeuda(portalPage) {
-    await seleccionarDropdown(portalPage, 'Tipo de plan', '461/AGIP/25');
-    await seleccionarDropdown(portalPage, 'Operación', 'Nuevo plan de facilidades');
-    await seleccionarDropdown(portalPage, 'Impuesto', 'IIBB - Convenio Multilateral');
-    await portalPage.getByRole('button', { name: 'Consultar' }).click();
-    await portalPage.waitForLoadState('networkidle');
+  // Consulta deuda con fallback a "Sellos" si el impuesto preferido no tiene
+  // deuda cargada (ver PFPPage.consultarDeudaConFallback).
+  async function consultarDeuda(portalPage, pfpPage) {
+    await pfpPage.consultarDeudaConFallback({
+      tipoPlan: '461/AGIP/25',
+      operacion: 'Nuevo plan de facilidades',
+      impuestoPreferido: 'IIBB - Convenio Multilateral',
+      impuestosFallback: ['Sellos'],
+    });
   }
 
  async function llegarAlPaso3(portalPage, cantidadCuotas) {
@@ -62,8 +58,8 @@ test.describe('Regresión — Casos negativos y variantes de cuotas', () => {
   }
 
   test('TC_NEG_002 — Paso 3 sin datos no habilita botón Continuar', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
     await llegarAlPaso3(portalPage, '1 cuota');
 
     await expect(portalPage.getByRole('textbox', { name: 'Titular de Cuenta' })).toBeVisible();
@@ -78,8 +74,8 @@ test.describe('Regresión — Casos negativos y variantes de cuotas', () => {
   });
 
   test('TC_NEG_003 — Paso 3 con solo Titular no habilita Continuar', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
     await llegarAlPaso3(portalPage, '1 cuota');
 
     await portalPage.getByRole('textbox', { name: 'Titular de Cuenta' }).fill('Solo titular');
@@ -92,8 +88,8 @@ test.describe('Regresión — Casos negativos y variantes de cuotas', () => {
   });
 
   test('TC_CUOTAS_001 — Plan con 1 cuota genera acogimiento correctamente', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
     await llegarAlPaso3(portalPage, '1 cuota');
 
     await portalPage.getByRole('textbox', { name: 'Titular de Cuenta' }).fill('test 1 cuota');
@@ -112,8 +108,8 @@ test.describe('Regresión — Casos negativos y variantes de cuotas', () => {
   });
 
   test('TC_CUOTAS_002 — Plan con 6 cuotas genera acogimiento correctamente', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
     await llegarAlPaso3(portalPage, '6 cuotas');
 
     await portalPage.getByRole('textbox', { name: 'Titular de Cuenta' }).fill('test 6 cuotas');
@@ -132,8 +128,8 @@ test.describe('Regresión — Casos negativos y variantes de cuotas', () => {
   });
 
   test('TC_CUOTAS_003 — Plan con 12 cuotas genera acogimiento correctamente', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
     await llegarAlPaso3(portalPage, '12 cuotas');
 
     await portalPage.getByRole('textbox', { name: 'Titular de Cuenta' }).fill('test 12 cuotas');
@@ -152,8 +148,8 @@ test.describe('Regresión — Casos negativos y variantes de cuotas', () => {
   });
 
   test('TC_CUOTAS_004 — Plan con máximo de cuotas disponibles', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
 
     const checkboxPeriodo = portalPage.locator('td > .v-simple-checkbox > .v-input--selection-controls__input > .v-icon').first();
     await expect(checkboxPeriodo).toBeVisible({ timeout: 10000 });

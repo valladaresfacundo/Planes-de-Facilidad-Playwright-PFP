@@ -1,25 +1,26 @@
 // tests/smoke/TC_AGENTE_001_smoke.spec.js
-// Smoke tests del Portal Agente DEV20 — perfil AgentePFP
+// Smoke tests del Portal Agente QA_AV — perfil AgentePFP
+// (migrado de DEV20 el 2026-08-19 — DEV20 ya no se prueba más, ver memoria pfp-roadmap-fases)
 
 const { test, expect } = require('@playwright/test');
 const { LoginAgentePage } = require('../../pages/LoginAgentePage');
 const { AMBIENTES_AGENTE, AGENTE, SIGN_AGENTE } = require('../../fixtures/test-data');
 
-const URL_AGENTE_DEV20 = AMBIENTES_AGENTE.DEV20;
+const URL_AGENTE_QA_AV = AMBIENTES_AGENTE.QA_AV;
 
-test.describe('Smoke Tests — Portal Agente DEV20 (AgentePFP)', () => {
+test.describe('Smoke Tests — Portal Agente QA_AV (AgentePFP)', () => {
 
   async function loginAgente(page) {
     const loginPage = new LoginAgentePage(page);
-    await loginPage.login(URL_AGENTE_DEV20, AGENTE.usuario, AGENTE.perfiles.AgentePFP, SIGN_AGENTE);
+    await loginPage.login(URL_AGENTE_QA_AV, AGENTE.usuario, AGENTE.perfiles.AgentePFP, SIGN_AGENTE);
     const portalPage = loginPage.obtenerPagina();
     await portalPage.waitForLoadState('networkidle');
     return { portalPage, loginPage };
   }
 
-  test('TC_AGENTE_001 — Portal Agente DEV20 responde sin errores', async ({ page }) => {
+  test('TC_AGENTE_001 — Portal Agente QA_AV responde sin errores', async ({ page }) => {
     const response = await page.goto(
-      'http://portal-agente20-dev.apps.ocp-test-hc.agip.gob.ar',
+      URL_AGENTE_QA_AV,
       { waitUntil: 'domcontentloaded', timeout: 60000 }
     );
     expect(response, 'Portal Agente debe responder').not.toBeNull();

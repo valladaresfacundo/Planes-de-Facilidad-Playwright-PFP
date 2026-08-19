@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:dev20": "playwright test tests/smoke/TC_MIGRACION_NodeJS20.spec.js --config=playwright.config.dev20.js",
-    "test:regresion:dev20": "playwright test --config=playwright.config.dev20.js"
+    "test:qa-av": "playwright test tests/smoke/TC_MIGRACION_NodeJS20.spec.js --config=playwright.config.qa-av.js",
+    "test:regresion:qa-av": "playwright test --config=playwright.config.qa-av.js"
   },
   "keywords": [],
   "author": "",

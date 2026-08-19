@@ -65,6 +65,46 @@ class PFPPage {
     await this.page.waitForLoadState('networkidle');
   }
 
+  /**
+   * Consulta deuda con fallback de impuesto: si el impuesto preferido no trae
+   * deuda cargada, reintenta con los de `impuestosFallback` en orden (default
+   * ["Sellos"], que en QA suele tener deuda cargada casi siempre). Evita que
+   * el acogimiento falle simplemente porque el CUIT/ambiente de turno no tiene
+   * deuda en el impuesto puntual que se le pidió.
+   * ⚠ No verificado en vivo todavía (agregado 2026-08-19 mientras
+   * ObtenerPlanes/PlanesDePagoNeg está caído en QA_HOMO — ver memoria
+   * pfp-roadmap-fases) — confirmar el texto exacto de "sin deuda" y el
+   * comportamiento real del reintento apenas el backend se recupere.
+   * @returns {Promise<string>} el impuesto que sí encontró deuda
+   */
+  async consultarDeudaConFallback({ tipoPlan, operacion, impuestoPreferido, impuestosFallback = ['Sellos'] }) {
+    const intentos = [impuestoPreferido, ...impuestosFallback];
+
+    for (let i = 0; i < intentos.length; i++) {
+      const impuesto = intentos[i];
+      if (i > 0) {
+        // Volvemos a la pantalla de selección para reintentar con otro impuesto
+        await this.irAPlanesYMoratoria();
+      }
+      await this.seleccionarTipoPlan(tipoPlan);
+      await this.seleccionarOperacion(operacion);
+      await this.seleccionarImpuesto(impuesto);
+      await this.page.getByRole('button', { name: 'Consultar' }).click();
+      await this.page.waitForLoadState('networkidle');
+
+      const hayDeuda = await this.page.getByText('Períodos a incluir en el plan')
+        .isVisible({ timeout: 5000 }).catch(() => false);
+
+      if (hayDeuda) {
+        console.log(`consultarDeudaConFallback — deuda encontrada con impuesto "${impuesto}"`);
+        return impuesto;
+      }
+      console.log(`consultarDeudaConFallback — sin deuda para "${impuesto}"${i < intentos.length - 1 ? ', probando siguiente...' : ''}`);
+    }
+
+    throw new Error(`consultarDeudaConFallback — no se encontró deuda para ningún impuesto probado: ${intentos.join(', ')}`);
+  }
+
   // Hace click en Continuar
   async clickContinuar() {
     await this.page.getByRole('button', { name: 'Continuar' }).click();

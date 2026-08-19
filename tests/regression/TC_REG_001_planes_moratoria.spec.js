@@ -15,19 +15,15 @@ test.describe('Regresión — Planes / Moratoria', () => {
     return { portalPage, pfpPage };
   }
 
-  async function seleccionarDropdown(portalPage, labelTexto, opcionTexto) {
-    await portalPage.locator(`label:text-is("${labelTexto}")`).click();
-    await portalPage.waitForTimeout(500);
-    await portalPage.locator(`.v-list-item__title:text-is("${opcionTexto}")`).click();
-    await portalPage.waitForTimeout(300);
-  }
-
-  async function consultarDeuda(portalPage) {
-    await seleccionarDropdown(portalPage, 'Tipo de plan', '461/AGIP/25');
-    await seleccionarDropdown(portalPage, 'Operación', 'Nuevo plan de facilidades');
-    await seleccionarDropdown(portalPage, 'Impuesto', 'IIBB - Convenio Multilateral');
-    await portalPage.getByRole('button', { name: 'Consultar' }).click();
-    await portalPage.waitForLoadState('networkidle');
+  // Consulta deuda con fallback a "Sellos" si el impuesto preferido no tiene
+  // deuda cargada (ver PFPPage.consultarDeudaConFallback).
+  async function consultarDeuda(portalPage, pfpPage) {
+    await pfpPage.consultarDeudaConFallback({
+      tipoPlan: '461/AGIP/25',
+      operacion: 'Nuevo plan de facilidades',
+      impuestoPreferido: 'IIBB - Convenio Multilateral',
+      impuestosFallback: ['Sellos'],
+    });
   }
 
   test('TC_REG_001 — Pantalla Planes/Moratoria carga con los 3 filtros', async ({ page }) => {
@@ -55,8 +51,8 @@ test.describe('Regresión — Planes / Moratoria', () => {
   });
 
   test('TC_REG_003 — Consulta con 461/AGIP/25 muestra deuda', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
     await portalPage.screenshot({ path: 'screenshots/TC_REG_003_resultado_consulta.png', fullPage: true });
     await expect(portalPage.getByText('Períodos a incluir en el plan')).toBeVisible();
     await expect(portalPage.getByRole('button', { name: 'Continuar' })).toBeVisible();
@@ -64,8 +60,8 @@ test.describe('Regresión — Planes / Moratoria', () => {
   });
 
   test('TC_REG_004 — Períodos de deuda tienen datos y total mayor a $0', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
     const tabla = portalPage.getByRole('table');
     await expect(tabla.getByText('Período')).toBeVisible();
     await expect(tabla.getByText('Fecha de Vto.')).toBeVisible();
@@ -79,8 +75,8 @@ test.describe('Regresión — Planes / Moratoria', () => {
   });
 
   test('TC_REG_005 — Continuar al paso 2 Simulación de Cuotas', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
     const checkboxVuetify = portalPage.locator('.v-input--selection-controls__ripple').first();
     await expect(checkboxVuetify).toBeVisible({ timeout: 10000 });
     await checkboxVuetify.click();
@@ -95,8 +91,8 @@ test.describe('Regresión — Planes / Moratoria', () => {
   });
 
    test('TC_REG_006 — Paso 2: dropdown de cuotas muestra opciones', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
 
     // Selector correcto del Codegen para el checkbox de período
     const checkboxPeriodo = portalPage.locator('td > .v-simple-checkbox > .v-input--selection-controls__input > .v-icon').first();
@@ -117,8 +113,8 @@ test.describe('Regresión — Planes / Moratoria', () => {
   });
 
   test('TC_REG_007 — Paso 3: campos Titular, CUIT y CBU visibles', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
 
     // Paso 1: seleccionar período
     const checkboxPeriodo = portalPage.locator('td > .v-simple-checkbox > .v-input--selection-controls__input > .v-icon').first();
@@ -143,8 +139,8 @@ test.describe('Regresión — Planes / Moratoria', () => {
   });
 
   test('TC_REG_008 — Flujo E2E completo: acogimiento, confirmación y descarga PDF', async ({ page }) => {
-    const { portalPage } = await loginYNavegar(page);
-    await consultarDeuda(portalPage);
+    const { portalPage, pfpPage } = await loginYNavegar(page);
+    await consultarDeuda(portalPage, pfpPage);
 
     // Paso 1: seleccionar período específico
     const checkboxPeriodo = portalPage.locator('td > .v-simple-checkbox > .v-input--selection-controls__input > .v-icon').first();

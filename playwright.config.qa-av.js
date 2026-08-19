@@ -1,5 +1,7 @@
-// playwright.config.dev20.js
-// Configuración para correr la regresión completa contra DEV20 (NodeJS 20.3+)
+// playwright.config.qa-av.js
+// Configuración para correr la regresión completa contra QA_AV (NodeJS 20.3+)
+// (renombrado de playwright.config.dev20.js el 2026-08-19 — DEV20 ya no se
+// prueba más, ver memoria pfp-roadmap-fases del proyecto)
 require('dotenv').config();
 const { defineConfig, devices } = require('@playwright/test');
 
@@ -8,7 +10,7 @@ module.exports = defineConfig({
   retries: 2,
   workers: 1,
   use: {
-    baseURL: 'http://portal-cct20-dev.apps.ocp-test-hc.agip.gob.ar',
+    baseURL: 'http://portal-cct-qa-av.apps.ocp-test-hc.agip.gob.ar',
     actionTimeout: 30000,
     navigationTimeout: 60000,
     video: 'on-first-retry',
@@ -17,12 +19,12 @@ module.exports = defineConfig({
   },
   timeout: 120000,
   reporter: [
-    ['html', { outputFolder: 'reports/dev20', open: 'never' }],
+    ['html', { outputFolder: 'reports/qa-av', open: 'never' }],
     ['list'],
   ],
   projects: [
     {
-      name: 'chromium-DEV20',
+      name: 'chromium-QA_AV',
       use: { ...devices['Desktop Chrome'] },
     },
   ],
