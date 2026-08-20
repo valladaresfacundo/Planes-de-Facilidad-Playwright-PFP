@@ -9,18 +9,24 @@
 //
 // ⚠ MUTA datos reales: paga la cuota 1 del plan vigente de verdad. Si el
 // fixture ya la tiene PAGADA, no hace nada (no se puede pagar dos veces).
+//
+// 2026-08-20: en QA_AV el servicio Tracer (txsapi) devuelve 200 con body
+// vacío incluso autenticado — esperarIdDebito() nunca encuentra nada ahí.
+// Fallback a mongoAdmin.obtenerIdDebito() (lee content.ID_Debito directo del
+// documento de la cuota, que sí se persiste bien tras GenerarDebitoCuotaPorSolicitud).
 const { test, expect } = require('@playwright/test');
 const { PfpApiClient } = require('../../../lib/pfpApiClient');
-const { SIGN_CCT, CUIT_AUTENTICADO, PLANES_CONOCIDOS } = require('../../../fixtures/test-data');
+const { obtenerIdDebito } = require('../../../lib/mongoAdmin');
+const { SIGN_CCT, PLANES_CONOCIDOS, CONTRIBUYENTES } = require('../../../fixtures/test-data');
 
 test('TC_REG_F3010_001 — pago real de la cuota 1 del plan VIGENTE conocido', async ({ request }) => {
   test.skip(!PLANES_CONOCIDOS.vigente, 'Requiere PLANES_CONOCIDOS.vigente en fixtures/test-data.js');
 
   const cliente = new PfpApiClient(request, 'qa-av');
-  await cliente.autenticar(CUIT_AUTENTICADO, SIGN_CCT);
+  await cliente.autenticar(CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
 
   const { resumen, detalle } = await cliente.buscarPlanPorSolicitud({
-    cuit: CUIT_AUTENTICADO,
+    cuit: CONTRIBUYENTES.conPlan.cuit,
     anio: new Date().getFullYear(),
     solicitud: PLANES_CONOCIDOS.vigente,
   });
@@ -45,12 +51,21 @@ test('TC_REG_F3010_001 — pago real de la cuota 1 del plan VIGENTE conocido', a
     fecha: emitir,
     esPrimerIntento: true,
   });
-  console.log(`TC_REG_F3010_001 — GenerarDebitoCuotaPorSolicitud: ok=${debito.ok} status=${debito.status}`);
+  console.log(`TC_REG_F3010_001 — GenerarDebitoCuotaPorSolicitud: ok=${debito.ok} status=${debito.status} body=${JSON.stringify(debito.body).slice(0, 200)}`);
+  // Tolerante: si ya había un débito generado en un intento previo (queda en
+  // DEBITO_ENVIADO), este endpoint responde "ninguna cuota apta" — no es un
+  // error real, seguimos igual a buscar el ID_Debito ya existente.
+  await new Promise(r => setTimeout(r, 1500));
 
-  const idDebito = await cliente.esperarIdDebito(cuota1.idTracerCuota);
+  let idDebito = await cliente.esperarIdDebito(cuota1.idTracerCuota);
+  if (!idDebito) {
+    console.log('TC_REG_F3010_001 — Tracer no devolvió ID_Debito, probando fallback por Mongo...');
+    idDebito = await obtenerIdDebito(cuota1.idTracerCuota);
+  }
+  console.log(`TC_REG_F3010_001 — ID_Debito: ${idDebito ?? '(ninguno, se registra con 0)'}`);
 
   const payload = cliente.construirPayloadF3010({
-    cuit: CUIT_AUTENTICADO,
+    cuit: CONTRIBUYENTES.conPlan.cuit,
     cuota: {
       numeroCuota: cuota1.numeroCuota,
       importeNominal: cuota1.importeNominal,
@@ -68,7 +83,7 @@ test('TC_REG_F3010_001 — pago real de la cuota 1 del plan VIGENTE conocido', a
 
   await new Promise(r => setTimeout(r, 1500));
   const { detalle: detalleFinal } = await cliente.buscarPlanPorSolicitud({
-    cuit: CUIT_AUTENTICADO,
+    cuit: CONTRIBUYENTES.conPlan.cuit,
     anio: new Date().getFullYear(),
     solicitud: PLANES_CONOCIDOS.vigente,
   });

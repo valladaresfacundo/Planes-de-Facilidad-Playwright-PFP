@@ -16,7 +16,7 @@
 // de rechazo y va directo a intentar rehabilitar).
 const { test, expect } = require('@playwright/test');
 const { PfpApiClient } = require('../../../lib/pfpApiClient');
-const { SIGN_CCT, CUIT_AUTENTICADO, PLANES_CONOCIDOS } = require('../../../fixtures/test-data');
+const { SIGN_CCT, PLANES_CONOCIDOS, CONTRIBUYENTES } = require('../../../fixtures/test-data');
 
 const NUMERO_CUOTA_A_REHABILITAR = 4;
 
@@ -24,10 +24,10 @@ test(`TC_REG_F3012_001 — rechazar cuota ${NUMERO_CUOTA_A_REHABILITAR} y rehabi
   test.skip(!PLANES_CONOCIDOS.vigente, 'Requiere PLANES_CONOCIDOS.vigente en fixtures/test-data.js');
 
   const cliente = new PfpApiClient(request, 'qa-av');
-  await cliente.autenticar(CUIT_AUTENTICADO, SIGN_CCT);
+  await cliente.autenticar(CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
 
   const { resumen, detalle } = await cliente.buscarPlanPorSolicitud({
-    cuit: CUIT_AUTENTICADO,
+    cuit: CONTRIBUYENTES.conPlan.cuit,
     anio: new Date().getFullYear(),
     solicitud: PLANES_CONOCIDOS.vigente,
   });
@@ -54,7 +54,7 @@ test(`TC_REG_F3012_001 — rechazar cuota ${NUMERO_CUOTA_A_REHABILITAR} y rehabi
 
     const idDebito = await cliente.esperarIdDebito(cuota.idTracerCuota);
     const payloadRechazo = cliente.construirPayloadF3010({
-      cuit: CUIT_AUTENTICADO,
+      cuit: CONTRIBUYENTES.conPlan.cuit,
       cuota: {
         numeroCuota: cuota.numeroCuota,
         importeNominal: cuota.importeNominal,
@@ -73,7 +73,7 @@ test(`TC_REG_F3012_001 — rechazar cuota ${NUMERO_CUOTA_A_REHABILITAR} y rehabi
 
   // Paso 2 — registrar F3012 (RECHAZADA → A_REHABILITAR)
   const payloadF3012 = cliente.construirPayloadF3012({
-    cuit: CUIT_AUTENTICADO,
+    cuit: CONTRIBUYENTES.conPlan.cuit,
     cuota: {
       numeroCuota: cuota.numeroCuota,
       importeNominal: cuota.importeNominal,
@@ -104,7 +104,7 @@ test(`TC_REG_F3012_001 — rechazar cuota ${NUMERO_CUOTA_A_REHABILITAR} y rehabi
   // Verificación final
   await new Promise(r => setTimeout(r, 1500));
   const { detalle: detalleFinal } = await cliente.buscarPlanPorSolicitud({
-    cuit: CUIT_AUTENTICADO,
+    cuit: CONTRIBUYENTES.conPlan.cuit,
     anio: new Date().getFullYear(),
     solicitud: PLANES_CONOCIDOS.vigente,
   });
