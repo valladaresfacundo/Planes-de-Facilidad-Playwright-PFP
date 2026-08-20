@@ -200,6 +200,14 @@ const PLANES_CONOCIDOS = {
   // tener que rehacer todo el flujo F3005 real cada vez) — sin completar
   // todavía. tests/regression/pfp-api/F3009_debito_ca.spec.js se saltea solo.
   caPendiente: null,
+  // Plan real dedicado a F3012 (rehabilitar cuota) — generado 2026-08-20, 2
+  // cuotas, VIGENTE. Separado de `vigente` a propósito: GenerarDebitoCuotaPorSolicitud
+  // solo persiste algo real para cuotas dentro de una ventana de anticipación
+  // corta (confirmado empírico — la cuota 4 del plan `vigente`, que vence en
+  // diciembre, no generó débito real pese a responder 200; la cuota 3, que
+  // vence en noviembre, sí). Usar la cuota 1 de este plan evita pisarse con
+  // F3003 (que usa cuota 1/2/3 de `vigente`) y evita el límite de anticipación.
+  paraRehabilitar: '1523073090',
 };
 
 // Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y

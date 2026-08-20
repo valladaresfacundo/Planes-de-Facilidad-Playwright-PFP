@@ -2,26 +2,29 @@
 // F3012 — Rehabilitar Cuota (RECHAZADA → A_REHABILITAR → REHABILITADA), vía
 // API (sin pantalla propia). Ver memoria pfp-formularios-catalogo / pfp-api-endpoints.
 //
-// Self-contained: rechaza una cuota del plan PLANES_CONOCIDOS.vigente (F3010
-// pago erróneo) y después la rehabilita — no necesita un fixture aparte ya
-// preparado, arma el escenario dentro del mismo test.
-//
-// Usa NUMERO_CUOTA_A_REHABILITAR = 4 (no 1/2/3) a propósito: F3003_caducidad_por_solicitud.spec.js
-// usa cuota 1/2/3 del mismo plan vigente — si este test tocara alguna de esas,
-// se pisarían entre sí al correr ambos contra el mismo PLANES_CONOCIDOS.vigente.
-// Requiere que el plan tenga al menos 4 cuotas.
+// Usa PLANES_CONOCIDOS.paraRehabilitar (plan dedicado, separado de `vigente`)
+// — no comparte plan con F3003_caducidad_por_solicitud.spec.js. Motivo real
+// (2026-08-20): GenerarDebitoCuotaPorSolicitud solo persiste algo real para
+// cuotas dentro de una ventana de anticipación corta — la cuota 4 de un plan
+// de 4 cuotas (vencimiento en diciembre) respondía 200 pero no generaba nada
+// en Mongo; una cuota más cercana (noviembre) sí. Un plan aparte con una
+// cuota bien próxima evita ese límite y evita pisarse con F3003.
 //
 // ⚠ MUTA datos reales: si la cuota no está en NO_VENCIDA, este test puede no
 // reproducir tal cual (una cuota ya RECHAZADA/A_REHABILITAR se salta el paso
 // de rechazo y va directo a intentar rehabilitar).
+// En QA_AV el servicio Tracer (txsapi) devuelve 200 con body vacío incluso
+// autenticado — esperarIdDebito() nunca encuentra nada ahí. Fallback a
+// mongoAdmin.obtenerIdDebito() (ver F3010_pago_directo.spec.js).
 const { test, expect } = require('@playwright/test');
 const { PfpApiClient } = require('../../../lib/pfpApiClient');
+const { obtenerIdDebito } = require('../../../lib/mongoAdmin');
 const { SIGN_CCT, PLANES_CONOCIDOS, CONTRIBUYENTES } = require('../../../fixtures/test-data');
 
-const NUMERO_CUOTA_A_REHABILITAR = 4;
+const NUMERO_CUOTA_A_REHABILITAR = 1;
 
 test(`TC_REG_F3012_001 — rechazar cuota ${NUMERO_CUOTA_A_REHABILITAR} y rehabilitarla (RECHAZADA → REHABILITADA)`, async ({ request }) => {
-  test.skip(!PLANES_CONOCIDOS.vigente, 'Requiere PLANES_CONOCIDOS.vigente en fixtures/test-data.js');
+  test.skip(!PLANES_CONOCIDOS.paraRehabilitar, 'Requiere PLANES_CONOCIDOS.paraRehabilitar en fixtures/test-data.js');
 
   const cliente = new PfpApiClient(request, 'qa-av');
   await cliente.autenticar(CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
@@ -29,7 +32,7 @@ test(`TC_REG_F3012_001 — rechazar cuota ${NUMERO_CUOTA_A_REHABILITAR} y rehabi
   const { resumen, detalle } = await cliente.buscarPlanPorSolicitud({
     cuit: CONTRIBUYENTES.conPlan.cuit,
     anio: new Date().getFullYear(),
-    solicitud: PLANES_CONOCIDOS.vigente,
+    solicitud: PLANES_CONOCIDOS.paraRehabilitar,
   });
 
   const cuota = (detalle?.cuotas ?? []).find(c => Number(c.numeroCuota) === NUMERO_CUOTA_A_REHABILITAR);
@@ -46,13 +49,21 @@ test(`TC_REG_F3012_001 — rechazar cuota ${NUMERO_CUOTA_A_REHABILITAR} y rehabi
     expect(emitir, `Debe existir EmitirDRG para vencimiento ${venc1ISO}`).toBeTruthy();
 
     const debito = await cliente.generarDebitoCuotaPorSolicitud({
-      idSolicitud: PLANES_CONOCIDOS.vigente,
+      idSolicitud: PLANES_CONOCIDOS.paraRehabilitar,
       fecha: emitir,
       esPrimerIntento: true,
     });
-    console.log(`TC_REG_F3012_001 — GenerarDebitoCuotaPorSolicitud: ok=${debito.ok} status=${debito.status}`);
+    console.log(`TC_REG_F3012_001 — GenerarDebitoCuotaPorSolicitud: ok=${debito.ok} status=${debito.status} body=${JSON.stringify(debito.body).slice(0, 200)}`);
+    await new Promise(r => setTimeout(r, 1500));
 
-    const idDebito = await cliente.esperarIdDebito(cuota.idTracerCuota);
+    let idDebito = await cliente.esperarIdDebito(cuota.idTracerCuota);
+    if (!idDebito) {
+      console.log('TC_REG_F3012_001 — Tracer no devolvió ID_Debito, probando fallback por Mongo...');
+      idDebito = await obtenerIdDebito(cuota.idTracerCuota);
+    }
+    console.log(`TC_REG_F3012_001 — ID_Debito: ${idDebito ?? '(ninguno, se registra con 0)'}`);
+    expect(idDebito, 'Debe conseguirse un ID_Debito real antes de rechazar (si no, RegistrarFormulario da "Duplicate document")').toBeTruthy();
+
     const payloadRechazo = cliente.construirPayloadF3010({
       cuit: CONTRIBUYENTES.conPlan.cuit,
       cuota: {
@@ -106,7 +117,7 @@ test(`TC_REG_F3012_001 — rechazar cuota ${NUMERO_CUOTA_A_REHABILITAR} y rehabi
   const { detalle: detalleFinal } = await cliente.buscarPlanPorSolicitud({
     cuit: CONTRIBUYENTES.conPlan.cuit,
     anio: new Date().getFullYear(),
-    solicitud: PLANES_CONOCIDOS.vigente,
+    solicitud: PLANES_CONOCIDOS.paraRehabilitar,
   });
   const cuotaFinal = (detalleFinal?.cuotas ?? []).find(c => Number(c.numeroCuota) === NUMERO_CUOTA_A_REHABILITAR);
   console.log(`TC_REG_F3012_001 — cuota ${NUMERO_CUOTA_A_REHABILITAR} después: estado=${cuotaFinal?.estadoCuota}`);
