@@ -76,10 +76,12 @@ class PFPPage {
    * ["Sellos"], que en QA suele tener deuda cargada casi siempre). Evita que
    * el acogimiento falle simplemente porque el CUIT/ambiente de turno no tiene
    * deuda en el impuesto puntual que se le pidió.
-   * ⚠ No verificado en vivo todavía (agregado 2026-08-19 mientras
-   * ObtenerPlanes/PlanesDePagoNeg está caído en QA_HOMO — ver memoria
-   * pfp-roadmap-fases) — confirmar el texto exacto de "sin deuda" y el
-   * comportamiento real del reintento apenas el backend se recupere.
+   * ⚠ Confirmado en vivo 2026-08-20 (QA_AV) que la consulta puede tardar más
+   * de lo que tarda networkidle en resolver — la pantalla queda mostrando
+   * "Procesando..." bastante después. El primer intento con solo 5s de
+   * espera post-Consultar daba falso negativo ("sin deuda") cuando en
+   * realidad la consulta seguía en curso. Por eso se espera explícitamente a
+   * que "Procesando..." desaparezca antes de chequear el resultado.
    * @returns {Promise<string>} el impuesto que sí encontró deuda
    */
   async consultarDeudaConFallback({ tipoPlan, operacion, impuestoPreferido, impuestosFallback = ['Sellos'] }) {
@@ -96,9 +98,11 @@ class PFPPage {
       await this.seleccionarImpuesto(impuesto);
       await this.page.getByRole('button', { name: 'Consultar' }).click();
       await this.page.waitForLoadState('networkidle');
+      await this.page.getByText('Procesando...', { exact: false })
+        .waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
 
       const hayDeuda = await this.page.getByText('Períodos a incluir en el plan')
-        .isVisible({ timeout: 5000 }).catch(() => false);
+        .isVisible({ timeout: 20000 }).catch(() => false);
 
       if (hayDeuda) {
         console.log(`consultarDeudaConFallback — deuda encontrada con impuesto "${impuesto}"`);

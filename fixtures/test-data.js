@@ -21,8 +21,15 @@ const AMBIENTES_AGENTE = {
 // Reemplazá los CUITs con contribuyentes reales del padrón de QA
 const CONTRIBUYENTES = {
   // Contribuyente con deuda y plan activo — para tests de PFP/Moratoria
+  // 2026-08-20: reemplazado por el usuario para seguir probando F3001
+  // (acogimiento) con deuda real en "IIBB - Convenio Multilateral" — el CUIT
+  // anterior (30686855860) no tenía deuda cargada para ese impuesto.
+  // ⚠ Este CUIT lo comparten F3005/F3007 (buscan por Nro. de solicitud
+  // logueados como este contribuyente) — PLANES_CONOCIDOS.vigente (1783000157)
+  // pertenece al CUIT VIEJO (30686855860), no a este, así que esos dos tests
+  // van a dejar de encontrar el plan hasta que se confirme/actualice.
   conPlan: {
-    cuit: '30686855860',      // ← reemplazá
+    cuit: '27236036044',
     nombre: 'EMPRESA CON PLAN SA',
   },
   // Contribuyente con deuda SIN plan activo — para probar acogimiento

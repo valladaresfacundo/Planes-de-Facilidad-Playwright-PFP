@@ -28,14 +28,16 @@ test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
     return { portalPage, pfpPage };
   }
 
-  // Consulta deuda con fallback a "Sellos" si el impuesto preferido no tiene
-  // deuda cargada (ver PFPPage.consultarDeudaConFallback).
+  // Consulta deuda — 2026-08-20: CONTRIBUYENTES.conPlan.cuit se reemplazó por
+  // 27236036044, que sí tiene deuda real en "IIBB - Convenio Multilateral"
+  // (a diferencia del CUIT anterior). Por ahora sin fallback a Sellos — el
+  // usuario pidió probar puntualmente con Convenio Multilateral primero.
   async function consultarDeuda(portalPage, pfpPage) {
     await pfpPage.consultarDeudaConFallback({
       tipoPlan: '461/AGIP/25',
       operacion: 'Nuevo plan de facilidades',
       impuestoPreferido: 'IIBB - Convenio Multilateral',
-      impuestosFallback: ['Sellos'],
+      impuestosFallback: [],
     });
   }
 
