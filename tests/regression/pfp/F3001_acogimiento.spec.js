@@ -7,10 +7,11 @@
 // (casos negativos y variantes de cantidad de cuotas) — reorganizado 2026-08-19
 // para que la regresión quede agrupada por formulario (F3001-F3018).
 //
-// ⚠ Bloqueado activamente por una caída real de backend (api-cct-qa,
-// ObtenerPlanes con 500 "ICancelacionAnticipadaService no resuelto") — el
-// dropdown "Tipo de plan" no carga sus opciones. No es un problema de
-// selectores. Ver memoria pfp-roadmap-fases para el detalle y el estado del outage.
+// ⚠ Corre contra QA_AV, no QA_HOMO — QA_HOMO tiene una caída real de backend
+// (api-cct-qa, ObtenerPlanes con 500 "ICancelacionAnticipadaService no
+// resuelto") que rompe el dropdown "Tipo de plan" y toda consulta de planes.
+// QA_AV no tiene ese bug (confirmado en vivo 2026-08-19). Ver memoria
+// pfp-roadmap-fases para el detalle completo del outage.
 const { test, expect } = require('@playwright/test');
 const { LoginPage }    = require('../../../pages/LoginPage');
 const { PFPPage }      = require('../../../pages/PFPPage');
@@ -20,7 +21,7 @@ test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
 
   async function loginYNavegar(page) {
     const loginPage = new LoginPage(page);
-    await loginPage.login(AMBIENTES.QA_HOMO, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
+    await loginPage.login(AMBIENTES.QA_AV, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
     const portalPage = loginPage.obtenerPagina();
     const pfpPage = new PFPPage(portalPage);
     await pfpPage.irAPlanesYMoratoria();

@@ -54,7 +54,7 @@ test('TC_REG_F3003_001 — caducar el plan VIGENTE conocido vía GenerarCaducida
   test.skip(!PLANES_CONOCIDOS.vigente, 'Requiere PLANES_CONOCIDOS.vigente en fixtures/test-data.js');
   test.skip(!process.env.MONGO_URI, 'Requiere MONGO_URI en .env — ver .env.example y lib/mongoAdmin.js');
 
-  const cliente = new PfpApiClient(request, 'qa');
+  const cliente = new PfpApiClient(request, 'qa-av');
   await cliente.autenticar(CUIT_AUTENTICADO, SIGN_CCT);
 
   const { resumen, detalle } = await cliente.buscarPlanPorSolicitud({
@@ -114,6 +114,6 @@ test('TC_REG_F3003_001 — caducar el plan VIGENTE conocido vía GenerarCaducida
   await new Promise(res => setTimeout(res, 1500));
   const docs = await buscarPlanEnMongo(PLANES_CONOCIDOS.vigente);
   const plan = docs.find(d => d.quota === 0);
-  console.log(`TC_REG_F3003_001 — estado final: ${estadoActual(plan)}`);
-  expect(estadoActual(plan)).toBe('CADUCO');
+  console.log(`TC_REG_F3003_001 — estado final: ${estadoActual(plan, 'PFP')}`);
+  expect(estadoActual(plan, 'PFP')).toBe('CADUCO');
 });

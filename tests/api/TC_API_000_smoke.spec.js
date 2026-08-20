@@ -16,7 +16,7 @@ const { SIGN_CCT, CUIT_AUTENTICADO, PLANES_CONOCIDOS } = require('../../fixtures
 test.describe('Fase 2 — reconocimiento del cliente API PFP', () => {
 
   test('TC_API_000 — autenticar() obtiene un JWT contra api-cct QA', async ({ request }) => {
-    const cliente = new PfpApiClient(request, 'qa');
+    const cliente = new PfpApiClient(request, 'qa-av');
     const token = await cliente.autenticar(CUIT_AUTENTICADO, SIGN_CCT);
     expect(token).toBeTruthy();
     expect(typeof token).toBe('string');
@@ -26,7 +26,7 @@ test.describe('Fase 2 — reconocimiento del cliente API PFP', () => {
   test('TC_API_001 — buscarPlanPorSolicitud() trae resumen + detalle (cuotas) del plan VIGENTE conocido', async ({ request }) => {
     test.skip(!PLANES_CONOCIDOS.vigente, 'Requiere PLANES_CONOCIDOS.vigente en fixtures/test-data.js');
 
-    const cliente = new PfpApiClient(request, 'qa');
+    const cliente = new PfpApiClient(request, 'qa-av');
     await cliente.autenticar(CUIT_AUTENTICADO, SIGN_CCT);
 
     const { resumen, detalle } = await cliente.buscarPlanPorSolicitud({

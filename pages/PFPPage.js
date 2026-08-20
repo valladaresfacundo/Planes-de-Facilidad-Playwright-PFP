@@ -42,26 +42,31 @@ class PFPPage {
   }
 
   // Selecciona el tipo de plan en el primer dropdown
+  // getByRole('button', ...) en vez de getByText — el label "Tipo de plan"
+  // colisiona con otro texto de la pantalla en QA_AV ("Tipo de Plan" en un
+  // comprobante), rompiendo el modo estricto de Playwright. Descubierto
+  // 2026-08-19 al migrar de QA_HOMO (donde nunca se llegaba a esta pantalla
+  // por el outage) — ver memoria pfp-roadmap-fases.
   async seleccionarTipoPlan(tipoPlan) {
-    await this.page.getByText('Tipo de plan').click();
+    await this.page.getByRole('button', { name: 'Tipo de plan' }).click();
     await this.page.waitForTimeout(500);
-    await this.page.getByText(tipoPlan).click();
+    await this.page.getByText(tipoPlan).first().click();
     await this.page.waitForLoadState('networkidle');
   }
 
   // Selecciona la operación en el segundo dropdown
   async seleccionarOperacion(operacion) {
-    await this.page.getByText('Operación').click();
+    await this.page.getByRole('button', { name: 'Operación' }).click();
     await this.page.waitForTimeout(500);
-    await this.page.getByText(operacion).click();
+    await this.page.getByText(operacion).first().click();
     await this.page.waitForLoadState('networkidle');
   }
 
   // Selecciona el impuesto en el tercer dropdown
   async seleccionarImpuesto(impuesto) {
-    await this.page.getByText('Impuesto').click();
+    await this.page.getByRole('button', { name: 'Impuesto' }).click();
     await this.page.waitForTimeout(500);
-    await this.page.getByText(impuesto).click();
+    await this.page.getByText(impuesto).first().click();
     await this.page.waitForLoadState('networkidle');
   }
 

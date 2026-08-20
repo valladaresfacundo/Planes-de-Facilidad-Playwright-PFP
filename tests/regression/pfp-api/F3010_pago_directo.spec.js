@@ -16,7 +16,7 @@ const { SIGN_CCT, CUIT_AUTENTICADO, PLANES_CONOCIDOS } = require('../../../fixtu
 test('TC_REG_F3010_001 — pago real de la cuota 1 del plan VIGENTE conocido', async ({ request }) => {
   test.skip(!PLANES_CONOCIDOS.vigente, 'Requiere PLANES_CONOCIDOS.vigente en fixtures/test-data.js');
 
-  const cliente = new PfpApiClient(request, 'qa');
+  const cliente = new PfpApiClient(request, 'qa-av');
   await cliente.autenticar(CUIT_AUTENTICADO, SIGN_CCT);
 
   const { resumen, detalle } = await cliente.buscarPlanPorSolicitud({

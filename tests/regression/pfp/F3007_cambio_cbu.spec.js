@@ -12,7 +12,7 @@ test.describe('F3007 — Cambio de CBU', () => {
 
   async function loginYBuscarPlan(page, nroSolicitud) {
     const loginPage = new LoginPage(page);
-    await loginPage.login(AMBIENTES.QA_HOMO, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
+    await loginPage.login(AMBIENTES.QA_AV, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
     const portalPage = loginPage.obtenerPagina();
     const pfpPage = new PFPPage(portalPage);
     await pfpPage.irAPlanesDeFacilidades();

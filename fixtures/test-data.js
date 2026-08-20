@@ -154,12 +154,10 @@ const SIGN_AGENTE = 'hbx9zff2MNCa/s3DvvECFPv60gsSoNNVtlpQim5Xq/qk3Z4KVesCnjonER6
 // Completar con datos reales de QA_HOMO — los tests que los usan se saltean solos
 // (test.skip) mientras estos campos queden en null.
 const PLANES_CONOCIDOS = {
-  // ⚠ 2026-08-19: NINGÚN plan "vigente" disponible por ahora. El último
-  // (1543000153) se usó a propósito para validar F3003 (Caducidad) end-to-end
-  // por API real y quedó CADUCO — ver "caduco" abajo. Pedirle al usuario un
-  // plan VIGENTE nuevo antes de reusar TC_REG_009/TC_REG_010 de Fase 1 o
-  // seguir probando F3012 (rehabilitar cuota, que sigue pendiente).
-  vigente: null,
+  // Plan real VIGENTE, provisto por el usuario el 2026-08-19, reemplazo de
+  // 1543000153 (quedó CADUCO validando F3003). Usado para destrabar los 6
+  // tests que dependían de un plan vigente (F3005×2, F3007, F3010, F3012, F3003).
+  vigente: '1783000157',
   // Histórico — 1783000149 (CUIT 30686855860, impuesto "Sellos - AR RELIT"):
   // usado 2026-08-13 para validar el flujo de Cancelación Anticipada COMPLETO de
   // verdad (Fase 2). Secuencia real: F3010 (pago cuota 1) → F3005 (CA real, UI) →
