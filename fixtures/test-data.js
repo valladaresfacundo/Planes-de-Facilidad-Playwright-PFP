@@ -161,10 +161,17 @@ const SIGN_AGENTE = 'hbx9zff2MNCa/s3DvvECFPv60gsSoNNVtlpQim5Xq/qk3Z4KVesCnjonER6
 // Completar con datos reales de QA_HOMO — los tests que los usan se saltean solos
 // (test.skip) mientras estos campos queden en null.
 const PLANES_CONOCIDOS = {
-  // Plan real VIGENTE, provisto por el usuario el 2026-08-19, reemplazo de
-  // 1543000153 (quedó CADUCO validando F3003). Usado para destrabar los 6
-  // tests que dependían de un plan vigente (F3005×2, F3007, F3010, F3012, F3003).
-  vigente: '1783000157',
+  // Plan real VIGENTE — generado por TC_REG_008 (F3001, flujo E2E real) el
+  // 2026-08-20 contra QA_AV, con CONTRIBUYENTES.conPlan.cuit ACTUAL
+  // (27236036044). Ubicado consultando Mongo directo (Tracers.TracerInstance,
+  // filtro idPerson=27236036044) para confirmar el IDSolicitud real — ver
+  // memoria pfp-roadmap-fases. 1 cuota, tax=2. Reemplaza a 1783000157 (CUIT
+  // viejo 30686855860, ya no coincide con CONTRIBUYENTES.conPlan.cuit).
+  vigente: '1523073086',
+  // Histórico — 1783000157 (CUIT viejo 30686855860): provisto por el usuario
+  // el 2026-08-19, dejó de servir el 2026-08-20 cuando CONTRIBUYENTES.conPlan.cuit
+  // pasó a 27236036044 (F3005/F3007 loguean con ese CUIT y ya no encuentran
+  // planes del CUIT viejo).
   // Histórico — 1783000149 (CUIT 30686855860, impuesto "Sellos - AR RELIT"):
   // usado 2026-08-13 para validar el flujo de Cancelación Anticipada COMPLETO de
   // verdad (Fase 2). Secuencia real: F3010 (pago cuota 1) → F3005 (CA real, UI) →
