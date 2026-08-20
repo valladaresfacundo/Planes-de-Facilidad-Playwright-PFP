@@ -161,17 +161,19 @@ const SIGN_AGENTE = 'hbx9zff2MNCa/s3DvvECFPv60gsSoNNVtlpQim5Xq/qk3Z4KVesCnjonER6
 // Completar con datos reales de QA_HOMO — los tests que los usan se saltean solos
 // (test.skip) mientras estos campos queden en null.
 const PLANES_CONOCIDOS = {
-  // Plan real VIGENTE — generado por TC_REG_008 (F3001, flujo E2E real) el
-  // 2026-08-20 contra QA_AV, con CONTRIBUYENTES.conPlan.cuit ACTUAL
-  // (27236036044). Ubicado consultando Mongo directo (Tracers.TracerInstance,
-  // filtro idPerson=27236036044) para confirmar el IDSolicitud real — ver
-  // memoria pfp-roadmap-fases. 1 cuota, tax=2. Reemplaza a 1783000157 (CUIT
-  // viejo 30686855860, ya no coincide con CONTRIBUYENTES.conPlan.cuit).
-  vigente: '1523073086',
-  // Histórico — 1783000157 (CUIT viejo 30686855860): provisto por el usuario
-  // el 2026-08-19, dejó de servir el 2026-08-20 cuando CONTRIBUYENTES.conPlan.cuit
-  // pasó a 27236036044 (F3005/F3007 loguean con ese CUIT y ya no encuentran
-  // planes del CUIT viejo).
+  // Plan real VIGENTE — generado 2026-08-20 vía flujo E2E real (acogimiento
+  // completo + confirmación real) contra QA_AV, CONTRIBUYENTES.conPlan.cuit
+  // ACTUAL (27236036044), con 4 cuotas TODAS sin tocar (NO_VENCIDA) — a
+  // pedido del usuario ("que no sea de más de 4 cuotas"). Con 4 cuotas
+  // alcanza para todo: F3005/F3007/F3010 (cuota 1), F3012 (cuota 4), F3003
+  // (cuota 1/2/3) — un solo plan para los 6 tests pendientes. Confirmado real
+  // en Mongo (Tracers.TracerInstance) tras la creación.
+  vigente: '1523073088',
+  // Histórico — 1523073086 (1 cuota) y 1523073087 (6 cuotas): generados en el
+  // mismo intento de esta sesión, insuficientes/de más para F3012/F3003 —
+  // reemplazados por 1523073088 (4 cuotas exactas). 1783000157 (CUIT viejo
+  // 30686855860): provisto por el usuario el 2026-08-19, dejó de servir el
+  // 2026-08-20 cuando CONTRIBUYENTES.conPlan.cuit pasó a 27236036044.
   // Histórico — 1783000149 (CUIT 30686855860, impuesto "Sellos - AR RELIT"):
   // usado 2026-08-13 para validar el flujo de Cancelación Anticipada COMPLETO de
   // verdad (Fase 2). Secuencia real: F3010 (pago cuota 1) → F3005 (CA real, UI) →
