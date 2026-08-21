@@ -17,16 +17,16 @@
 const { test, expect } = require('@playwright/test');
 const { PfpApiClient } = require('../../../lib/pfpApiClient');
 const { obtenerIdDebito } = require('../../../lib/mongoAdmin');
-const { SIGN_CCT, PLANES_CONOCIDOS, CONTRIBUYENTES } = require('../../../fixtures/test-data');
+const { SIGN_CCT, PLANES_CONOCIDOS, CUIT_AUTENTICADO } = require('../../../fixtures/test-data');
 
 test('TC_REG_F3010_001 — pago real de la cuota 1 del plan VIGENTE conocido', async ({ request }) => {
   test.skip(!PLANES_CONOCIDOS.vigente, 'Requiere PLANES_CONOCIDOS.vigente en fixtures/test-data.js');
 
   const cliente = new PfpApiClient(request, 'qa-av');
-  await cliente.autenticar(CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
+  await cliente.autenticar(CUIT_AUTENTICADO, SIGN_CCT);
 
   const { resumen, detalle } = await cliente.buscarPlanPorSolicitud({
-    cuit: CONTRIBUYENTES.conPlan.cuit,
+    cuit: CUIT_AUTENTICADO,
     anio: new Date().getFullYear(),
     solicitud: PLANES_CONOCIDOS.vigente,
   });
@@ -65,7 +65,7 @@ test('TC_REG_F3010_001 — pago real de la cuota 1 del plan VIGENTE conocido', a
   console.log(`TC_REG_F3010_001 — ID_Debito: ${idDebito ?? '(ninguno, se registra con 0)'}`);
 
   const payload = cliente.construirPayloadF3010({
-    cuit: CONTRIBUYENTES.conPlan.cuit,
+    cuit: CUIT_AUTENTICADO,
     cuota: {
       numeroCuota: cuota1.numeroCuota,
       importeNominal: cuota1.importeNominal,
@@ -83,7 +83,7 @@ test('TC_REG_F3010_001 — pago real de la cuota 1 del plan VIGENTE conocido', a
 
   await new Promise(r => setTimeout(r, 1500));
   const { detalle: detalleFinal } = await cliente.buscarPlanPorSolicitud({
-    cuit: CONTRIBUYENTES.conPlan.cuit,
+    cuit: CUIT_AUTENTICADO,
     anio: new Date().getFullYear(),
     solicitud: PLANES_CONOCIDOS.vigente,
   });

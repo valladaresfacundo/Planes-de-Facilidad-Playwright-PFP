@@ -16,13 +16,13 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../../pages/LoginPage');
 const { PFPPage }   = require('../../../pages/PFPPage');
-const { AMBIENTES, CONTRIBUYENTES, SIGN_CCT, PLANES_CONOCIDOS } = require('../../../fixtures/test-data');
+const { AMBIENTES, CUIT_AUTENTICADO, SIGN_CCT, PLANES_CONOCIDOS } = require('../../../fixtures/test-data');
 
 test.describe('F3005 — Solicitud de Cancelación Anticipada', () => {
 
   async function loginYBuscarPlan(page, nroSolicitud) {
     const loginPage = new LoginPage(page);
-    await loginPage.login(AMBIENTES.QA_AV, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
+    await loginPage.login(AMBIENTES.QA_AV, CUIT_AUTENTICADO, SIGN_CCT);
     const portalPage = loginPage.obtenerPagina();
     const pfpPage = new PFPPage(portalPage);
     await pfpPage.irAPlanesDeFacilidades();

@@ -23,7 +23,7 @@
 const { test, expect } = require('@playwright/test');
 const { PfpApiClient } = require('../../../lib/pfpApiClient');
 const { actualizarFechasCuota, buscarPlanPorSolicitud: buscarPlanEnMongo, estadoActual, obtenerIdDebito } = require('../../../lib/mongoAdmin');
-const { SIGN_CCT, PLANES_CONOCIDOS, CONTRIBUYENTES } = require('../../../fixtures/test-data');
+const { SIGN_CCT, PLANES_CONOCIDOS, CUIT_AUTENTICADO } = require('../../../fixtures/test-data');
 
 function fechaISO(diasAtras) {
   const d = new Date();
@@ -48,7 +48,7 @@ async function pagarORechazar(cliente, { resumen, cuota, correcto }) {
   let idDebito = await cliente.esperarIdDebito(cuota.idTracerCuota);
   if (!idDebito) idDebito = await obtenerIdDebito(cuota.idTracerCuota);
   const payload = cliente.construirPayloadF3010({
-    cuit: CONTRIBUYENTES.conPlan.cuit,
+    cuit: CUIT_AUTENTICADO,
     cuota: { ...cuota, vencimientoCuota1: venc1ISO },
     resumenPlan: resumen,
     correcto,
@@ -62,10 +62,10 @@ test('TC_REG_F3003_001 — caducar el plan VIGENTE conocido vía GenerarCaducida
   test.skip(!process.env.MONGO_URI, 'Requiere MONGO_URI en .env — ver .env.example y lib/mongoAdmin.js');
 
   const cliente = new PfpApiClient(request, 'qa-av');
-  await cliente.autenticar(CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
+  await cliente.autenticar(CUIT_AUTENTICADO, SIGN_CCT);
 
   const { resumen, detalle } = await cliente.buscarPlanPorSolicitud({
-    cuit: CONTRIBUYENTES.conPlan.cuit,
+    cuit: CUIT_AUTENTICADO,
     anio: new Date().getFullYear(),
     solicitud: PLANES_CONOCIDOS.vigente,
   });

@@ -161,13 +161,16 @@ const SIGN_AGENTE = 'hbx9zff2MNCa/s3DvvECFPv60gsSoNNVtlpQim5Xq/qk3Z4KVesCnjonER6
 // Completar con datos reales de QA_HOMO — los tests que los usan se saltean solos
 // (test.skip) mientras estos campos queden en null.
 const PLANES_CONOCIDOS = {
-  // ⚠ 2026-08-21: CONSUMIDO — quedó CADUCO validando F3003 (ver
-  // F3003_caducidad_por_solicitud.spec.js, PASS real). Pedirle al usuario un
-  // plan VIGENTE nuevo antes de reusar F3005/F3007/F3010.
-  // Generado 2026-08-20 vía flujo E2E real (acogimiento completo +
-  // confirmación real) contra QA_AV, CONTRIBUYENTES.conPlan.cuit ACTUAL
-  // (27236036044), con 4 cuotas.
-  vigente: '1523073088',
+  // Plan real VIGENTE, provisto por el usuario el 2026-08-21, 3 cuotas
+  // NO_VENCIDA — reemplazo de 1523073088 (quedó CADUCO validando F3003).
+  // ⚠ Pertenece a CUIT_AUTENTICADO (30686855860), NO a
+  // CONTRIBUYENTES.conPlan.cuit (27236036044, el CUIT actual de F3001) — los
+  // tests que usan este fixture (F3005/F3007/F3010/F3003) autentican/consultan
+  // con CUIT_AUTENTICADO por eso, no asumir que todos los PLANES_CONOCIDOS.*
+  // comparten el mismo CUIT.
+  vigente: '1543000155',
+  // Histórico — 1523073088 (4 cuotas, CUIT 27236036044): quedó CADUCO
+  // validando F3003 el 2026-08-21 (PASS real).
   // Histórico — 1523073086 (1 cuota) y 1523073087 (6 cuotas): generados en el
   // mismo intento de esta sesión, insuficientes/de más para F3012/F3003 —
   // reemplazados por 1523073088 (4 cuotas exactas). 1783000157 (CUIT viejo
