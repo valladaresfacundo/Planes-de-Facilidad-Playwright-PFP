@@ -161,13 +161,12 @@ const SIGN_AGENTE = 'hbx9zff2MNCa/s3DvvECFPv60gsSoNNVtlpQim5Xq/qk3Z4KVesCnjonER6
 // Completar con datos reales de QA_HOMO — los tests que los usan se saltean solos
 // (test.skip) mientras estos campos queden en null.
 const PLANES_CONOCIDOS = {
-  // Plan real VIGENTE — generado 2026-08-20 vía flujo E2E real (acogimiento
-  // completo + confirmación real) contra QA_AV, CONTRIBUYENTES.conPlan.cuit
-  // ACTUAL (27236036044), con 4 cuotas TODAS sin tocar (NO_VENCIDA) — a
-  // pedido del usuario ("que no sea de más de 4 cuotas"). Con 4 cuotas
-  // alcanza para todo: F3005/F3007/F3010 (cuota 1), F3012 (cuota 4), F3003
-  // (cuota 1/2/3) — un solo plan para los 6 tests pendientes. Confirmado real
-  // en Mongo (Tracers.TracerInstance) tras la creación.
+  // ⚠ 2026-08-21: CONSUMIDO — quedó CADUCO validando F3003 (ver
+  // F3003_caducidad_por_solicitud.spec.js, PASS real). Pedirle al usuario un
+  // plan VIGENTE nuevo antes de reusar F3005/F3007/F3010.
+  // Generado 2026-08-20 vía flujo E2E real (acogimiento completo +
+  // confirmación real) contra QA_AV, CONTRIBUYENTES.conPlan.cuit ACTUAL
+  // (27236036044), con 4 cuotas.
   vigente: '1523073088',
   // Histórico — 1523073086 (1 cuota) y 1523073087 (6 cuotas): generados en el
   // mismo intento de esta sesión, insuficientes/de más para F3012/F3003 —
