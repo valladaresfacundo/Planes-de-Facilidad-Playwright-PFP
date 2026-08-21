@@ -205,14 +205,16 @@ const PLANES_CONOCIDOS = {
   // cuotas dentro de una ventana de anticipación corta (confirmado empírico:
   // una cuota que vence en diciembre no generó débito real pese a responder
   // 200; una que vence en noviembre sí).
-  // ⚠ 2026-08-20: 1523073090 (2 cuotas) quedó CONSUMIDO — se usó por error la
-  // CUOTA 1 para el doble rechazo, lo que disparó F3011 (Nulidad automática)
-  // del plan ENTERO (VIGENTE → NULO, confirmado real en Mongo, mismo
-  // timestamp que el rechazo — ver memoria pfp-roadmap-fases y
-  // pfp-formularios-catalogo). Regla operativa: F3012 SIEMPRE debe usar
-  // cuota 2 en adelante, nunca cuota 1. Pedirle al usuario un plan VIGENTE
-  // nuevo (o generar uno) antes de retomar F3012.
-  paraRehabilitar: null,
+  // ⚠ Histórico: 1523073090 (2 cuotas) quedó CONSUMIDO 2026-08-20 — se usó por
+  // error la CUOTA 1 para el doble rechazo, lo que disparó F3011 (Nulidad
+  // automática) del plan ENTERO (VIGENTE → NULO, confirmado real en Mongo,
+  // mismo timestamp que el rechazo). Regla operativa: F3012 SIEMPRE debe usar
+  // cuota 2 en adelante, nunca cuota 1 — ver memoria pfp-roadmap-fases y
+  // pfp-formularios-catalogo.
+  // Plan nuevo provisto por el usuario 2026-08-21 — CUIT 30686855860
+  // (CUIT_AUTENTICADO, NO CONTRIBUYENTES.conPlan.cuit), VIGENTE, 3 cuotas
+  // NO_VENCIDA. Se usa cuota 2 para el doble rechazo.
+  paraRehabilitar: '1543000154',
 };
 
 // Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y

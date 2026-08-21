@@ -31,7 +31,10 @@
 const { test, expect } = require('@playwright/test');
 const { PfpApiClient } = require('../../../lib/pfpApiClient');
 const { obtenerIdDebito, withTracerInstance } = require('../../../lib/mongoAdmin');
-const { SIGN_CCT, PLANES_CONOCIDOS, CONTRIBUYENTES } = require('../../../fixtures/test-data');
+const { SIGN_CCT, PLANES_CONOCIDOS, CUIT_AUTENTICADO } = require('../../../fixtures/test-data');
+// Nota: este plan (paraRehabilitar) pertenece a CUIT_AUTENTICADO (30686855860),
+// NO a CONTRIBUYENTES.conPlan.cuit (27236036044, el CUIT actual para F3001) —
+// por eso se autentica/consulta con CUIT_AUTENTICADO acá.
 
 const NUMERO_CUOTA_A_REHABILITAR = 2; // NUNCA 1 — ver advertencia arriba
 
@@ -51,7 +54,7 @@ async function rechazarVencimiento(cliente, { resumen, cuota, fechaVencimientoIS
   expect(idDebito, 'Debe conseguirse un ID_Debito real antes de rechazar').toBeTruthy();
 
   const payload = cliente.construirPayloadF3010({
-    cuit: CONTRIBUYENTES.conPlan.cuit,
+    cuit: CUIT_AUTENTICADO,
     cuota: {
       numeroCuota: cuota.numeroCuota,
       importeNominal: cuota.importeNominal,
@@ -73,10 +76,10 @@ test(`TC_REG_F3012_001 — rechazar cuota ${NUMERO_CUOTA_A_REHABILITAR} en ambos
   expect(NUMERO_CUOTA_A_REHABILITAR, 'NUNCA usar cuota 1 — dispara Nulidad automática del plan (F3011)').toBeGreaterThan(1);
 
   const cliente = new PfpApiClient(request, 'qa-av');
-  await cliente.autenticar(CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
+  await cliente.autenticar(CUIT_AUTENTICADO, SIGN_CCT);
 
   const { resumen, detalle } = await cliente.buscarPlanPorSolicitud({
-    cuit: CONTRIBUYENTES.conPlan.cuit,
+    cuit: CUIT_AUTENTICADO,
     anio: new Date().getFullYear(),
     solicitud: PLANES_CONOCIDOS.paraRehabilitar,
   });
