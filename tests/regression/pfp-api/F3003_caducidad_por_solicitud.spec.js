@@ -22,7 +22,7 @@
 // tener un plan VIGENTE de sobra para gastar.
 const { test, expect } = require('@playwright/test');
 const { PfpApiClient } = require('../../../lib/pfpApiClient');
-const { actualizarFechasCuota, buscarPlanPorSolicitud: buscarPlanEnMongo, estadoActual } = require('../../../lib/mongoAdmin');
+const { actualizarFechasCuota, buscarPlanPorSolicitud: buscarPlanEnMongo, estadoActual, obtenerIdDebito } = require('../../../lib/mongoAdmin');
 const { SIGN_CCT, PLANES_CONOCIDOS, CONTRIBUYENTES } = require('../../../fixtures/test-data');
 
 function fechaISO(diasAtras) {
@@ -39,7 +39,14 @@ async function pagarORechazar(cliente, { resumen, cuota, correcto }) {
   await cliente.generarDebitoCuotaPorSolicitud({
     idSolicitud: resumen.content.IDSolicitud, fecha: emitir, esPrimerIntento: true,
   });
-  const idDebito = await cliente.esperarIdDebito(cuota.idTracerCuota);
+  await new Promise(r => setTimeout(r, 1500));
+  // En QA_AV el servicio Tracer (txsapi) devuelve 200 con body vacío incluso
+  // autenticado — esperarIdDebito() nunca encuentra nada ahí. Fallback a
+  // mongoAdmin.obtenerIdDebito() (lee content.ID_Debito directo del
+  // documento de la cuota). Sin esto, el payload sale con ID_Debito:0 y el
+  // backend lo trata como duplicado en vez de procesar el rechazo real.
+  let idDebito = await cliente.esperarIdDebito(cuota.idTracerCuota);
+  if (!idDebito) idDebito = await obtenerIdDebito(cuota.idTracerCuota);
   const payload = cliente.construirPayloadF3010({
     cuit: CONTRIBUYENTES.conPlan.cuit,
     cuota: { ...cuota, vencimientoCuota1: venc1ISO },
