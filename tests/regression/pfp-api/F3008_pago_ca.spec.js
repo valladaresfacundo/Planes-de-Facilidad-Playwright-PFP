@@ -19,18 +19,18 @@ const { LoginPage } = require('../../../pages/LoginPage');
 const { PFPPage } = require('../../../pages/PFPPage');
 const { PfpApiClient } = require('../../../lib/pfpApiClient');
 const { obtenerIdDebito, withTracerInstance } = require('../../../lib/mongoAdmin');
-const { AMBIENTES, SIGN_CCT, CUIT_AUTENTICADO, PLANES_CONOCIDOS } = require('../../../fixtures/test-data');
+const { AMBIENTES, SIGN_CCT, CONTRIBUYENTES, PLANES_CONOCIDOS } = require('../../../fixtures/test-data');
 
 test('TC_REG_F3008_001 — generar CA real, débito (F3009) y pago de la CA (F3008)', async ({ page, request }) => {
   test.skip(!PLANES_CONOCIDOS.paraCancelacionAnticipada, 'Requiere PLANES_CONOCIDOS.paraCancelacionAnticipada en fixtures/test-data.js');
 
   const idSolicitud = PLANES_CONOCIDOS.paraCancelacionAnticipada;
   const cliente = new PfpApiClient(request, 'qa-av');
-  await cliente.autenticar(CUIT_AUTENTICADO, SIGN_CCT);
+  await cliente.autenticar(CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
 
   // Paso 1 — pagar cuota 1 si todavía no está paga (precondición real de F3005)
   const { resumen, detalle } = await cliente.buscarPlanPorSolicitud({
-    cuit: CUIT_AUTENTICADO, anio: new Date().getFullYear(), solicitud: idSolicitud,
+    cuit: CONTRIBUYENTES.conPlan.cuit, anio: new Date().getFullYear(), solicitud: idSolicitud,
   });
   const cuota1 = (detalle?.cuotas ?? []).find(c => Number(c.numeroCuota) === 1);
   expect(cuota1, 'Debe existir la cuota 1 en el detalle del plan').toBeTruthy();
@@ -45,7 +45,7 @@ test('TC_REG_F3008_001 — generar CA real, débito (F3009) y pago de la CA (F30
     let idDebito = await cliente.esperarIdDebito(cuota1.idTracerCuota);
     if (!idDebito) idDebito = await obtenerIdDebito(cuota1.idTracerCuota);
     const payload = cliente.construirPayloadF3010({
-      cuit: CUIT_AUTENTICADO,
+      cuit: CONTRIBUYENTES.conPlan.cuit,
       cuota: { numeroCuota: 1, importeNominal: cuota1.importeNominal, importeActualizado: cuota1.importeActualizado, vencimientoCuota1: venc1ISO, idTracerCuota: cuota1.idTracerCuota },
       resumenPlan: resumen, correcto: true, idDebito: idDebito || 0,
     });
@@ -56,7 +56,7 @@ test('TC_REG_F3008_001 — generar CA real, débito (F3009) y pago de la CA (F30
 
   // Paso 2 — F3005 real: generar la CA de verdad por UI (único camino conocido)
   const loginPage = new LoginPage(page);
-  await loginPage.login(AMBIENTES.QA_AV, CUIT_AUTENTICADO, SIGN_CCT);
+  await loginPage.login(AMBIENTES.QA_AV, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
   const portalPage = loginPage.obtenerPagina();
   const pfpPage = new PFPPage(portalPage);
 

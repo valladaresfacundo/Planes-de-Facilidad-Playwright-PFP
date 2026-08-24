@@ -231,7 +231,13 @@ const PLANES_CONOCIDOS = {
   // eso: la cuota 2 rehabilitada seguía con un débito en curso, no por el
   // tiempo transcurrido desde el pago de la cuota 1. Usar SIEMPRE un plan
   // nuevo, sin ninguna otra cuota tocada, dedicado solo a este flujo.
-  paraCancelacionAnticipada: null,
+  // ⚠ 1523073096 (1 sola cuota) NO sirve — confirmado real: con 1 cuota, tras
+  // pagarla no queda nada para cancelar y el portal bloquea con "No existen
+  // cuotas adeudadas". El usuario confirmó que F3005 (CA) necesita un plan de
+  // AL MENOS 3 cuotas. Reemplazo: 1523073097 (6 cuotas, VIGENTE, todas
+  // NO_VENCIDA, CUIT 27236036044/CONTRIBUYENTES.conPlan.cuit), generado
+  // 2026-08-24 confirmando de verdad el wizard de acogimiento.
+  paraCancelacionAnticipada: '1523073097',
 };
 
 // Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y
