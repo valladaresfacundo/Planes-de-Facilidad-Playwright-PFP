@@ -222,6 +222,16 @@ const PLANES_CONOCIDOS = {
   // vía flujo E2E real (TC_REG_008), VIGENTE, CUIT 27236036044
   // (CONTRIBUYENTES.conPlan.cuit), cuota 1 sin pagar.
   paraCancelar: '1523073086',
+  // Plan dedicado a F3005 real + F3009 + F3008 (Cancelación Anticipada
+  // completa).
+  // ⚠ 2026-08-24: NO reusar un plan que haya tenido actividad de F3012
+  // (rehabilitar cuota) — confirmado por el usuario que el sistema bloquea
+  // F3005 si CUALQUIER cuota del plan tiene un débito pendiente/en proceso,
+  // no solo la cuota 1. `1543000154` (usado para paraRehabilitar) falló por
+  // eso: la cuota 2 rehabilitada seguía con un débito en curso, no por el
+  // tiempo transcurrido desde el pago de la cuota 1. Usar SIEMPRE un plan
+  // nuevo, sin ninguna otra cuota tocada, dedicado solo a este flujo.
+  paraCancelacionAnticipada: null,
 };
 
 // Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y

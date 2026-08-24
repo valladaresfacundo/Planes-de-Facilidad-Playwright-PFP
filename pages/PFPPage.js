@@ -201,6 +201,30 @@ class PFPPage {
     await this.page.getByRole('button', { name: 'Cancelación Anticipada' }).click();
     await this.page.waitForLoadState('networkidle');
   }
+
+  // F3005 — Confirma la CA de verdad (MUTA: el plan pasa a CA_PENDIENTE).
+  // Wizard de 4 pasos ("Operaciones / Pagar"), confirmado en vivo 2026-08-13:
+  // 1. "Confirmar Cuotas" → botón "Continuar".
+  // 2. "Confirmación de CBU" → viene precargado con el último CBU cargado
+  //    (F3007) → botón "Continuar".
+  // 3. "Confirmación" → botón real es "Confirmar" (no "Continuar", distinto
+  //    de los pasos anteriores) → clic real, dispara la CA.
+  // Llamar después de iniciarCancelacionAnticipada() y de confirmar que el
+  // mensaje de bloqueo ("La primer cuota del plan debe estar paga") NO está
+  // presente.
+  async confirmarCancelacionAnticipada() {
+    await this.page.getByRole('button', { name: 'Continuar' }).click();
+    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(800);
+
+    await this.page.getByRole('button', { name: 'Continuar' }).click();
+    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(800);
+
+    await this.page.getByRole('button', { name: 'Confirmar' }).click();
+    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(1500);
+  }
 }
 
 module.exports = { PFPPage };
