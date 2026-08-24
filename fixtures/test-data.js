@@ -217,6 +217,11 @@ const PLANES_CONOCIDOS = {
   // (CUIT_AUTENTICADO, NO CONTRIBUYENTES.conPlan.cuit), VIGENTE, 3 cuotas
   // NO_VENCIDA. Se usa cuota 2 para el doble rechazo.
   paraRehabilitar: '1543000154',
+  // Plan dedicado a F3002 (Cancelación normal) — 1 sola cuota, para que
+  // "pagar todas las cuotas" sea trivial (un solo F3010). Generado 2026-08-20
+  // vía flujo E2E real (TC_REG_008), VIGENTE, CUIT 27236036044
+  // (CONTRIBUYENTES.conPlan.cuit), cuota 1 sin pagar.
+  paraCancelar: '1523073086',
 };
 
 // Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y
