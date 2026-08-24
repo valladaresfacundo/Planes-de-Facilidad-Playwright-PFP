@@ -161,15 +161,15 @@ const SIGN_AGENTE = 'hbx9zff2MNCa/s3DvvECFPv60gsSoNNVtlpQim5Xq/qk3Z4KVesCnjonER6
 // Completar con datos reales de QA_HOMO — los tests que los usan se saltean solos
 // (test.skip) mientras estos campos queden en null.
 const PLANES_CONOCIDOS = {
-  // Plan real VIGENTE, provisto por el usuario el 2026-08-21, 3 cuotas
-  // NO_VENCIDA — reemplazo de 1523073088 (quedó CADUCO validando F3003).
-  // ⚠ Pertenece a CUIT_AUTENTICADO (30686855860), NO a
-  // CONTRIBUYENTES.conPlan.cuit (27236036044, el CUIT actual de F3001) — los
-  // tests que usan este fixture (F3005/F3007/F3010/F3003) autentican/consultan
-  // con CUIT_AUTENTICADO por eso, no asumir que todos los PLANES_CONOCIDOS.*
-  // comparten el mismo CUIT.
+  // ⚠ 2026-08-21: CONSUMIDO — corrida completa TC_REG_009 → F3010 → TC_REG_011
+  // → TC_REG_010 → F3003, las 5 PASS, quedó CADUCO al final (a propósito, por
+  // F3003). Pedirle al usuario un plan VIGENTE nuevo antes de reusar
+  // F3005/F3007/F3010. Recordar: el próximo plan puede pertenecer a
+  // CUIT_AUTENTICADO O a CONTRIBUYENTES.conPlan.cuit según de dónde salga —
+  // confirmar el idPerson real en Mongo antes de asumir cuál usar.
   vigente: '1543000155',
-  // Histórico — 1523073088 (4 cuotas, CUIT 27236036044): quedó CADUCO
+  // Histórico — 1523073088 (4 cuotas, CUIT 27236036044) y 1543000155 (3
+  // cuotas, CUIT 30686855860): ambos quedaron CADUCO
   // validando F3003 el 2026-08-21 (PASS real).
   // Histórico — 1523073086 (1 cuota) y 1523073087 (6 cuotas): generados en el
   // mismo intento de esta sesión, insuficientes/de más para F3012/F3003 —
