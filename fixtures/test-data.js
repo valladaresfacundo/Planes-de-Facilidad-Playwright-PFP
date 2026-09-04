@@ -193,7 +193,13 @@ const PLANES_CONOCIDOS = {
   // abril/mayo 2026, y GenerarCaducidadPorSolicitud (F3003 puntual, ver
   // lib/pfpApiClient.js) confirmó el plan CADUCO de verdad. Ver memoria
   // pfp-roadmap-fases para el detalle completo del proceso.
-  caduco: '1543000153', // → F3006 Reversa de Caducidad (Portal Agente)
+  // ⚠ 2026-09-03: CONSUMIDO — se confirmó ReversarCaducidades real (API,
+  // hallazgo nuevo, ver memoria pfp-roadmap-fases/pfp-formularios-catalogo)
+  // sobre este plan para validar F3006 por API. Quedó VIGENTE, con las
+  // cuotas 2 y 3 rotas (RECHAZADA/RECHAZADO, vencimientos ya pasados) — la
+  // reversa NO redistribuye cuotas (F3015/F3016 no son un efecto colateral
+  // automático). Pedir un plan CADUCO nuevo antes de reusar F3006/F3016.
+  caduco: null, // → F3006 Reversa de Caducidad (Portal Agente o API ReversarCaducidades)
   // nulo: reemplazo provisto por el usuario el 2026-08-12 — el anterior (1523072944) se
   // consumió validando F3013 end-to-end y quedó VIGENTE. Mismo cuidado: si TC_AGPFP_008
   // corre hasta el final, este número también queda VIGENTE y hay que pedir otro reemplazo.
