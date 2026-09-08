@@ -244,6 +244,18 @@ const PLANES_CONOCIDOS = {
   // NO_VENCIDA, CUIT 27236036044/CONTRIBUYENTES.conPlan.cuit), generado
   // 2026-08-24 confirmando de verdad el wizard de acogimiento.
   paraCancelacionAnticipada: '1523073097',
+  // Plan dedicado a F3011 (Nulidad automática) + F3013 vía API
+  // (ReversarNulidades) — generado 2026-09-08 vía UI (VIGENTE, 3 cuotas, CUIT
+  // 27236036044/CONTRIBUYENTES.conPlan.cuit), a propósito SEPARADO de
+  // PLANES_CONOCIDOS.nulo (que el usuario pidió no tocar sin confirmar de
+  // nuevo). Confirmado real: 1 solo rechazo de cuota 1 (F3010 incorrecto)
+  // dispara F3011 (VIGENTE→NULO automático) → ReversarNulidades revierte a
+  // VIGENTE real (transaction 647239). ⚠ Igual que ReversarCaducidades, esto
+  // NO redistribuye la cuota (queda RECHAZADA para siempre, ver
+  // pfp-formularios-catalogo) — no repetible indefinidamente: una vez
+  // consumida la cuota 1, este plan ya no sirve para volver a disparar F3011
+  // (sí se puede seguir reversando el mismo NULO si algo lo vuelve a nulificar).
+  paraNulidad: '1523073109',
 };
 
 // Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y
