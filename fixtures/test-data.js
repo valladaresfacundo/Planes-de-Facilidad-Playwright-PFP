@@ -256,6 +256,14 @@ const PLANES_CONOCIDOS = {
   // consumida la cuota 1, este plan ya no sirve para volver a disparar F3011
   // (sí se puede seguir reversando el mismo NULO si algo lo vuelve a nulificar).
   paraNulidad: '1523073109',
+  // Planes provistos por el usuario 2026-09-08, dejados a propósito en 3
+  // puntos distintos del ciclo de estados de la CA (Cancelación Anticipada)
+  // — CUIT 27236036044/CONTRIBUYENTES.conPlan.cuit. Confirmado real en Mongo,
+  // ver memoria pfp-formularios-catalogo (sección "Ciclo de estados de la
+  // Cancelación Anticipada"):
+  paraCAEnviadaDebito: '1523073103', // estado real: CA_ENVIADA_DEBITO
+  paraCARechazada: '1523073102', // estado real: CA_RECHAZADA
+  paraCARehabilitada: '1523073104', // estado real: CA_REHABILITADA
 };
 
 // Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y
