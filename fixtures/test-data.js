@@ -255,7 +255,11 @@ const PLANES_CONOCIDOS = {
   // pfp-formularios-catalogo) — no repetible indefinidamente: una vez
   // consumida la cuota 1, este plan ya no sirve para volver a disparar F3011
   // (sí se puede seguir reversando el mismo NULO si algo lo vuelve a nulificar).
-  paraNulidad: '1523073109',
+  // ⚠ 1523073109 quedó CONSUMIDO por TC_REG_F3011_001 (cuota 1 ya RECHAZADA,
+  // plan VIGENTE de nuevo) — reemplazado 2026-09-09 por 1523073113 (mismo
+  // origen/CUIT, generado vía UI, VIGENTE, 3 cuotas, cuota 1 sin tocar) para
+  // dar lugar a tests/regression/pfp-api/F3013_reversa_nulidad_por_solicitud.spec.js.
+  paraNulidad: '1523073113',
   // Planes provistos por el usuario 2026-09-08, dejados a propósito en 3
   // puntos distintos del ciclo de estados de la CA (Cancelación Anticipada)
   // — CUIT 27236036044/CONTRIBUYENTES.conPlan.cuit. Confirmado real en Mongo,
