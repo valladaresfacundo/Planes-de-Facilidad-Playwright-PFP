@@ -260,10 +260,17 @@ const PLANES_CONOCIDOS = {
   // puntos distintos del ciclo de estados de la CA (Cancelación Anticipada)
   // — CUIT 27236036044/CONTRIBUYENTES.conPlan.cuit. Confirmado real en Mongo,
   // ver memoria pfp-formularios-catalogo (sección "Ciclo de estados de la
-  // Cancelación Anticipada"):
-  paraCAEnviadaDebito: '1523073103', // estado real: CA_ENVIADA_DEBITO
-  paraCARechazada: '1523073102', // estado real: CA_RECHAZADA
-  paraCARehabilitada: '1523073104', // estado real: CA_REHABILITADA
+  // Cancelación Anticipada").
+  // ⚠ 2026-09-09: CONSUMIDOS por tests/regression/pfp-api/F3009_ciclo_
+  // rechazo_rehabilitacion_ca.spec.js — cada uno avanzó un paso real más:
+  // paraCAEnviadaDebito (1523073103) → CA_RECHAZADA
+  // paraCARechazada (1523073102) → CA_REHABILITADA
+  // paraCARehabilitada (1523073104) → CA_PAGADA (ciclo cerrado del todo)
+  // Pedir planes nuevos en cada estado si se necesita volver a correr estos
+  // tests — no quedan disponibles tal cual.
+  paraCAEnviadaDebito: '1523073103',
+  paraCARechazada: '1523073102',
+  paraCARehabilitada: '1523073104',
 };
 
 // Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y
