@@ -293,14 +293,17 @@ const PLANES_CONOCIDOS = {
   // tiene su propio esquema de numeración. Interés condonado 0% (a
   // diferencia de 461, que veníamos viendo con 70%) — no asumir que las
   // reglas de condonación de 461 aplican igual acá.
+  // ⚠ REFORMULADO (consumido, ver plan890Reformulado abajo).
   plan890: '2223000121',
-  // Segundo plan 890 real, generado en algún punto anterior de la sesión
-  // (mismo CUIT con890) — VIGENTE, cuota 1 PAGADA, 5 cuotas impagas.
-  // Confirmado elegible para reformular (apareció listado junto a
-  // plan890 en "Seleccioná un plan vigente a reformular"). Sin usar
-  // todavía — candidato para un segundo test de reformulación o para
-  // reponer plan890 si hace falta un 890 VIGENTE de nuevo.
-  plan890Alternativo: '2223000122',
+  // ⚠ 2026-09-16: REFORMULADO también (consumido por la corrida real de
+  // TC_REG_REFORMULAR_001, ver tests/regression/pfp/
+  // F3001_reformulacion_890_a_461.spec.js) — generó el plan 1523073118
+  // (461, VIGENTE). Reemplazado por 2223000124 — quedan 2 de repuesto
+  // (2223000124 actual, 2223000125 de más reserva), mismo estado: VIGENTE,
+  // cuota 1 PAGADA, 3 cuotas, CUIT con890 (nacieron de corridas de debug
+  // del fallback de auto-fabricación del test, que se sacó del código
+  // final por gastar períodos de deuda reales en cada intento fallido).
+  plan890Alternativo: '2223000124',
   // Plan generado por la REFORMULACIÓN real del plan890 (2223000121) hacia
   // 461/AGIP/25 — confirmado real 2026-09-16. VIGENTE, 3 cuotas nuevas
   // (NO_VENCIDA), $206.519,62 total (con 70% de condonación aplicado sobre
