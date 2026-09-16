@@ -42,6 +42,17 @@ const CONTRIBUYENTES = {
     cuit: '30604731018',      // CUIT del token por defecto
     nombre: 'USUARIO PRUEBA',
   },
+  // Contribuyente dedicado a la norma 890/MHFGC/20 — provisto por el
+  // usuario 2026-09-16. Esta norma tiene una regla de negocio que 461/AGIP/25
+  // no tiene: exige "cancelación de obligaciones tributarias en los 90 días
+  // corridos previos" (ver memoria pfp-roadmap-fases) — ningún CUIT usado
+  // hasta ahora en el resto de la suite la cumple. Este SÍ la cumple,
+  // confirmado real: acogimiento generado con éxito (ver PLANES_CONOCIDOS.
+  // plan890 más abajo). Impuesto: IIBB - Convenio Multilateral (tax 2).
+  con890: {
+    cuit: '20226452614',
+    impuesto: 'IIBB - Convenio Multilateral',
+  },
 };
 
 // ─── Configuración del token de login ────────────────────────────────────────
@@ -275,6 +286,13 @@ const PLANES_CONOCIDOS = {
   paraCAEnviadaDebito: '1523073103',
   paraCARechazada: '1523073102',
   paraCARehabilitada: '1523073104',
+  // Plan real bajo la norma 890/MHFGC/20 (desbloqueada 2026-09-16 con
+  // CONTRIBUYENTES.con890) — VIGENTE, 3 cuotas, sin pagar. Prefijo de
+  // solicitud distinto al resto (2223... en vez de 1523/1543/1783) — 890
+  // tiene su propio esquema de numeración. Interés condonado 0% (a
+  // diferencia de 461, que veníamos viendo con 70%) — no asumir que las
+  // reglas de condonación de 461 aplican igual acá.
+  plan890: '2223000121',
 };
 
 // Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y
