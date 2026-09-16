@@ -286,13 +286,28 @@ const PLANES_CONOCIDOS = {
   paraCAEnviadaDebito: '1523073103',
   paraCARechazada: '1523073102',
   paraCARehabilitada: '1523073104',
-  // Plan real bajo la norma 890/MHFGC/20 (desbloqueada 2026-09-16 con
-  // CONTRIBUYENTES.con890) — VIGENTE, 3 cuotas, sin pagar. Prefijo de
-  // solicitud distinto al resto (2223... en vez de 1523/1543/1783) — 890
+  // ⚠ 2026-09-16: CONSUMIDO por la reformulación (ver plan890Reformulado
+  // abajo) — quedó REFORMULADO (cuotas 1/2/3 todas REFORMULADA/REFORMULADO,
+  // incluida la 1 que ya estaba PAGADA). Ya no sirve como plan890 "normal".
+  // Prefijo de solicitud propio (2223... en vez de 1523/1543/1783) — 890
   // tiene su propio esquema de numeración. Interés condonado 0% (a
   // diferencia de 461, que veníamos viendo con 70%) — no asumir que las
   // reglas de condonación de 461 aplican igual acá.
   plan890: '2223000121',
+  // Segundo plan 890 real, generado en algún punto anterior de la sesión
+  // (mismo CUIT con890) — VIGENTE, cuota 1 PAGADA, 5 cuotas impagas.
+  // Confirmado elegible para reformular (apareció listado junto a
+  // plan890 en "Seleccioná un plan vigente a reformular"). Sin usar
+  // todavía — candidato para un segundo test de reformulación o para
+  // reponer plan890 si hace falta un 890 VIGENTE de nuevo.
+  plan890Alternativo: '2223000122',
+  // Plan generado por la REFORMULACIÓN real del plan890 (2223000121) hacia
+  // 461/AGIP/25 — confirmado real 2026-09-16. VIGENTE, 3 cuotas nuevas
+  // (NO_VENCIDA), $206.519,62 total (con 70% de condonación aplicado sobre
+  // la deuda pendiente del plan viejo, aunque el 890 original tenía 0%
+  // condonado — la reformulación aplica SU PROPIA regla de condonación,
+  // no hereda la del plan de origen).
+  plan890Reformulado: '1523073116',
 };
 
 // Expediente estándar a usar siempre en las Reversas (F3006/F3013) — provisto por el usuario y
