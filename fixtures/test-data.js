@@ -251,10 +251,19 @@ const PLANES_CONOCIDOS = {
   // ⚠ 1523073096 (1 sola cuota) NO sirve — confirmado real: con 1 cuota, tras
   // pagarla no queda nada para cancelar y el portal bloquea con "No existen
   // cuotas adeudadas". El usuario confirmó que F3005 (CA) necesita un plan de
-  // AL MENOS 3 cuotas. Reemplazo: 1523073097 (6 cuotas, VIGENTE, todas
-  // NO_VENCIDA, CUIT 27236036044/CONTRIBUYENTES.conPlan.cuit), generado
-  // 2026-08-24 confirmando de verdad el wizard de acogimiento.
-  paraCancelacionAnticipada: '1523073097',
+  // AL MENOS 3 cuotas.
+  // ⚠ 2026-09-18: 1523073097 quedó CONSUMIDO (CA_PAGADA, ciclo completo ya
+  // corrido) — reemplazado por 1523073120 (3 cuotas, mismo CUIT). Ciclo real
+  // confirmado de nuevo: F3010 (pago cuota 1) → F3005 (CA_PENDIENTE) → F3009
+  // (CA_ENVIADA_DEBITO) → F3008 (CA_PAGADA, importe $16.693,36).
+  // Hallazgo nuevo de paso: al generar este plan, **6 cuotas dio un error
+  // real de negocio** — "Con 6 cuotas, el plan no alcanza el importe
+  // mínimo." (la deuda disponible era ~$36.000; dividida en 6 no llega al
+  // mínimo por cuota) — hubo que usar 3 cuotas en su lugar. La cantidad de
+  // cuotas máxima utilizable depende del monto de deuda disponible en el
+  // momento, no es un número fijo — tenerlo en cuenta al fabricar planes
+  // nuevos para CA.
+  paraCancelacionAnticipada: '1523073120',
   // Plan dedicado a F3011 (Nulidad automática) + F3013 vía API
   // (ReversarNulidades) — generado 2026-09-08 vía UI (VIGENTE, 3 cuotas, CUIT
   // 27236036044/CONTRIBUYENTES.conPlan.cuit), a propósito SEPARADO de
