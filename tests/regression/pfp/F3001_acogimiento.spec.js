@@ -41,31 +41,73 @@ test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
     });
   }
 
+  // El primer período de la tabla puede tener $0,00 de deuda (fila real
+  // pero sin importe) — tildarlo no habilita "Continuar". Hay que buscar
+  // el primero con capital > $0, mismo criterio ya usado en otros archivos
+  // de esta suite (BUG_redondeo_simulacion_cuotas.spec.js,
+  // F3001_reformulacion_890_a_461.spec.js).
+  async function elegirPeriodoConDeuda(portalPage) {
+    const filas = portalPage.locator('table tbody tr');
+    const totalFilas = await filas.count();
+    for (let i = 0; i < totalFilas; i++) {
+      const fila = filas.nth(i);
+      const texto = await fila.innerText();
+      const columnas = texto.split('\t').filter(Boolean);
+      const posibleCapital = columnas.find(c => /^\$\s*[1-9]/.test(c.trim()));
+      if (posibleCapital) {
+        await fila.locator('.v-simple-checkbox > .v-input--selection-controls__input > .v-icon').click();
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Elige la cantidad de cuotas pedida; si el plan "no alcanza el importe
+  // mínimo" con esa cantidad (mensaje real de negocio — depende de cuánta
+  // deuda quedó disponible en el período elegido, que se va consumiendo a
+  // medida que corren otros tests de este mismo archivo), baja de a una
+  // hasta encontrar una cantidad que sí alcance. Confirmado real 2026-09-21
+  // (ver memoria pfp-roadmap-fases).
+  async function elegirCuotasQueAlcancen(portalPage, cantidadPreferida) {
+    await portalPage.getByRole('button', { name: '*Cantidad de cuotas a pagar' }).click();
+    await portalPage.waitForTimeout(500);
+
+    // Lista de opciones tal como aparecen (se asume orden ascendente, de
+    // menos a más cuotas — así se vio siempre en 461 y 890).
+    const textosOpciones = await portalPage.getByRole('option').allTextContents();
+    let indiceElegido = textosOpciones.findIndex(t => t.trim() === cantidadPreferida.trim());
+    if (indiceElegido === -1) {
+      console.log(`Opción "${cantidadPreferida}" no disponible, tomando máximo disponible`);
+      indiceElegido = textosOpciones.length - 1;
+    }
+    await portalPage.getByRole('option').nth(indiceElegido).click();
+    await portalPage.waitForTimeout(1000);
+
+    for (let intentos = 0; intentos < textosOpciones.length; intentos++) {
+      const noAlcanza = await portalPage.getByText('no alcanza el importe mínimo').isVisible().catch(() => false);
+      if (!noAlcanza) return;
+
+      indiceElegido -= 1;
+      if (indiceElegido < 0) throw new Error('No se encontró ninguna cantidad de cuotas que alcance el importe mínimo');
+      console.log(`elegirCuotasQueAlcancen — no alcanza el importe mínimo, bajando a "${textosOpciones[indiceElegido]}"...`);
+      await portalPage.getByRole('button', { name: '*Cantidad de cuotas a pagar' }).click();
+      await portalPage.waitForTimeout(300);
+      await portalPage.getByRole('option').nth(indiceElegido).click();
+      await portalPage.waitForTimeout(1000);
+    }
+    throw new Error('No se encontró ninguna cantidad de cuotas que alcance el importe mínimo tras varios intentos');
+  }
+
   async function llegarAlPaso3(portalPage, cantidadCuotas) {
-    const checkboxPeriodo = portalPage.locator('td > .v-simple-checkbox > .v-input--selection-controls__input > .v-icon').first();
-    await expect(checkboxPeriodo).toBeVisible({ timeout: 10000 });
-    await checkboxPeriodo.click();
+    const encontroPeriodo = await elegirPeriodoConDeuda(portalPage);
+    expect(encontroPeriodo, 'Debe existir al menos un período con deuda > $0').toBeTruthy();
     await portalPage.waitForTimeout(500);
 
     // Usamos .last() porque el botón habilitado es el último cuando hay dos
     await portalPage.getByRole('button', { name: 'Continuar' }).last().click();
     await portalPage.waitForLoadState('networkidle');
 
-    await portalPage.getByRole('button', { name: '*Cantidad de cuotas a pagar' }).click();
-    await portalPage.waitForTimeout(500);
-
-    // Verificamos si la opción existe antes de clickear
-    const opcion = portalPage.getByRole('option', { name: cantidadCuotas, exact: true });
-    const existeOpcion = await opcion.isVisible({ timeout: 3000 }).catch(() => false);
-
-    if (!existeOpcion) {
-      // Si no existe la opción pedida, tomamos la última disponible
-      console.log(`Opción "${cantidadCuotas}" no disponible, tomando máximo disponible`);
-      const opciones = portalPage.getByRole('option');
-      await opciones.last().click();
-    } else {
-      await opcion.click();
-    }
+    await elegirCuotasQueAlcancen(portalPage, cantidadCuotas);
 
     await portalPage.waitForTimeout(300);
     await portalPage.getByRole('button', { name: 'Continuar' }).last().click();
@@ -143,9 +185,8 @@ test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
     await consultarDeuda(portalPage, pfpPage);
 
     // Selector correcto del Codegen para el checkbox de período
-    const checkboxPeriodo = portalPage.locator('td > .v-simple-checkbox > .v-input--selection-controls__input > .v-icon').first();
-    await expect(checkboxPeriodo).toBeVisible({ timeout: 10000 });
-    await checkboxPeriodo.click();
+    const encontroPeriodo = await elegirPeriodoConDeuda(portalPage);
+    expect(encontroPeriodo, 'Debe existir al menos un período con deuda > $0').toBeTruthy();
     await portalPage.waitForTimeout(500);
 
     const btnContinuar = portalPage.getByRole('button', { name: 'Continuar' });
@@ -165,9 +206,8 @@ test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
     await consultarDeuda(portalPage, pfpPage);
 
     // Paso 1: seleccionar período
-    const checkboxPeriodo = portalPage.locator('td > .v-simple-checkbox > .v-input--selection-controls__input > .v-icon').first();
-    await expect(checkboxPeriodo).toBeVisible({ timeout: 10000 });
-    await checkboxPeriodo.click();
+    const encontroPeriodo007 = await elegirPeriodoConDeuda(portalPage);
+    expect(encontroPeriodo007, 'Debe existir al menos un período con deuda > $0').toBeTruthy();
     await portalPage.waitForTimeout(500);
     await portalPage.getByRole('button', { name: 'Continuar' }).click();
     await portalPage.waitForLoadState('networkidle');
@@ -191,9 +231,8 @@ test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
     await consultarDeuda(portalPage, pfpPage);
 
     // Paso 1: seleccionar período específico
-    const checkboxPeriodo = portalPage.locator('td > .v-simple-checkbox > .v-input--selection-controls__input > .v-icon').first();
-    await expect(checkboxPeriodo).toBeVisible({ timeout: 10000 });
-    await checkboxPeriodo.click();
+    const encontroPeriodo008 = await elegirPeriodoConDeuda(portalPage);
+    expect(encontroPeriodo008, 'Debe existir al menos un período con deuda > $0').toBeTruthy();
     await portalPage.waitForTimeout(500);
     await portalPage.getByRole('button', { name: 'Continuar' }).click();
     await portalPage.waitForLoadState('networkidle');
@@ -348,23 +387,28 @@ test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
     const { portalPage, pfpPage } = await loginYNavegar(page);
     await consultarDeuda(portalPage, pfpPage);
 
-    const checkboxPeriodo = portalPage.locator('td > .v-simple-checkbox > .v-input--selection-controls__input > .v-icon').first();
-    await expect(checkboxPeriodo).toBeVisible({ timeout: 10000 });
-    await checkboxPeriodo.click();
+    const encontroPeriodo004 = await elegirPeriodoConDeuda(portalPage);
+    expect(encontroPeriodo004, 'Debe existir al menos un período con deuda > $0').toBeTruthy();
     await portalPage.waitForTimeout(500);
     await portalPage.getByRole('button', { name: 'Continuar' }).last().click();
     await portalPage.waitForLoadState('networkidle');
 
-    // Abrimos el dropdown y seleccionamos la última opción disponible (máximo de cuotas)
+    // Abrimos el dropdown para ver cuál es la última opción disponible
+    // (máximo de cuotas del ambiente) — el máximo REAL usable puede ser
+    // menor si la deuda del período no alcanza el importe mínimo por cuota
+    // con esa cantidad (regla real de negocio, ver elegirCuotasQueAlcancen).
     await portalPage.getByRole('button', { name: '*Cantidad de cuotas a pagar' }).click();
     await portalPage.waitForTimeout(500);
     const opciones = portalPage.getByRole('option');
     const cantidadOpciones = await opciones.count();
     const ultimaOpcion = await opciones.last().textContent();
-    await opciones.last().click();
+    console.log(`TC_CUOTAS_004 — Máximo de cuotas ofrecido por el dropdown: ${ultimaOpcion} (${cantidadOpciones} opciones)`);
+    await portalPage.keyboard.press('Escape');
     await portalPage.waitForTimeout(300);
-    console.log(`TC_CUOTAS_004 — Máximo de cuotas disponibles: ${ultimaOpcion} (${cantidadOpciones} opciones)`);
 
+    await elegirCuotasQueAlcancen(portalPage, ultimaOpcion.trim());
+
+    await portalPage.waitForTimeout(300);
     await portalPage.getByRole('button', { name: 'Continuar' }).last().click();
     await portalPage.waitForLoadState('networkidle');
 
@@ -380,7 +424,7 @@ test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
     await expect(checkboxConfirmacion).toBeVisible({ timeout: 10000 });
     await checkboxConfirmacion.click();
     await expect(portalPage.getByRole('button', { name: 'Confirmar' })).toBeEnabled();
-    console.log(`TC_CUOTAS_004 — Plan con máximo cuotas (${ultimaOpcion}) listo para confirmar`);
+    console.log(`TC_CUOTAS_004 — Plan listo para confirmar (dropdown ofrecía hasta "${ultimaOpcion.trim()}", puede haber bajado si no alcanzaba el importe mínimo — ver logs arriba)`);
   });
 
 });
