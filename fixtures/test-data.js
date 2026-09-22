@@ -263,7 +263,12 @@ const PLANES_CONOCIDOS = {
   // cuotas máxima utilizable depende del monto de deuda disponible en el
   // momento, no es un número fijo — tenerlo en cuenta al fabricar planes
   // nuevos para CA.
-  paraCancelacionAnticipada: '1523073120',
+  // ⚠ 2026-09-22: 1523073120 quedó CONSUMIDO (CA_PAGADA de nuevo) —
+  // reemplazado por 1523073123 (3 cuotas, mismo CUIT). Ciclo confirmado
+  // real otra vez: F3010 (pago cuota 1, transaction 654024) → F3005
+  // (CA_PENDIENTE) → F3009 (CA_ENVIADA_DEBITO, transaction 654026) → F3008
+  // (CA_PAGADA, transaction 654027, importe $16.247,16).
+  paraCancelacionAnticipada: '1523073123',
   // Plan dedicado a F3011 (Nulidad automática) + F3013 vía API
   // (ReversarNulidades) — generado 2026-09-08 vía UI (VIGENTE, 3 cuotas, CUIT
   // 27236036044/CONTRIBUYENTES.conPlan.cuit), a propósito SEPARADO de
