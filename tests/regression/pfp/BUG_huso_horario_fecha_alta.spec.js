@@ -9,27 +9,25 @@
 // - El backend está bien: `ObtenerPlanesDePago` devuelve el campo
 //   `created`/`content.Fecha_Consolidacion` con el offset -03:00 intacto
 //   (ej. "2026-04-30T21:00:04.456-03:00").
-// - El FRONTEND es el que falla — en AMBOS portales (Contribuyente y
-//   Agente) — al mostrar "Fecha de alta". Muestra un día después de la
-//   fecha real, únicamente cuando la hora de consolidación cae en la
-//   ventana 21:00:00–23:59:59 hora Argentina (justo cuando el momento
-//   equivalente en UTC ya cruzó al día siguiente: 21hs ARG = 00hs UTC del
-//   día siguiente). Confirmado con un control real: la MISMA fecha a
-//   mediodía (que no cruza medianoche UTC) se muestra correcta.
-// - Patrón típico de esta clase de bug: extraer año/mes/día del valor en
-//   UTC (`getUTCDate()`, `toISOString().slice(0,10)`) en vez de en hora
-//   local de Argentina.
+// - El FRONTEND fallaba — en AMBOS portales (Contribuyente y Agente) — al
+//   mostrar "Fecha de alta". Mostraba un día después de la fecha real,
+//   únicamente cuando la hora de consolidación caía en la ventana
+//   21:00:00–23:59:59 hora Argentina (justo cuando el momento equivalente
+//   en UTC ya cruzaba al día siguiente: 21hs ARG = 00hs UTC del día
+//   siguiente). Confirmado con un control real: la MISMA fecha a mediodía
+//   (que no cruza medianoche UTC) se mostraba correcta incluso con el bug.
+//
+// ✅ FIX CONFIRMADO 2026-09-25 — corrido en vivo contra QA_AV: la "Fecha
+// de alta" ahora muestra 30/04/2026 correctamente (antes: 01/05/2026),
+// tanto para el plan de este test como para el plan de ejemplo dejado
+// para el Dev (2223000125, CUIT 20226452614). Se sacó el test.fail() que
+// tenía mientras el bug seguía presente — de acá en más es una regresión
+// normal, si vuelve a fallar es una alerta real.
 //
 // Self-contained y NO destructivo: guarda la fecha real del plan usado,
 // la pisa temporalmente para reproducir la ventana horaria del bug, y la
 // restaura al final (en un finally) — el plan queda exactamente como
 // estaba antes de correr el test, se puede repetir indefinidamente.
-//
-// Usa test.fail() (mismo criterio que BUG_52821 y BUG_redondeo_simulacion_
-// cuotas): hoy "pasa" (falla como se espera, sin romper la suite); el día
-// que se arregle el formateo de fecha en el frontend, va a pasar de
-// verdad y Playwright lo va a marcar como alerta ("expected to fail, but
-// passed").
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../../pages/LoginPage');
 const { PFPPage } = require('../../../pages/PFPPage');
@@ -41,7 +39,6 @@ const { AMBIENTES, CONTRIBUYENTES, SIGN_CCT, PLANES_CONOCIDOS } = require('../..
 const FECHA_CON_BUG = new Date('2026-04-30T21:00:04.456-03:00');
 
 test('BUG_HUSO_HORARIO — "Fecha de alta" debe mostrar la fecha en hora Argentina, no en UTC', async ({ page }) => {
-  test.fail(true, 'Bug real confirmado — reclamo de producción (plan 1523005608). El frontend muestra un día de más cuando la consolidación cae entre las 21:00 y las 23:59 hora Argentina.');
   test.skip(!process.env.MONGO_URI, 'Requiere MONGO_URI en .env — ver .env.example y lib/mongoAdmin.js');
   test.skip(!PLANES_CONOCIDOS.paraCancelar, 'Requiere PLANES_CONOCIDOS.paraCancelar en fixtures/test-data.js');
 
