@@ -120,6 +120,58 @@ class PFPPage {
     await this.page.waitForLoadState('networkidle');
   }
 
+  // ─── Dropdown "*Cantidad de cuotas a pagar" (paso 2) ───────────────────────
+  // ⚠ El menú tiene scroll VIRTUALIZADO: Vuetify sólo renderiza las primeras
+  // ~20 opciones y agrega el resto a medida que se scrollea. Leer
+  // getByRole('option') sin scrollear devuelve "20 cuotas" como última opción
+  // aunque la norma permita más (461/AGIP/25 permite 48 — confirmado
+  // 2026-09-30 en el bundle del portal y en Param.Tables PFP_Cantidad_Cuotas).
+
+  async abrirDropdownCuotas() {
+    await this.page.getByRole('button', { name: '*Cantidad de cuotas a pagar' }).click();
+    await this.page.locator('.menuable__content__active').waitFor({ state: 'visible' });
+  }
+
+  // Scrollea el menú abierto una "página" hacia abajo. Devuelve false si ya
+  // estaba al final (no hay más opciones para cargar).
+  async _scrollearMenuCuotas() {
+    const menu = this.page.locator('.menuable__content__active');
+    const avanzo = await menu.evaluate(el => {
+      const antes = el.scrollTop;
+      el.scrollTop = el.scrollTop + el.clientHeight;
+      return el.scrollTop > antes;
+    });
+    await this.page.waitForTimeout(200);
+    return avanzo;
+  }
+
+  // Devuelve TODAS las opciones del dropdown (ej. ["1 cuota", ..., "48 cuotas"])
+  // scrolleando hasta el final, y cierra el menú.
+  async obtenerOpcionesCuotas() {
+    await this.abrirDropdownCuotas();
+    const opciones = [];
+    for (let i = 0; i < 50; i++) {
+      for (const texto of await this.page.getByRole('option').allTextContents()) {
+        if (!opciones.includes(texto.trim())) opciones.push(texto.trim());
+      }
+      if (!(await this._scrollearMenuCuotas())) break;
+    }
+    await this.page.keyboard.press('Escape');
+    await this.page.waitForTimeout(300);
+    return opciones;
+  }
+
+  // Elige una cantidad de cuotas por texto exacto (ej. "24 cuotas"),
+  // scrolleando el menú hasta que la opción esté renderizada.
+  async seleccionarCuotas(textoOpcion) {
+    await this.abrirDropdownCuotas();
+    const opcion = this.page.getByRole('option', { name: textoOpcion, exact: true });
+    for (let i = 0; i < 50 && !(await opcion.isVisible().catch(() => false)); i++) {
+      if (!(await this._scrollearMenuCuotas())) break;
+    }
+    await opcion.click();
+  }
+
   // Verifica en qué paso del stepper estamos (1 al 5)
   async verificarPasoActual(numeroPaso) {
     const pasos = [

@@ -19,11 +19,14 @@
 // Hallazgos propios de 890 (no asumir que se comportan igual que 461):
 // - Prefijo de solicitud propio (2223... en vez de 1523/1543/1783).
 // - Interés condonado 0% en la prueba real (461 mostró 70%).
-// - Dropdown de cuotas ofrece 1 a 20 individualmente (no saltos).
+// - Dropdown de cuotas ofrece todas las cantidades individualmente (no saltos).
+//   ⚠ El menú es virtualizado: sólo renderiza ~20 opciones hasta que se
+//   scrollea (ver PFPPage.obtenerOpcionesCuotas). El "máximo 20" que se
+//   registró antes era un error de lectura, no un límite real.
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../../pages/LoginPage');
 const { PFPPage } = require('../../../pages/PFPPage');
-const { AMBIENTES, CONTRIBUYENTES, SIGN_CCT } = require('../../../fixtures/test-data');
+const { AMBIENTES, CONTRIBUYENTES, SIGN_CCT, PFP } = require('../../../fixtures/test-data');
 
 test.describe('F3001 — Acogimiento bajo norma 890/MHFGC/20', () => {
 
@@ -72,16 +75,14 @@ test.describe('F3001 — Acogimiento bajo norma 890/MHFGC/20', () => {
     await portalPage.getByRole('button', { name: 'Continuar' }).last().click();
     await portalPage.waitForLoadState('networkidle');
 
-    await portalPage.getByRole('button', { name: '*Cantidad de cuotas a pagar' }).click();
-    await portalPage.waitForTimeout(500);
-
-    const opcion = portalPage.getByRole('option', { name: cantidadCuotas, exact: true });
-    const existeOpcion = await opcion.isVisible({ timeout: 3000 }).catch(() => false);
-    if (!existeOpcion) {
+    // Menú virtualizado: hay que leer la lista completa (ver PFPPage.obtenerOpcionesCuotas).
+    const pfpPage = new PFPPage(portalPage);
+    const opciones = await pfpPage.obtenerOpcionesCuotas();
+    if (!opciones.includes(cantidadCuotas)) {
       console.log(`Opción "${cantidadCuotas}" no disponible, tomando máximo disponible`);
-      await portalPage.getByRole('option').last().click();
+      await pfpPage.seleccionarCuotas(opciones[opciones.length - 1]);
     } else {
-      await opcion.click();
+      await pfpPage.seleccionarCuotas(cantidadCuotas);
     }
     await portalPage.waitForTimeout(300);
     await portalPage.getByRole('button', { name: 'Continuar' }).last().click();
@@ -155,14 +156,15 @@ test.describe('F3001 — Acogimiento bajo norma 890/MHFGC/20', () => {
     await portalPage.getByRole('button', { name: 'Continuar' }).last().click();
     await portalPage.waitForLoadState('networkidle');
 
-    await portalPage.getByRole('button', { name: '*Cantidad de cuotas a pagar' }).click();
-    await portalPage.waitForTimeout(500);
-    const opciones = portalPage.getByRole('option');
-    const cantidadOpciones = await opciones.count();
-    const ultimaOpcion = await opciones.last().textContent();
-    await opciones.last().click();
+    // Menú virtualizado: sin scrollear, la última opción renderizada es
+    // "20 cuotas" aunque el máximo real sea mayor (ver PFPPage.obtenerOpcionesCuotas).
+    const pfpPage = new PFPPage(portalPage);
+    const opciones = await pfpPage.obtenerOpcionesCuotas();
+    const ultimaOpcion = opciones[opciones.length - 1];
+    console.log(`TC_890_CUOTAS_003 — Máximo de cuotas disponibles bajo 890: ${ultimaOpcion} (${opciones.length} opciones)`);
+    expect(ultimaOpcion, 'Máximo de cuotas de 890/MHFGC/20 (PFP.maxCuotas)').toBe(`${PFP.maxCuotas['890/MHFGC/20']} cuotas`);
+    await pfpPage.seleccionarCuotas(ultimaOpcion);
     await portalPage.waitForTimeout(300);
-    console.log(`TC_890_CUOTAS_003 — Máximo de cuotas disponibles bajo 890: ${ultimaOpcion} (${cantidadOpciones} opciones)`);
     await portalPage.getByRole('button', { name: 'Continuar' }).last().click();
     await portalPage.waitForLoadState('networkidle');
 

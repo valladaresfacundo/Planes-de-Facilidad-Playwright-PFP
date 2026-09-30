@@ -15,7 +15,7 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage }    = require('../../../pages/LoginPage');
 const { PFPPage }      = require('../../../pages/PFPPage');
-const { AMBIENTES, CONTRIBUYENTES, SIGN_CCT } = require('../../../fixtures/test-data');
+const { AMBIENTES, CONTRIBUYENTES, SIGN_CCT, PFP } = require('../../../fixtures/test-data');
 
 test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
 
@@ -69,18 +69,17 @@ test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
   // hasta encontrar una cantidad que sí alcance. Confirmado real 2026-09-21
   // (ver memoria pfp-roadmap-fases).
   async function elegirCuotasQueAlcancen(portalPage, cantidadPreferida) {
-    await portalPage.getByRole('button', { name: '*Cantidad de cuotas a pagar' }).click();
-    await portalPage.waitForTimeout(500);
+    const pfpPage = new PFPPage(portalPage);
 
-    // Lista de opciones tal como aparecen (se asume orden ascendente, de
-    // menos a más cuotas — así se vio siempre en 461 y 890).
-    const textosOpciones = await portalPage.getByRole('option').allTextContents();
-    let indiceElegido = textosOpciones.findIndex(t => t.trim() === cantidadPreferida.trim());
+    // Lista COMPLETA de opciones (el menú es virtualizado — ver
+    // PFPPage.obtenerOpcionesCuotas); orden ascendente, de menos a más cuotas.
+    const textosOpciones = await pfpPage.obtenerOpcionesCuotas();
+    let indiceElegido = textosOpciones.indexOf(cantidadPreferida.trim());
     if (indiceElegido === -1) {
       console.log(`Opción "${cantidadPreferida}" no disponible, tomando máximo disponible`);
       indiceElegido = textosOpciones.length - 1;
     }
-    await portalPage.getByRole('option').nth(indiceElegido).click();
+    await pfpPage.seleccionarCuotas(textosOpciones[indiceElegido]);
     await portalPage.waitForTimeout(1000);
 
     for (let intentos = 0; intentos < textosOpciones.length; intentos++) {
@@ -90,9 +89,7 @@ test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
       indiceElegido -= 1;
       if (indiceElegido < 0) throw new Error('No se encontró ninguna cantidad de cuotas que alcance el importe mínimo');
       console.log(`elegirCuotasQueAlcancen — no alcanza el importe mínimo, bajando a "${textosOpciones[indiceElegido]}"...`);
-      await portalPage.getByRole('button', { name: '*Cantidad de cuotas a pagar' }).click();
-      await portalPage.waitForTimeout(300);
-      await portalPage.getByRole('option').nth(indiceElegido).click();
+      await pfpPage.seleccionarCuotas(textosOpciones[indiceElegido]);
       await portalPage.waitForTimeout(1000);
     }
     throw new Error('No se encontró ninguna cantidad de cuotas que alcance el importe mínimo tras varios intentos');
@@ -393,20 +390,17 @@ test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
     await portalPage.getByRole('button', { name: 'Continuar' }).last().click();
     await portalPage.waitForLoadState('networkidle');
 
-    // Abrimos el dropdown para ver cuál es la última opción disponible
-    // (máximo de cuotas del ambiente) — el máximo REAL usable puede ser
-    // menor si la deuda del período no alcanza el importe mínimo por cuota
-    // con esa cantidad (regla real de negocio, ver elegirCuotasQueAlcancen).
-    await portalPage.getByRole('button', { name: '*Cantidad de cuotas a pagar' }).click();
-    await portalPage.waitForTimeout(500);
-    const opciones = portalPage.getByRole('option');
-    const cantidadOpciones = await opciones.count();
-    const ultimaOpcion = await opciones.last().textContent();
-    console.log(`TC_CUOTAS_004 — Máximo de cuotas ofrecido por el dropdown: ${ultimaOpcion} (${cantidadOpciones} opciones)`);
-    await portalPage.keyboard.press('Escape');
-    await portalPage.waitForTimeout(300);
+    // Leemos TODAS las opciones para conocer el máximo de cuotas del
+    // ambiente (el menú es virtualizado: sin scrollear, la última opción
+    // renderizada es "20 cuotas" aunque 461 permita 48). El máximo REAL
+    // usable puede ser menor si la deuda del período no alcanza el importe
+    // mínimo por cuota (regla real de negocio, ver elegirCuotasQueAlcancen).
+    const opciones = await pfpPage.obtenerOpcionesCuotas();
+    const ultimaOpcion = opciones[opciones.length - 1];
+    console.log(`TC_CUOTAS_004 — Máximo de cuotas ofrecido por el dropdown: ${ultimaOpcion} (${opciones.length} opciones)`);
+    expect(ultimaOpcion, 'Máximo de cuotas de 461/AGIP/25 (PFP.maxCuotas)').toBe(`${PFP.maxCuotas['461/AGIP/25']} cuotas`);
 
-    await elegirCuotasQueAlcancen(portalPage, ultimaOpcion.trim());
+    await elegirCuotasQueAlcancen(portalPage, ultimaOpcion);
 
     await portalPage.waitForTimeout(300);
     await portalPage.getByRole('button', { name: 'Continuar' }).last().click();

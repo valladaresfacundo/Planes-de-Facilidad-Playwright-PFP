@@ -111,6 +111,9 @@ const PFP = {
     '890/MHFGC/20': 36,
     'nuevo/2025':    48,
     '4323/MHFGC/22': 6,
+    // Confirmado 2026-09-30 en el bundle del portal (obtenerMaximoCuotas) y
+    // en Param.Tables → PFP_Cantidad_Cuotas_V1.0.0 (impuesto 20: máximo 6).
+    '461/AGIP/25':   48,
   },
 
   // Impuestos incluidos en los planes (código → nombre)
