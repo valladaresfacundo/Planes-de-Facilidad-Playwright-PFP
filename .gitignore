@@ -16,3 +16,7 @@ node_modules/
 
 # Scripts/capturas temporales de investigación (nunca se commitean)
 _tmp_*
+
+# Claude Code: configuracion local de cada usuario (permisos, locks)
+.claude/settings.local.json
+.claude/*.lock
