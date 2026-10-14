@@ -112,6 +112,29 @@ F3005, F3007, F3008, F3012, F3014 y F3013 (UI) ya no dependen de `PLANES_CONOCID
 - **Generar un plan gasta un período de deuda real del CUIT.** Si el CUIT se queda sin deuda, la fábrica falla con el mensaje "hay que cargar deuda nueva".
 - Para no gastar deuda podés agregar a mano en `planes-runtime.json` planes existentes que ya cumplan la receta: `{ "sinTocar": ["1523073110"], ... }`.
 - `NO_FABRICAR=1` desactiva la generación: si no hay plan válido, el test se saltea con un mensaje claro.
+- Si el CUIT se queda sin períodos con deuda, la fábrica **carga deuda sola** (DJ 5866, $5.000.000 en el próximo período libre) y reintenta.
+
+### Carga de deuda y saldo a favor (`scripts/cargar-formulario.js`)
+
+Reemplazo por línea de comandos de la herramienta interna `carga_unificada_formularios` (HTML): mismos endpoints y mismos bodies, en `lib/cargaFormularios.js`.
+
+| Formulario | Qué carga |
+|---|---|
+| 1234 | Saldo a favor en la cuenta corriente (pago ACREDITADO) |
+| 5220 | DJ Contribuyentes Locales (impuesto 4) |
+| 5225 | DJ Agentes de Recaudación (impuesto 20) |
+| 5556 | DJ Sellos (impuesto = cada tasa) |
+| 5866 | DJ Convenio Multilateral (impuesto 2) — **la deuda que usan los planes 461 de la suite** |
+
+```bash
+npm run cargar -- --help
+npm run cargar -- 5866 --cuits 27236036044 --proximo --deuda 5000000      # próximo período libre
+npm run cargar -- 5866 --cuits 27236036044 --anio 2020 --meses 1-6 --deuda 5000000
+npm run cargar -- 1234 --cuits 27236036044 --tasas 2 --anio 2026 --meses 9 --deuda 10000
+npm run cargar -- 5556 --cuits 20123456789 --tasas 281,282 --anio 2025 --meses 3 --deuda 5000 --dry-run
+```
+
+⚠ **5866 sólo acepta períodos anteriores a 2022/08**: la regla activa de validación (`F5866_V1.0.1_FORM_VALIDATION_DEFAULT_V1.0.4`) tiene la condición invertida y rechaza con "Error 5066-01" todo período desde 2022/08, para cualquier CUIT. Por eso `--proximo` busca hacia atrás desde 2022/07.
 
 ## 7. Cosas que hay que saber antes de tocar esto
 
