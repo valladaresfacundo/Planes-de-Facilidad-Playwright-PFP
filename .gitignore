@@ -20,3 +20,6 @@ _tmp_*
 # Claude Code: configuracion local de cada usuario (permisos, locks)
 .claude/settings.local.json
 .claude/*.lock
+
+# Planes fabricados por lib/fabricaPlanes.js (estado del ambiente QA, cambia en cada corrida)
+fixtures/planes-runtime.json

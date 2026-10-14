@@ -13,7 +13,7 @@ const { test, expect } = require('@playwright/test');
 const { LoginAgentePage } = require('../../../pages/LoginAgentePage');
 const { AMBIENTES_AGENTE, AGENTE, SIGN_AGENTE, PLANES_CONOCIDOS, EXPEDIENTE_REVERSA } = require('../../../fixtures/test-data');
 
-const URL_AGENTE_QA = AMBIENTES_AGENTE.QA_HOMO;
+const URL_AGENTE_QA = AMBIENTES_AGENTE.QA_AV; // 2026-10-14: QA_HOMO → QA_AV (comparten datos)
 
 test.describe('F3006 — Reversa de Caducidad (Portal Agente)', () => {
 

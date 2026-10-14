@@ -140,19 +140,23 @@ test.describe('Regresión — Portal Agente QA_AV — Perfiles y Permisos', () =
       console.log('✅ Menú Consultor verificado');
     });
 
-    test('TC_AGCONSUL_003 — Consultor NO tiene acceso a Operaciones', async ({ page }) => {
+    // 2026-10-14: confirmado por el usuario que es correcto que el Consultor
+    // vea "Operaciones" (antes el test esperaba que no). Relevado en vivo: su
+    // submenú tiene SOLO "Anular SAF" — ninguna de las operaciones de
+    // AgentePFP (Riesgo Fiscal) ni de AgenteRec (Anular Operación, Deb/Cred
+    // Especiales, Devolución SAF).
+    test('TC_AGCONSUL_003 — Consultor ve Operaciones sólo con "Anular SAF"', async ({ page }) => {
       const { portalPage } = await loginConPerfil(page, AGENTE.perfiles.Consultor);
 
-      // Operaciones no debe estar en el menú del Consultor
-      const operacionesVisible = await portalPage
-        .getByRole('button', { name: 'Operaciones' })
-        .isVisible()
-        .catch(() => false);
+      await portalPage.getByRole('button', { name: 'Operaciones' }).click();
+      await portalPage.waitForTimeout(800);
+      await portalPage.screenshot({ path: 'screenshots/TC_AGCONSUL_003_operaciones.png', fullPage: true });
 
-      await portalPage.screenshot({ path: 'screenshots/TC_AGCONSUL_003_sin_operaciones.png', fullPage: true });
-
-      expect(operacionesVisible, 'Consultor NO debe ver Operaciones').toBe(false);
-      console.log('✅ Operaciones correctamente oculto para Consultor');
+      await expect(portalPage.getByRole('link', { name: 'Anular SAF' })).toBeVisible();
+      for (const opcion of ['Riesgo Fiscal', 'Anular Operación', 'Deb / Cred Especiales', 'Devolucion SAF']) {
+        await expect(portalPage.getByRole('link', { name: opcion }), `Consultor NO debe ver "${opcion}"`).toHaveCount(0);
+      }
+      console.log('✅ Operaciones del Consultor: sólo "Anular SAF"');
     });
 
     test('TC_AGCONSUL_004 — Consultor accede a Consultas → Contribuyentes → Consultar PF', async ({ page }) => {

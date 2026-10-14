@@ -14,17 +14,24 @@
 // ⚠ MUTA datos reales de forma IRREVERSIBLE: confirma una CA real (el plan
 // pasa a CA_PENDIENTE) y la paga (CA_PAGADA). No hay reversa documentada de
 // una CA ya pagada.
+//
+// 2026-10-14: el plan sale de lib/fabricaPlanes.js (receta "paraCancelacionAnticipada").
+// Como este test lo consume, cada corrida toma otro: reusa uno existente si
+// hay, si no lo genera por el Portal.
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../../pages/LoginPage');
 const { PFPPage } = require('../../../pages/PFPPage');
 const { PfpApiClient } = require('../../../lib/pfpApiClient');
 const { obtenerIdDebito, withTracerInstance } = require('../../../lib/mongoAdmin');
-const { AMBIENTES, SIGN_CCT, CONTRIBUYENTES, PLANES_CONOCIDOS } = require('../../../fixtures/test-data');
+const { planParaCA } = require('../../../lib/fabricaPlanes');
+const { AMBIENTES, SIGN_CCT, CONTRIBUYENTES } = require('../../../fixtures/test-data');
 
 test('TC_REG_F3008_001 — generar CA real, débito (F3009) y pago de la CA (F3008)', async ({ page, request }) => {
-  test.skip(!PLANES_CONOCIDOS.paraCancelacionAnticipada, 'Requiere PLANES_CONOCIDOS.paraCancelacionAnticipada en fixtures/test-data.js');
+  test.skip(!process.env.MONGO_URI, 'Requiere MONGO_URI en .env (la fábrica de planes valida el estado en Mongo)');
+  test.setTimeout(300000);
 
-  const idSolicitud = PLANES_CONOCIDOS.paraCancelacionAnticipada;
+  const idSolicitud = await planParaCA(page);
+  test.skip(!idSolicitud, 'Sin plan VIGENTE de 3+ cuotas limpio y NO_FABRICAR=1');
   const cliente = new PfpApiClient(request, 'qa-av');
   await cliente.autenticar(CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
 

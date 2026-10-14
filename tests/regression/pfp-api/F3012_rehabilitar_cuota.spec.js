@@ -2,128 +2,62 @@
 // F3012 — Rehabilitar Cuota (RECHAZADA → A_REHABILITAR → REHABILITADA), vía
 // API (sin pantalla propia). Ver memoria pfp-formularios-catalogo / pfp-api-endpoints.
 //
-// MECANISMO REAL (confirmado por el usuario 2026-08-20 — NO es lo que se
-// había asumido antes, portado sin validar de la herramienta HTML):
-//   1. Rechazar la cuota (F3010 pago erróneo) en su 1° Y 2° vencimiento — DOS
-//      rechazos sobre la MISMA cuota, no uno. Recién con los dos el estado
-//      pasa de RECHAZADA a A_REHABILITAR.
+// MECANISMO REAL (confirmado por el usuario 2026-08-20):
+//   1. Rechazar la cuota en su 1° Y 2° vencimiento — DOS rechazos sobre la
+//      MISMA cuota. Recién con los dos el estado pasa de RECHAZADA a A_REHABILITAR.
 //   2. ObtenerRehabilitacionCuota?idCuota=... (informativo, confirma que está lista).
 //   3. GenerarRehabilitacionCuota?idCuota=...&idPlan=... (real, rehabilita).
-// NO hace falta (ni funciona) RegistrarFormulario?formulario=3012 — el primer
-// intento de esta sesión usaba ese endpoint con un payload adivinado
-// (header+Datos) que el backend rechazaba con muchos "campo requerido"; el
-// usuario aclaró que el flujo real es el de arriba, sin ese paso.
+// NO hace falta (ni funciona) RegistrarFormulario?formulario=3012.
 //
-// ⚠⚠⚠ NUNCA usar la cuota 1 para esto: rechazarla (aunque sea una sola vez)
-// dispara F3011 (Nulidad automática) del PLAN ENTERO — confirmado real en
-// Mongo (VIGENTE → NULO, mismo timestamp que el rechazo). Usar SIEMPRE cuota
-// 2 en adelante. Ver memoria pfp-formularios-catalogo.
+// ⚠⚠⚠ NUNCA usar la cuota 1: rechazarla dispara F3011 (Nulidad automática)
+// del PLAN ENTERO. primeraCuotaLibre() sólo devuelve cuotas 2+.
 //
-// Nota técnica: una vez que la cuota queda RECHAZADA, ObtenerPlanDePagoDetalle
-// deja de devolver vencimientoCuota2 (queda "-") aunque el dato sigue en
-// Mongo (content.Fecha_Segundo_Vencimiento) — para el 2° rechazo hay que leer
-// la fecha directo de Mongo, no de la respuesta de la API.
+// 2026-10-14: el plan sale de lib/fabricaPlanes.js (receta "paraCuotas",
+// compartida con F3014) y cada corrida usa la primera cuota 2+ sin tocar —
+// antes usaba siempre la cuota 2 de PLANES_CONOCIDOS.paraRehabilitar, que una
+// vez rehabilitada dejaba el test roto para siempre. Los rechazos van por
+// api-publicador (débito + GenerarPagoCuotas con pagoRechazado), el mismo
+// camino que el simulador del banco; el estado se lee de Mongo. El CUIT sale
+// del propio plan, no de una constante.
 //
-// ⚠ MUTA datos reales: si la cuota no está en NO_VENCIDA, este test puede no
-// reproducir tal cual. En QA_AV el servicio Tracer (txsapi) devuelve 200 con
-// body vacío incluso autenticado — esperarIdDebito() nunca encuentra nada
-// ahí, por eso se usa el fallback mongoAdmin.obtenerIdDebito() en su lugar.
+// ⚠ MUTA datos reales: consume una cuota del plan por corrida.
 const { test, expect } = require('@playwright/test');
 const { PfpApiClient } = require('../../../lib/pfpApiClient');
-const { obtenerIdDebito, withTracerInstance } = require('../../../lib/mongoAdmin');
-const { SIGN_CCT, PLANES_CONOCIDOS, CUIT_AUTENTICADO } = require('../../../fixtures/test-data');
-// Nota: este plan (paraRehabilitar) pertenece a CUIT_AUTENTICADO (30686855860),
-// NO a CONTRIBUYENTES.conPlan.cuit (27236036044, el CUIT actual para F3001) —
-// por eso se autentica/consulta con CUIT_AUTENTICADO acá.
+const { planParaCuotas, primeraCuotaLibre, estadoPlan, operarCuota } = require('../../../lib/fabricaPlanes');
+const { SIGN_CCT } = require('../../../fixtures/test-data');
 
-const NUMERO_CUOTA_A_REHABILITAR = 2; // NUNCA 1 — ver advertencia arriba
+test('TC_REG_F3012_001 — rechazar una cuota en ambos vencimientos y rehabilitarla', async ({ page, request }) => {
+  test.skip(!process.env.MONGO_URI, 'Requiere MONGO_URI en .env (la fábrica de planes valida el estado en Mongo)');
+  test.setTimeout(240000);
 
-async function rechazarVencimiento(cliente, { resumen, cuota, fechaVencimientoISO }) {
-  const emitir = cliente.buscarEmitirDRG(fechaVencimientoISO);
-  expect(emitir, `Debe existir EmitirDRG para vencimiento ${fechaVencimientoISO}`).toBeTruthy();
+  const solicitud = await planParaCuotas(page);
+  test.skip(!solicitud, 'Sin plan VIGENTE con cuotas 2+ libres y NO_FABRICAR=1');
 
-  await cliente.generarDebitoCuotaPorSolicitud({
-    idSolicitud: PLANES_CONOCIDOS.paraRehabilitar,
-    fecha: emitir,
-    esPrimerIntento: true,
-  });
-  await new Promise(r => setTimeout(r, 1500));
-
-  let idDebito = await cliente.esperarIdDebito(cuota.idTracerCuota);
-  if (!idDebito) idDebito = await obtenerIdDebito(cuota.idTracerCuota);
-  expect(idDebito, 'Debe conseguirse un ID_Debito real antes de rechazar').toBeTruthy();
-
-  const payload = cliente.construirPayloadF3010({
-    cuit: CUIT_AUTENTICADO,
-    cuota: {
-      numeroCuota: cuota.numeroCuota,
-      importeNominal: cuota.importeNominal,
-      importeActualizado: cuota.importeActualizado,
-      vencimientoCuota1: fechaVencimientoISO,
-      idTracerCuota: cuota.idTracerCuota,
-    },
-    resumenPlan: resumen,
-    correcto: false,
-    idDebito,
-  });
-  const resultado = await cliente.registrarPagoCuota3010(payload);
-  console.log(`TC_REG_F3012_001 — F3010 (rechazo ${fechaVencimientoISO}): ${JSON.stringify(resultado)}`);
-  await new Promise(r => setTimeout(r, 1500));
-}
-
-test(`TC_REG_F3012_001 — rechazar cuota ${NUMERO_CUOTA_A_REHABILITAR} en ambos vencimientos y rehabilitarla`, async ({ request }) => {
-  test.skip(!PLANES_CONOCIDOS.paraRehabilitar, 'Requiere PLANES_CONOCIDOS.paraRehabilitar en fixtures/test-data.js — plan VIGENTE nuevo, la cuota 2 debe estar libre');
-  expect(NUMERO_CUOTA_A_REHABILITAR, 'NUNCA usar cuota 1 — dispara Nulidad automática del plan (F3011)').toBeGreaterThan(1);
+  const cuota = await primeraCuotaLibre(solicitud);
+  expect(cuota.nro, 'NUNCA usar cuota 1 — dispara Nulidad automática del plan (F3011)').toBeGreaterThan(1);
+  console.log(`TC_REG_F3012_001 — plan ${solicitud}, cuota ${cuota.nro}`);
 
   const cliente = new PfpApiClient(request, 'qa-av');
-  await cliente.autenticar(CUIT_AUTENTICADO, SIGN_CCT);
+  const estadoCuota = async () => (await estadoPlan(solicitud)).cuotas.find(c => c.nro === cuota.nro).estado;
 
-  const { resumen, detalle } = await cliente.buscarPlanPorSolicitud({
-    cuit: CUIT_AUTENTICADO,
-    anio: new Date().getFullYear(),
-    solicitud: PLANES_CONOCIDOS.paraRehabilitar,
-  });
+  await operarCuota(cliente, solicitud, cuota.nro, { resultado: 'rechazo', vencimiento: 1 });
+  expect(await estadoCuota(), 'Tras el rechazo del 1° vencimiento').toBe('RECHAZADA');
 
-  const cuota = (detalle?.cuotas ?? []).find(c => Number(c.numeroCuota) === NUMERO_CUOTA_A_REHABILITAR);
-  expect(cuota, `Debe existir la cuota ${NUMERO_CUOTA_A_REHABILITAR} en el detalle del plan`).toBeTruthy();
-  console.log(`TC_REG_F3012_001 — cuota ${NUMERO_CUOTA_A_REHABILITAR} antes: estado=${cuota.estadoCuota}`);
+  await operarCuota(cliente, solicitud, cuota.nro, { resultado: 'rechazo', vencimiento: 2 });
+  expect(await estadoCuota(), 'Tras el rechazo del 2° vencimiento').toBe('A_REHABILITAR');
 
-  if (cuota.estadoCuota === 'NO_VENCIDA') {
-    // 1er vencimiento — todavía visible en la respuesta de la API en este punto
-    const venc1ISO = cuota.vencimientoCuota1.includes('/')
-      ? cuota.vencimientoCuota1.split('/').reverse().join('-')
-      : cuota.vencimientoCuota1;
-    await rechazarVencimiento(cliente, { resumen, cuota, fechaVencimientoISO: venc1ISO });
-
-    // 2do vencimiento — la API ya no lo devuelve tras el 1er rechazo ("-"), leer de Mongo
-    const docMongo = await withTracerInstance(col => col.findOne({ _id: cuota.idTracerCuota }));
-    const venc2ISO = new Date(docMongo.content.Fecha_Segundo_Vencimiento).toISOString().slice(0, 10);
-    await rechazarVencimiento(cliente, { resumen, cuota, fechaVencimientoISO: venc2ISO });
-  }
-
-  // Verificar A_REHABILITAR antes de seguir — directo en Mongo (más confiable
-  // que la API de detalle en este estado)
-  const docTrasRechazos = await withTracerInstance(col => col.findOne({ _id: cuota.idTracerCuota }));
-  const estadoTrasRechazos = docTrasRechazos.states?.find(s => s.statechart === 'PFP_Cuota')?.state;
-  console.log(`TC_REG_F3012_001 — estado tras los 2 rechazos: ${estadoTrasRechazos}`);
-  expect(estadoTrasRechazos).toBe('A_REHABILITAR');
+  const { cuit, plan } = await estadoPlan(solicitud);
+  await cliente.autenticar(cuit, SIGN_CCT);
 
   // Paso 2 — ObtenerRehabilitacionCuota (informativo, confirma que está lista)
-  const infoRehab = await cliente.obtenerRehabilitacionCuota(cuota.idTracerCuota);
+  const infoRehab = await cliente.obtenerRehabilitacionCuota(cuota.doc._id);
   console.log(`TC_REG_F3012_001 — ObtenerRehabilitacionCuota: ${JSON.stringify(infoRehab)}`);
   expect(infoRehab?.codigo).toBe(1);
 
   // Paso 3 — GenerarRehabilitacionCuota (real)
-  const rehabilitacion = await cliente.generarRehabilitacionCuota({
-    idCuota: cuota.idTracerCuota,
-    idPlan: resumen._id,
-  });
+  const rehabilitacion = await cliente.generarRehabilitacionCuota({ idCuota: cuota.doc._id, idPlan: plan._id });
   console.log(`TC_REG_F3012_001 — GenerarRehabilitacionCuota: ${JSON.stringify(rehabilitacion)}`);
 
-  // Verificación final
   await new Promise(r => setTimeout(r, 1500));
-  const docFinal = await withTracerInstance(col => col.findOne({ _id: cuota.idTracerCuota }));
-  const estadoFinal = docFinal.states?.find(s => s.statechart === 'PFP_Cuota')?.state;
-  console.log(`TC_REG_F3012_001 — cuota ${NUMERO_CUOTA_A_REHABILITAR} después: estado=${estadoFinal}`);
-  expect(estadoFinal).toBe('REHABILITADA');
+  expect(await estadoCuota()).toBe('REHABILITADA');
 });

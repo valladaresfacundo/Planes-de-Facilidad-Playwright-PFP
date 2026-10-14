@@ -92,44 +92,46 @@ async function leerDetalleCuotas(page, cantidadCuotas) {
   return filas;
 }
 
-for (const cantidadCuotas of [3, 4, 5, 6]) {
-  test(`BUG_REDONDEO_CUOTAS_${cantidadCuotas} — Importe Nominal + Interés financiero debe coincidir con Importe total por fila (${cantidadCuotas} cuotas)`, async ({ page }) => {
-    test.fail(true, 'Bug real confirmado 2026-09-16 — la columna "Importe total" del detalle de simulación usa un promedio en vez del cálculo real por fila.');
+// 2026-10-14: antes era un test por cantidad de cuotas, y cada uno fallaba
+// "como se esperaba" sólo si SU división caía mal — el de 3 cuotas "pasó" en
+// la corrida del 2026-10-13 porque los montos cerraron justo, aunque 4/5/6
+// seguían mostrando el bug. Ahora es UN solo test que revisa 3 a 6 cuotas en
+// la misma simulación: falla (como se espera) si alguna fila de alguna
+// cantidad tiene diferencia, y sólo "pasa" — la alerta de que lo arreglaron —
+// si ninguna de las 4 la tiene.
+test('BUG_REDONDEO_CUOTAS — Importe Nominal + Interés financiero debe coincidir con Importe total por fila (3 a 6 cuotas)', async ({ page }) => {
+  test.fail(true, 'Bug real confirmado 2026-09-16 — la columna "Importe total" del detalle de simulación usa un promedio en vez del cálculo real por fila.');
 
-    const loginPage = new LoginPage(page);
-    await loginPage.login(AMBIENTES.QA_AV, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
-    const portalPage = loginPage.obtenerPagina();
-    const pfpPage = new PFPPage(portalPage);
+  const loginPage = new LoginPage(page);
+  await loginPage.login(AMBIENTES.QA_AV, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
+  const portalPage = loginPage.obtenerPagina();
+  const pfpPage = new PFPPage(portalPage);
 
-    await pfpPage.irAPlanesYMoratoria();
-    await pfpPage.consultarDeudaConFallback({
-      tipoPlan: '461/AGIP/25',
-      operacion: 'Nuevo plan de facilidades',
-      impuestoPreferido: 'IIBB - Convenio Multilateral',
-      impuestosFallback: ['Sellos'],
-    });
+  await pfpPage.irAPlanesYMoratoria();
+  await pfpPage.consultarDeudaConFallback({
+    tipoPlan: '461/AGIP/25',
+    operacion: 'Nuevo plan de facilidades',
+    impuestoPreferido: 'IIBB - Convenio Multilateral',
+    impuestosFallback: ['Sellos'],
+  });
 
-    const encontroPeriodo = await elegirPeriodoConDeuda(portalPage);
-    expect(encontroPeriodo, 'Debe existir al menos un período con deuda > $0').toBe(true);
-    await portalPage.waitForTimeout(500);
-    await portalPage.getByRole('button', { name: 'Continuar' }).last().click();
-    await portalPage.waitForLoadState('networkidle');
+  const encontroPeriodo = await elegirPeriodoConDeuda(portalPage);
+  expect(encontroPeriodo, 'Debe existir al menos un período con deuda > $0').toBe(true);
+  await portalPage.waitForTimeout(500);
+  await portalPage.getByRole('button', { name: 'Continuar' }).last().click();
+  await portalPage.waitForLoadState('networkidle');
 
+  const discrepancias = [];
+  for (const cantidadCuotas of [3, 4, 5, 6]) {
     const filas = await leerDetalleCuotas(portalPage, cantidadCuotas);
     expect(filas.length, `Debe haber ${cantidadCuotas} filas en el detalle`).toBe(cantidadCuotas);
-
-    const discrepancias = filas
-      .map(f => ({ ...f, esperado: Math.round((f.importeNominal + f.interesFinanciero) * 100) / 100 }))
+    const conDiferencia = filas
+      .map(f => ({ cuotas: cantidadCuotas, ...f, esperado: Math.round((f.importeNominal + f.interesFinanciero) * 100) / 100 }))
       .filter(f => Math.abs(f.esperado - f.importeTotal) >= 0.005);
+    console.log(`BUG_REDONDEO_CUOTAS — ${cantidadCuotas} cuotas: ${conDiferencia.length ? JSON.stringify(conDiferencia) : 'sin discrepancias'}`);
+    discrepancias.push(...conDiferencia);
+  }
 
-    if (discrepancias.length) {
-      console.log(`BUG_REDONDEO_CUOTAS_${cantidadCuotas} — filas con discrepancia:`, JSON.stringify(discrepancias));
-    } else {
-      console.log(`BUG_REDONDEO_CUOTAS_${cantidadCuotas} — sin discrepancias esta corrida (los montos cerraron justo).`);
-    }
-
-    // No cerrar la sesión con un plan a medio armar en curso — no hace
-    // falta, nunca se confirmó nada (no muta datos reales).
-    expect(discrepancias, 'Ninguna fila debería tener diferencia entre Importe Nominal+Interés y el Importe total mostrado').toEqual([]);
-  });
-}
+  // No muta datos reales: nunca se confirma nada.
+  expect(discrepancias, 'Ninguna fila debería tener diferencia entre Importe Nominal+Interés y el Importe total mostrado').toEqual([]);
+});

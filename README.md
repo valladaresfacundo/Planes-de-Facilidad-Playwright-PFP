@@ -101,6 +101,18 @@ Cuando un fixture se agota, el test correspondiente **no falla** — se saltea s
 2. Conseguir un plan real que cumpla esa condición (generarlo a mano por el Portal, o pedírselo a alguien que tenga acceso a producción/QA con datos reales) — algunos también se pueden fabricar con los propios tests de la suite (ver los comentarios de cada archivo).
 3. Actualizar el valor correspondiente en `PLANES_CONOCIDOS` (`fixtures/test-data.js`) y dejar un comentario explicando de dónde salió y en qué estado quedó el anterior — es la convención que se usó en todo el archivo, seguirla ayuda a quien venga después.
 
+### Fábrica de planes (`lib/fabricaPlanes.js`)
+
+F3005, F3007, F3008, F3012, F3014 y F3013 (UI) ya no dependen de `PLANES_CONOCIDOS`: cada uno pide un plan por **receta** (`planSinTocar`, `planCuota1Paga`, `planParaCA`, `planNulo`, `planParaCuotas`). La fábrica:
+
+1. Revisa los repuestos de esa receta en `fixtures/planes-runtime.json` (gitignored) y usa el primero que, **según Mongo**, siga en el estado que la receta pide. Los que ya no sirven se descartan solos.
+2. Si no queda ninguno, **genera un plan nuevo por el Portal** (461/AGIP/25, CUIT `CONTRIBUYENTES.conPlan`) y lo lleva al estado pedido vía api-publicador (débito + pago/rechazo, igual que el simulador del banco).
+
+- Los tests de solo lectura (F3005, F3007, F3013 UI) reusan su plan entre corridas. F3012/F3014 usan **la siguiente cuota libre** del mismo plan (12 cuotas ≈ 5 corridas). F3008 consume un plan por corrida.
+- **Generar un plan gasta un período de deuda real del CUIT.** Si el CUIT se queda sin deuda, la fábrica falla con el mensaje "hay que cargar deuda nueva".
+- Para no gastar deuda podés agregar a mano en `planes-runtime.json` planes existentes que ya cumplan la receta: `{ "sinTocar": ["1523073110"], ... }`.
+- `NO_FABRICAR=1` desactiva la generación: si no hay plan válido, el test se saltea con un mensaje claro.
+
 ## 7. Cosas que hay que saber antes de tocar esto
 
 - **QA_HOMO (`portal-cct-qa`) tiene una caída de backend permanente** (`ObtenerPlanesDePago`/`ObtenerPlanes` devuelven 500 real, error de inyección de dependencias .NET) — no es un problema de la suite, no reintentar ahí. Todo corre contra **QA_AV** (`portal-cct-qa-av`).

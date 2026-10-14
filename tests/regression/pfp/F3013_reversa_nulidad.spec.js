@@ -9,11 +9,16 @@
 // pfp-roadmap-fases) — quedó probado que funciona end-to-end. El test de acá
 // queda parado en "Continuar habilitado" y NO confirma, para ser repetible
 // sin consumir un plan NULO nuevo en cada corrida.
+//
+// 2026-10-14: el plan NULO sale de lib/fabricaPlanes.js (receta "nulo") en vez
+// de PLANES_CONOCIDOS.nulo, que alguien había revertido a VIGENTE. Ambiente
+// pasado de QA_HOMO a QA_AV (comparten datos; QA_AV es el ambiente vigente).
 const { test, expect } = require('@playwright/test');
 const { LoginAgentePage } = require('../../../pages/LoginAgentePage');
-const { AMBIENTES_AGENTE, AGENTE, SIGN_AGENTE, PLANES_CONOCIDOS, EXPEDIENTE_REVERSA } = require('../../../fixtures/test-data');
+const { planNulo } = require('../../../lib/fabricaPlanes');
+const { AMBIENTES_AGENTE, AGENTE, SIGN_AGENTE, EXPEDIENTE_REVERSA } = require('../../../fixtures/test-data');
 
-const URL_AGENTE_QA = AMBIENTES_AGENTE.QA_HOMO;
+const URL_AGENTE_QA = AMBIENTES_AGENTE.QA_AV;
 
 test.describe('F3013 — Reversa de Nulidad (Portal Agente)', () => {
 
@@ -89,10 +94,13 @@ test.describe('F3013 — Reversa de Nulidad (Portal Agente)', () => {
     await portalPage.waitForTimeout(500);
   }
 
-  test('TC_AGPFP_008 — Expediente completo, "Continuar" habilitado', async ({ page }) => {
-    test.skip(!PLANES_CONOCIDOS.nulo, 'Requiere PLANES_CONOCIDOS.nulo en fixtures/test-data.js — ver memoria pfp-roadmap-fases');
+  test('TC_AGPFP_008 — Expediente completo, "Continuar" habilitado', async ({ page, request }) => {
+    test.skip(!process.env.MONGO_URI, 'Requiere MONGO_URI en .env (la fábrica de planes valida el estado en Mongo)');
+    test.setTimeout(240000);
+    const solicitud = await planNulo(page, request);
+    test.skip(!solicitud, 'Sin plan NULO y NO_FABRICAR=1');
 
-    const { portalPage } = await loginYBuscarPlan(page, PLANES_CONOCIDOS.nulo);
+    const { portalPage } = await loginYBuscarPlan(page, solicitud);
     await expect(portalPage.getByText('Nulo')).toBeVisible();
     await portalPage.screenshot({ path: 'screenshots/TC_AGPFP_008_plan_nulo.png', fullPage: true });
 
