@@ -84,8 +84,9 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     }
   });
 
+  // 2026-10-20: corregido en el back — Impuesto pasó a obligatorio (asterisco y
+  // "Consultar" deshabilitado sin él), como piden CA01/CA02/CA03. Antes era test.fail().
   test('CA01/CA02 — Impuesto obligatorio', async ({ page }) => {
-    test.fail(true, 'Discrepancia en la historia: la descripción dice que Impuesto es opcional, pero CA01 (tabla), CA02 y CA03 lo tratan como obligatorio. Implementado como opcional: sin asterisco y "Consultar" habilitado sin impuesto. Pendiente de definición.');
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
     await r.elegir('Instrumento Legal', '890/MHFGC/20');
     await r.elegir('Año', '2026');
@@ -93,13 +94,15 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     await expect(r.consultar, 'Sin Impuesto no debería poder consultar').toBeDisabled();
   });
 
-  test('CA02 — sin Instrumento Legal o Año no permite consultar', async ({ page }) => {
+  test('CA02 — sin Instrumento Legal, Año o Impuesto no permite consultar', async ({ page }) => {
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
     await expect(r.consultar).toBeDisabled();
     await r.elegir('Instrumento Legal', '890/MHFGC/20');
     await expect(r.consultar, 'Falta Año').toBeDisabled();
     await r.elegir('Año', '2026');
-    await expect(r.consultar, 'Instrumento y Año completos').toBeEnabled();
+    await expect(r.consultar, 'Falta Impuesto').toBeDisabled();
+    await r.elegir('Impuesto', CM);
+    await expect(r.consultar, 'Obligatorios completos').toBeEnabled();
   });
 
   test('CA03/CA04 — grilla igual a Mongo, fila por fila (890/2026/CM)', async ({ page }) => {

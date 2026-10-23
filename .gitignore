@@ -23,3 +23,6 @@ _tmp_*
 
 # Planes fabricados por lib/fabricaPlanes.js (estado del ambiente QA, cambia en cada corrida)
 fixtures/planes-runtime.json
+
+# Archivos de bloqueo de Office (documento abierto)
+~$*
