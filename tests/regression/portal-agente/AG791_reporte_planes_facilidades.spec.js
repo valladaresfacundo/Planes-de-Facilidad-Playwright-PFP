@@ -8,9 +8,10 @@
 // creación) y el mapeo del CA04 (Padron.businessName, Regimenes.DescripcionCorta).
 // Solo lectura: no modifica datos (la descarga es un GET de reporte).
 //
-// Los casos marcados con test.fail() documentan defectos encontrados el
-// 2026-10-15 — "pasan" mientras el defecto siga; si alguno aparece como
-// fallido en el reporte es porque lo corrigieron: sacarle el test.fail().
+// Los defectos encontrados (AG-897 a AG-901, AG-944, AG-949) se verificaron
+// corregidos el 2026-10-30. El único test.fail() que queda documenta una
+// observación no cargada (orden de la grilla); si aparece como fallido en el
+// reporte es porque lo corrigieron: sacarle el test.fail().
 //
 // ⚠ Las consultas tardan 1–21 s en QA_AV (461/2026/CM: ~20 s, 72.392 planes).
 const { test, expect } = require('@playwright/test');
@@ -58,13 +59,20 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
   test.skip(!process.env.MONGO_URI, 'Requiere MONGO_URI en .env (el oráculo lee Mongo)');
   test.setTimeout(240000);
 
+  // 2026-10-30: corregidos AG-944 ("nuevo/2025" en Instrumento Legal) y AG-949
+  // (Año e Impuesto armados con los planes existentes). Año y Estado se habilitan
+  // tras elegir el instrumento, e Impuesto tras elegir el Año.
   test('CA01 — filtros disponibles y sus valores', async ({ page }) => {
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
-    expect(await r.opciones('Instrumento Legal')).toEqual(['890/MHFGC/20', '461/AGIP/25']);
+    expect([...await r.opciones('Instrumento Legal')].sort()).toEqual(['461/AGIP/25', '890/MHFGC/20']);
     const anioActual = new Date().getFullYear();
-    const anios = (await r.opciones('Año')).map(Number).sort();
-    expect(anios).toEqual(Array.from({ length: anioActual - 2021 }, (_, i) => 2022 + i));
-    expect(await r.opciones('Estado')).toEqual(['Vigente', 'Cancelado', 'Nulo', 'Caduco', 'Todos']);
+    for (const instrumento of ['890/MHFGC/20', '461/AGIP/25']) {
+      await r.elegir('Instrumento Legal', instrumento);
+      const anios = (await r.opciones('Año')).map(Number).sort();
+      expect(anios, `Años de ${instrumento}`).toEqual(Array.from({ length: anioActual - 2021 }, (_, i) => 2022 + i));
+      await r.elegir('Año', String(anioActual));
+      expect([...await r.opciones('Estado')].sort(), `Estados de ${instrumento}`).toEqual(['Caduco', 'Cancelado', 'Nulo', 'Todos', 'Vigente']);
+    }
     // Obligatorios con asterisco (el nombre accesible del campo lo incluye)
     for (const campo of ['Reporte', 'Instrumento Legal', 'Año']) {
       expect(await r.campo(campo).innerText(), `${campo} debe tener asterisco`).toContain('*');
@@ -73,14 +81,18 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     await r.portal.screenshot({ path: 'screenshots/AG791_CA01_filtros.png', fullPage: true });
   });
 
-  test('CA01 — impuestos por instrumento según PFP_Impuestos_Incluidos + Regimenes', async ({ page }) => {
+  test('CA01 — impuestos por instrumento y año según PFP_Impuestos_Incluidos + Regimenes', async ({ page }) => {
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
+    const anioActual = new Date().getFullYear();
     for (const instrumento of ['890/MHFGC/20', '461/AGIP/25']) {
-      await r.elegir('Instrumento Legal', instrumento);
-      const enPantalla = (await r.opciones('Impuesto')).filter(o => o !== 'Todos');
       const esperados = await impuestosPorInstrumento(instrumento);
-      console.log(`AG791 — ${instrumento}: ${enPantalla.length} impuestos en pantalla, ${esperados.length} en la tabla`);
-      expect([...enPantalla].sort(), `Impuestos de ${instrumento}`).toEqual([...esperados].sort());
+      await r.elegir('Instrumento Legal', instrumento);
+      for (let anio = 2022; anio <= anioActual; anio++) {
+        await r.elegir('Año', String(anio));
+        const enPantalla = (await r.opciones('Impuesto')).filter(o => o !== 'Todos');
+        console.log(`AG791 — ${instrumento} ${anio}: ${enPantalla.length} impuestos en pantalla, ${esperados.length} en la tabla`);
+        expect([...enPantalla].sort(), `Impuestos de ${instrumento} ${anio}`).toEqual([...esperados].sort());
+      }
     }
   });
 
@@ -112,11 +124,23 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     expect(res.respuesta?.codigo, JSON.stringify(res.respuesta?.errores)).toBe(1);
     expect(await r.encabezados()).toEqual(['N° Solicitud', 'Instrumento Legal', 'CUIT', 'Razón Social', 'Impuesto', 'Fecha de Alta',
       'Cant. de Cuotas', 'Deuda nominal', 'Interés resarcitorio', 'Interés financiero']);
-    const esperados = (await planesEsperados(CONSULTA_CHICA)).map(filaGrilla);
+    // Contenido fila por fila, buscando cada plan por N° de solicitud (el orden se valida aparte)
+    const esperados = new Map((await planesEsperados(CONSULTA_CHICA)).map(p => [p.solicitud, filaGrilla(p)]));
     const grilla = await r.leerGrilla();
-    expect(grilla.length).toBe(esperados.length);
-    grilla.forEach((fila, i) => compararFila(fila, esperados[i], `fila ${i + 1} (${esperados[i][0]})`));
+    expect(grilla.length).toBe(esperados.size);
+    grilla.forEach((fila, i) => {
+      expect(esperados.has(fila[0]), `fila ${i + 1}: ${fila[0]} no está en la base`).toBe(true);
+      compararFila(fila, esperados.get(fila[0]), `fila ${i + 1} (${fila[0]})`);
+    });
     await r.portal.screenshot({ path: 'screenshots/AG791_CA03_CA04_grilla.png', fullPage: true });
+  });
+
+  test('CA03 — orden ascendente por fecha de creación (890/2026/CM)', async ({ page }) => {
+    test.fail(true, 'Observación (no cargada en Jira): la grilla ordena por orden de inserción (_id), no por created. Solo se nota en 2223000125, cuyo created fue editado a mano (01/05/2026): aparece 19.º en vez de 2.º.');
+    const r = await new ReportePlanesFacilidadesPage(page).abrir();
+    await r.consultarCon(CONSULTA_CHICA);
+    const esperados = await planesEsperados(CONSULTA_CHICA);
+    expect((await r.leerGrilla()).map(f => f[0])).toEqual(esperados.map(p => p.solicitud));
   });
 
   test('CA03 — filtro por Estado (461/2026/CL/Caduco)', async ({ page }) => {
@@ -159,12 +183,13 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     expect(body.content.paginaActual).toBe(totalPaginas - 1);
   });
 
+  // AG-900 (corregido 28/10): antes respondía "Persona Inexistente" si la página tenía
+  // un CUIT fuera de CCT.Padron; ahora el plan sale con la razón social vacía.
   test('CA05 — página 2 de 461/2026/CM (planes de CUITs que no están en el padrón)', async ({ page }) => {
-    test.fail(true, 'Defecto: si en la página hay un plan cuyo CUIT no existe en CCT.Padron (ej. 34000000010, plan 1523000181), el backend responde codigo 2 "Persona Inexistente" y falla TODA la consulta, en vez de mostrar el plan sin razón social. Afecta la página 2 de la consulta principal y el filtro Caduco de 461/2026/CM.');
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
     await r.consultarCon(CONSULTA_GRANDE);
     const body = await irAPagina(r, 'siguiente');
-    await r.portal.screenshot({ path: 'screenshots/AG791_CA05_pagina2_persona_inexistente.png', fullPage: true });
+    await r.portal.screenshot({ path: 'screenshots/AG791_CA05_pagina2.png', fullPage: true });
     expect(body.codigo, `Respuesta: ${JSON.stringify(body.errores)}`).toBe(1);
     expect(await r.filas.count()).toBe(50);
   });
@@ -179,8 +204,8 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     await expect(r.descargar).toHaveCount(0);
   });
 
+  // AG-901 (corregido 28/10): antes mostraba "No se encontraron datos para los filtros de búsqueda seleccionados."
   test('CA06 — texto del mensaje sin resultados', async ({ page }) => {
-    test.fail(true, `Defecto menor: muestra "No se encontraron datos para los filtros de búsqueda seleccionados." en vez de "${TEXTO_CA06}".`);
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
     await r.consultarCon(CONSULTA_VACIA);
     await expect(r.portal.getByText(TEXTO_CA06)).toBeVisible();
@@ -196,31 +221,47 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     await test.info().attach('reporte.xlsx', { path: archivo });
     const [encabezado, ...filas] = leerXlsx(archivo);
     console.log(`AG791 — Excel ${descarga.suggestedFilename()}: ${filas.length} filas · ${JSON.stringify(encabezado)}`);
-    const esperados = await planesEsperados(CONSULTA_CHICA);
+    const esperados = new Map((await planesEsperados(CONSULTA_CHICA)).map(p => [p.solicitud, p]));
     expect(encabezado).toHaveLength(10);
-    expect(filas.map(f => f[0])).toEqual(esperados.map(p => p.solicitud));
-    filas.forEach((f, i) => {
-      const p = esperados[i];
+    expect(filas.map(f => String(f[0])).sort()).toEqual([...esperados.keys()].sort());
+    filas.forEach(f => {
+      const p = esperados.get(String(f[0]));
       expect([f[1], f[2], f[4], Number(f[6]), Number(f[7])], `fila ${p.solicitud}`).toEqual([p.instrumento, p.cuit, p.impuesto, p.cuotas, p.deudaNominal]);
     });
   });
 
+  // AG-897 (corregido 28/10): los importes perdían el separador decimal (intereses ×100).
   test('CA08 — Excel: importes de intereses iguales a la consulta', async ({ page }) => {
-    test.fail(true, 'Defecto: en el Excel los intereses salen multiplicados por 100 (pierden la coma decimal). Ej. 2223000107: Int. resarcitorio 1.155,94 → 115594; Int. financiero 615,37 → 61537. La API de la grilla los devuelve como texto con coma ("1155,94").');
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
     await r.consultarCon(CONSULTA_CHICA);
     const [descarga] = await Promise.all([r.portal.waitForEvent('download', { timeout: 120000 }), r.descargar.click()]);
     const archivo = test.info().outputPath(descarga.suggestedFilename());
     await descarga.saveAs(archivo);
     const [, ...filas] = leerXlsx(archivo);
-    const esperados = await planesEsperados(CONSULTA_CHICA);
-    filas.forEach((f, i) => {
-      expect([Number(f[8]), Number(f[9])], `intereses de ${esperados[i].solicitud}`).toEqual([esperados[i].interesResarcitorio, esperados[i].interesFinanciero]);
+    const esperados = new Map((await planesEsperados(CONSULTA_CHICA)).map(p => [p.solicitud, p]));
+    expect(filas).toHaveLength(esperados.size);
+    filas.forEach(f => {
+      const p = esperados.get(String(f[0]));
+      expect([Number(f[7]), Number(f[8]), Number(f[9])], `importes de ${f[0]}`).toEqual([p.deudaNominal, p.interesResarcitorio, p.interesFinanciero]);
     });
   });
 
+  test('CA08 — Excel: Fecha Alta igual a la grilla (alta entre 21:00 y 23:59, plan 2223000125)', async ({ page }) => {
+    test.fail(true, 'Defecto (02/11): el Excel guarda la Fecha Alta en UTC con formato dd/MM/yyyy, así que un alta entre las 21:00 y las 23:59 hora argentina sale con un día más que en la grilla. Ej. 2223000125: grilla 30/04/2026, Excel 01/05/2026. 7 planes de QA en esa franja.');
+    const r = await new ReportePlanesFacilidadesPage(page).abrir();
+    await r.consultarCon(CONSULTA_CHICA);
+    const enGrilla = (await r.leerGrilla()).find(f => f[0] === '2223000125');
+    const [descarga] = await Promise.all([r.portal.waitForEvent('download', { timeout: 120000 }), r.descargar.click()]);
+    const archivo = test.info().outputPath(descarga.suggestedFilename());
+    await descarga.saveAs(archivo);
+    const [, ...filas] = leerXlsx(archivo);
+    // Excel muestra el serial tal cual (sin zona horaria) con el formato dd/MM/yyyy de la celda
+    const iso = new Date(Math.round((Number(filas.find(f => String(f[0]) === '2223000125')[5]) - 25569) * 86400000)).toISOString();
+    expect(`${iso.slice(8, 10)}/${iso.slice(5, 7)}/${iso.slice(0, 4)}`).toBe(enGrilla[5]);
+  });
+
+  // AG-898 (corregido 28/10): la descarga respondía HTTP 500 con gran volumen.
   test('CA08 — Excel de una consulta grande (461/2026/CM, 72.392 planes)', async ({ page }) => {
-    test.fail(true, 'Defecto: ReportePlanFacilidadesDescarga responde HTTP 500 para 461/2026/CM y no se genera el Excel (con 21 planes sí funciona).');
     test.setTimeout(400000);
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
     await r.consultarCon(CONSULTA_GRANDE);
@@ -228,8 +269,8 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     expect(descarga.suggestedFilename()).toMatch(/\.xlsx$/);
   });
 
+  // AG-899 (corregido 28/10): antes mostraba "Actualmente no podemos efectuar esta consulta…" y borraba la grilla.
   test('CA09 — error al generar el Excel muestra el mensaje del criterio', async ({ page }) => {
-    test.fail(true, 'Defecto: ante un error de la descarga la pantalla muestra "Actualmente no podemos efectuar esta consulta. Por favor intente más tarde." (y borra la grilla) en vez del texto del CA09, aunque el backend devuelve el texto correcto.');
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
     await r.consultarCon(CONSULTA_CHICA);
     // Se fuerza el error de la descarga devolviendo lo mismo que el backend real ante un 500
@@ -243,8 +284,9 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     expect(await r.filas.count(), 'la grilla consultada no debería desaparecer').toBeGreaterThan(0);
   });
 
+  // Corregido 28/10: el plan 1583024404 (Fecha_Consolidacion y created guardados como
+  // string) antes no aparecía en el reporte.
   test('CA03 — plan con Fecha_Consolidacion guardada como texto (1583024404, 461/2025/Automotor)', async ({ page }) => {
-    test.fail(true, 'Observación: el plan 1583024404 tiene content.Fecha_Consolidacion como string ("2025-11-27T15:19:19-03:00") en vez de Date y el reporte lo omite (29 en pantalla vs 30 en Mongo). Es el único PFP así en QA — definir si se corrige el dato o si el reporte debe contemplarlo.');
     const consulta = { instrumento: '461/AGIP/25', anio: 2025, estado: 'Todos', impuesto: 'Automotor' };
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
     const res = await r.consultarCon(consulta);
