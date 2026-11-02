@@ -1,0 +1,901 @@
+﻿Instrumento Legal;Año;Código impuesto;Impuesto;Estado;Planes base;Planes portal;Comparación;Faltan;Sobran;Repetidos;Dif. de campos;Orden = fecha de creación;Filas Excel;Dif. Excel;Resultado
+890/MHFGC/20;2022;2;IIBB - Convenio Multilateral;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;2;IIBB - Convenio Multilateral;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;2;IIBB - Convenio Multilateral;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;2;IIBB - Convenio Multilateral;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;2;IIBB - Convenio Multilateral;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;4;IIBB - Contribuyentes Locales;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;4;IIBB - Contribuyentes Locales;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;4;IIBB - Contribuyentes Locales;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;4;IIBB - Contribuyentes Locales;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;4;IIBB - Contribuyentes Locales;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;40;IIBB - Régimen Simplificado;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;40;IIBB - Régimen Simplificado;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;40;IIBB - Régimen Simplificado;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;40;IIBB - Régimen Simplificado;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;40;IIBB - Régimen Simplificado;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;281;Sellos - AR Escribanos CABA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;281;Sellos - AR Escribanos CABA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;281;Sellos - AR Escribanos CABA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;281;Sellos - AR Escribanos CABA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;281;Sellos - AR Escribanos CABA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;282;Sellos - AR Martilleros;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;282;Sellos - AR Martilleros;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;282;Sellos - AR Martilleros;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;282;Sellos - AR Martilleros;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;282;Sellos - AR Martilleros;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;283;Sellos - AR Contratos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;283;Sellos - AR Contratos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;283;Sellos - AR Contratos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;283;Sellos - AR Contratos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;283;Sellos - AR Contratos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;284;Sellos - AR Esc. Extra. Jurisdicción;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;284;Sellos - AR Esc. Extra. Jurisdicción;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;284;Sellos - AR Esc. Extra. Jurisdicción;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;284;Sellos - AR Esc. Extra. Jurisdicción;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;284;Sellos - AR Esc. Extra. Jurisdicción;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;285;Sellos - AR Bolsa de Comercio;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;285;Sellos - AR Bolsa de Comercio;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;285;Sellos - AR Bolsa de Comercio;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;285;Sellos - AR Bolsa de Comercio;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;285;Sellos - AR Bolsa de Comercio;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;286;Sellos - AR RNPA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;286;Sellos - AR RNPA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;286;Sellos - AR RNPA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;286;Sellos - AR RNPA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;286;Sellos - AR RNPA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;287;Sellos - AR RELIT;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;287;Sellos - AR RELIT;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;287;Sellos - AR RELIT;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;287;Sellos - AR RELIT;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;287;Sellos - AR RELIT;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;288;Sellos - AR SAR;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;288;Sellos - AR SAR;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;288;Sellos - AR SAR;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;288;Sellos - AR SAR;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2022;288;Sellos - AR SAR;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;2;IIBB - Convenio Multilateral;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;2;IIBB - Convenio Multilateral;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;2;IIBB - Convenio Multilateral;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;2;IIBB - Convenio Multilateral;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;2;IIBB - Convenio Multilateral;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;4;IIBB - Contribuyentes Locales;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;4;IIBB - Contribuyentes Locales;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;4;IIBB - Contribuyentes Locales;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;4;IIBB - Contribuyentes Locales;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;4;IIBB - Contribuyentes Locales;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;40;IIBB - Régimen Simplificado;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;40;IIBB - Régimen Simplificado;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;40;IIBB - Régimen Simplificado;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;40;IIBB - Régimen Simplificado;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;40;IIBB - Régimen Simplificado;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;281;Sellos - AR Escribanos CABA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;281;Sellos - AR Escribanos CABA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;281;Sellos - AR Escribanos CABA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;281;Sellos - AR Escribanos CABA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;281;Sellos - AR Escribanos CABA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;282;Sellos - AR Martilleros;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;282;Sellos - AR Martilleros;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;282;Sellos - AR Martilleros;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;282;Sellos - AR Martilleros;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;282;Sellos - AR Martilleros;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;283;Sellos - AR Contratos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;283;Sellos - AR Contratos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;283;Sellos - AR Contratos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;283;Sellos - AR Contratos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;283;Sellos - AR Contratos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;284;Sellos - AR Esc. Extra. Jurisdicción;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;284;Sellos - AR Esc. Extra. Jurisdicción;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;284;Sellos - AR Esc. Extra. Jurisdicción;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;284;Sellos - AR Esc. Extra. Jurisdicción;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;284;Sellos - AR Esc. Extra. Jurisdicción;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;285;Sellos - AR Bolsa de Comercio;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;285;Sellos - AR Bolsa de Comercio;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;285;Sellos - AR Bolsa de Comercio;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;285;Sellos - AR Bolsa de Comercio;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;285;Sellos - AR Bolsa de Comercio;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;286;Sellos - AR RNPA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;286;Sellos - AR RNPA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;286;Sellos - AR RNPA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;286;Sellos - AR RNPA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;286;Sellos - AR RNPA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;287;Sellos - AR RELIT;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;287;Sellos - AR RELIT;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;287;Sellos - AR RELIT;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;287;Sellos - AR RELIT;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;287;Sellos - AR RELIT;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;288;Sellos - AR SAR;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;288;Sellos - AR SAR;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;288;Sellos - AR SAR;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;288;Sellos - AR SAR;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2023;288;Sellos - AR SAR;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;2;IIBB - Convenio Multilateral;TODOS;1;1;completo;0;0;0;0;Sí;1;;Coincide
+890/MHFGC/20;2024;2;IIBB - Convenio Multilateral;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;2;IIBB - Convenio Multilateral;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;2;IIBB - Convenio Multilateral;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;2;IIBB - Convenio Multilateral;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;4;IIBB - Contribuyentes Locales;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;4;IIBB - Contribuyentes Locales;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;4;IIBB - Contribuyentes Locales;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;4;IIBB - Contribuyentes Locales;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;4;IIBB - Contribuyentes Locales;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;40;IIBB - Régimen Simplificado;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;40;IIBB - Régimen Simplificado;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;40;IIBB - Régimen Simplificado;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;40;IIBB - Régimen Simplificado;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;40;IIBB - Régimen Simplificado;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;281;Sellos - AR Escribanos CABA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;281;Sellos - AR Escribanos CABA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;281;Sellos - AR Escribanos CABA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;281;Sellos - AR Escribanos CABA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;281;Sellos - AR Escribanos CABA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;282;Sellos - AR Martilleros;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;282;Sellos - AR Martilleros;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;282;Sellos - AR Martilleros;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;282;Sellos - AR Martilleros;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;282;Sellos - AR Martilleros;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;283;Sellos - AR Contratos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;283;Sellos - AR Contratos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;283;Sellos - AR Contratos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;283;Sellos - AR Contratos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;283;Sellos - AR Contratos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;284;Sellos - AR Esc. Extra. Jurisdicción;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;284;Sellos - AR Esc. Extra. Jurisdicción;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;284;Sellos - AR Esc. Extra. Jurisdicción;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;284;Sellos - AR Esc. Extra. Jurisdicción;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;284;Sellos - AR Esc. Extra. Jurisdicción;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;285;Sellos - AR Bolsa de Comercio;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;285;Sellos - AR Bolsa de Comercio;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;285;Sellos - AR Bolsa de Comercio;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;285;Sellos - AR Bolsa de Comercio;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;285;Sellos - AR Bolsa de Comercio;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;286;Sellos - AR RNPA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;286;Sellos - AR RNPA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;286;Sellos - AR RNPA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;286;Sellos - AR RNPA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;286;Sellos - AR RNPA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;287;Sellos - AR RELIT;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;287;Sellos - AR RELIT;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;287;Sellos - AR RELIT;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;287;Sellos - AR RELIT;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;287;Sellos - AR RELIT;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;288;Sellos - AR SAR;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;288;Sellos - AR SAR;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;288;Sellos - AR SAR;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;288;Sellos - AR SAR;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2024;288;Sellos - AR SAR;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;2;IIBB - Convenio Multilateral;TODOS;45;45;completo;0;0;0;0;Sí;45;;Coincide
+890/MHFGC/20;2025;2;IIBB - Convenio Multilateral;VIGENTE;30;30;completo;0;0;0;0;Sí;30;;Coincide
+890/MHFGC/20;2025;2;IIBB - Convenio Multilateral;CANCELADO;5;5;completo;0;0;0;0;Sí;5;;Coincide
+890/MHFGC/20;2025;2;IIBB - Convenio Multilateral;NULO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+890/MHFGC/20;2025;2;IIBB - Convenio Multilateral;CADUCO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+890/MHFGC/20;2025;4;IIBB - Contribuyentes Locales;TODOS;81;81;completo;0;0;0;0;Sí;81;;Coincide
+890/MHFGC/20;2025;4;IIBB - Contribuyentes Locales;VIGENTE;37;37;completo;0;0;0;0;Sí;37;;Coincide
+890/MHFGC/20;2025;4;IIBB - Contribuyentes Locales;CANCELADO;8;8;completo;0;0;0;0;Sí;8;;Coincide
+890/MHFGC/20;2025;4;IIBB - Contribuyentes Locales;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;4;IIBB - Contribuyentes Locales;CADUCO;8;8;completo;0;0;0;0;Sí;8;;Coincide
+890/MHFGC/20;2025;40;IIBB - Régimen Simplificado;TODOS;11;11;completo;0;0;0;0;Sí;11;;Coincide
+890/MHFGC/20;2025;40;IIBB - Régimen Simplificado;VIGENTE;9;9;completo;0;0;0;0;Sí;9;;Coincide
+890/MHFGC/20;2025;40;IIBB - Régimen Simplificado;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;40;IIBB - Régimen Simplificado;NULO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+890/MHFGC/20;2025;40;IIBB - Régimen Simplificado;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;281;Sellos - AR Escribanos CABA;TODOS;1;1;completo;0;0;0;0;Sí;1;;Coincide
+890/MHFGC/20;2025;281;Sellos - AR Escribanos CABA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;281;Sellos - AR Escribanos CABA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;281;Sellos - AR Escribanos CABA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;281;Sellos - AR Escribanos CABA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;282;Sellos - AR Martilleros;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;282;Sellos - AR Martilleros;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;282;Sellos - AR Martilleros;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;282;Sellos - AR Martilleros;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;282;Sellos - AR Martilleros;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;283;Sellos - AR Contratos;TODOS;1;1;completo;0;0;0;0;Sí;1;;Coincide
+890/MHFGC/20;2025;283;Sellos - AR Contratos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;283;Sellos - AR Contratos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;283;Sellos - AR Contratos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;283;Sellos - AR Contratos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;284;Sellos - AR Esc. Extra. Jurisdicción;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;284;Sellos - AR Esc. Extra. Jurisdicción;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;284;Sellos - AR Esc. Extra. Jurisdicción;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;284;Sellos - AR Esc. Extra. Jurisdicción;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;284;Sellos - AR Esc. Extra. Jurisdicción;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;285;Sellos - AR Bolsa de Comercio;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;285;Sellos - AR Bolsa de Comercio;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;285;Sellos - AR Bolsa de Comercio;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;285;Sellos - AR Bolsa de Comercio;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;285;Sellos - AR Bolsa de Comercio;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;286;Sellos - AR RNPA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;286;Sellos - AR RNPA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;286;Sellos - AR RNPA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;286;Sellos - AR RNPA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;286;Sellos - AR RNPA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;287;Sellos - AR RELIT;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;287;Sellos - AR RELIT;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;287;Sellos - AR RELIT;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;287;Sellos - AR RELIT;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;287;Sellos - AR RELIT;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;288;Sellos - AR SAR;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;288;Sellos - AR SAR;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;288;Sellos - AR SAR;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;288;Sellos - AR SAR;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2025;288;Sellos - AR SAR;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;2;IIBB - Convenio Multilateral;TODOS;21;21;completo;0;0;0;0;No;21;;Coincide
+890/MHFGC/20;2026;2;IIBB - Convenio Multilateral;VIGENTE;7;7;completo;0;0;0;0;No;7;;Coincide
+890/MHFGC/20;2026;2;IIBB - Convenio Multilateral;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;2;IIBB - Convenio Multilateral;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;2;IIBB - Convenio Multilateral;CADUCO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+890/MHFGC/20;2026;4;IIBB - Contribuyentes Locales;TODOS;4;4;completo;0;0;0;0;Sí;4;;Coincide
+890/MHFGC/20;2026;4;IIBB - Contribuyentes Locales;VIGENTE;3;3;completo;0;0;0;0;Sí;3;;Coincide
+890/MHFGC/20;2026;4;IIBB - Contribuyentes Locales;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;4;IIBB - Contribuyentes Locales;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;4;IIBB - Contribuyentes Locales;CADUCO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+890/MHFGC/20;2026;40;IIBB - Régimen Simplificado;TODOS;18;18;completo;0;0;0;0;Sí;18;;Coincide
+890/MHFGC/20;2026;40;IIBB - Régimen Simplificado;VIGENTE;10;10;completo;0;0;0;0;Sí;10;;Coincide
+890/MHFGC/20;2026;40;IIBB - Régimen Simplificado;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;40;IIBB - Régimen Simplificado;NULO;3;3;completo;0;0;0;0;Sí;3;;Coincide
+890/MHFGC/20;2026;40;IIBB - Régimen Simplificado;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;281;Sellos - AR Escribanos CABA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;281;Sellos - AR Escribanos CABA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;281;Sellos - AR Escribanos CABA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;281;Sellos - AR Escribanos CABA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;281;Sellos - AR Escribanos CABA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;282;Sellos - AR Martilleros;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;282;Sellos - AR Martilleros;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;282;Sellos - AR Martilleros;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;282;Sellos - AR Martilleros;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;282;Sellos - AR Martilleros;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;283;Sellos - AR Contratos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;283;Sellos - AR Contratos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;283;Sellos - AR Contratos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;283;Sellos - AR Contratos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;283;Sellos - AR Contratos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;284;Sellos - AR Esc. Extra. Jurisdicción;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;284;Sellos - AR Esc. Extra. Jurisdicción;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;284;Sellos - AR Esc. Extra. Jurisdicción;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;284;Sellos - AR Esc. Extra. Jurisdicción;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;284;Sellos - AR Esc. Extra. Jurisdicción;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;285;Sellos - AR Bolsa de Comercio;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;285;Sellos - AR Bolsa de Comercio;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;285;Sellos - AR Bolsa de Comercio;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;285;Sellos - AR Bolsa de Comercio;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;285;Sellos - AR Bolsa de Comercio;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;286;Sellos - AR RNPA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;286;Sellos - AR RNPA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;286;Sellos - AR RNPA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;286;Sellos - AR RNPA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;286;Sellos - AR RNPA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;287;Sellos - AR RELIT;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;287;Sellos - AR RELIT;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;287;Sellos - AR RELIT;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;287;Sellos - AR RELIT;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;287;Sellos - AR RELIT;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;288;Sellos - AR SAR;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;288;Sellos - AR SAR;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;288;Sellos - AR SAR;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;288;Sellos - AR SAR;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+890/MHFGC/20;2026;288;Sellos - AR SAR;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;2;IIBB - Convenio Multilateral;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;2;IIBB - Convenio Multilateral;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;2;IIBB - Convenio Multilateral;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;2;IIBB - Convenio Multilateral;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;2;IIBB - Convenio Multilateral;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;3;Anuncios Publicitarios;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;3;Anuncios Publicitarios;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;3;Anuncios Publicitarios;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;3;Anuncios Publicitarios;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;3;Anuncios Publicitarios;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;4;IIBB - Contribuyentes Locales;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;4;IIBB - Contribuyentes Locales;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;4;IIBB - Contribuyentes Locales;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;4;IIBB - Contribuyentes Locales;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;4;IIBB - Contribuyentes Locales;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;7;Inmobiliario/ABL;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;7;Inmobiliario/ABL;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;7;Inmobiliario/ABL;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;7;Inmobiliario/ABL;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;7;Inmobiliario/ABL;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;8;Automotor;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;8;Automotor;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;8;Automotor;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;8;Automotor;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;8;Automotor;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;10;Ferias;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;10;Ferias;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;10;Ferias;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;10;Ferias;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;10;Ferias;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;11;Mesas y Sillas - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;11;Mesas y Sillas - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;11;Mesas y Sillas - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;11;Mesas y Sillas - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;11;Mesas y Sillas - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;14;Vallas - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;14;Vallas - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;14;Vallas - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;14;Vallas - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;14;Vallas - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;16;Toldos - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;16;Toldos - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;16;Toldos - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;16;Toldos - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;16;Toldos - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;17;Postes - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;17;Postes - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;17;Postes - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;17;Postes - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;17;Postes - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;18;Puestos Ambulantes;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;18;Puestos Ambulantes;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;18;Puestos Ambulantes;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;18;Puestos Ambulantes;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;18;Puestos Ambulantes;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;19;Uso del Subsuelo - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;19;Uso del Subsuelo - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;19;Uso del Subsuelo - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;19;Uso del Subsuelo - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;19;Uso del Subsuelo - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;31;Antenas sobre estructuras;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;31;Antenas sobre estructuras;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;31;Antenas sobre estructuras;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;31;Antenas sobre estructuras;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;31;Antenas sobre estructuras;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;35;Visit BS AS;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;35;Visit BS AS;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;35;Visit BS AS;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;35;Visit BS AS;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;35;Visit BS AS;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;36;Compañías Eléctricas;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;36;Compañías Eléctricas;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;36;Compañías Eléctricas;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;36;Compañías Eléctricas;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;36;Compañías Eléctricas;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;40;IIBB - Régimen Simplificado;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;40;IIBB - Régimen Simplificado;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;40;IIBB - Régimen Simplificado;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;40;IIBB - Régimen Simplificado;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;40;IIBB - Régimen Simplificado;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;49;Residuos Humedos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;49;Residuos Humedos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;49;Residuos Humedos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;49;Residuos Humedos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;49;Residuos Humedos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;281;Sellos - AR Escribanos CABA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;281;Sellos - AR Escribanos CABA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;281;Sellos - AR Escribanos CABA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;281;Sellos - AR Escribanos CABA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;281;Sellos - AR Escribanos CABA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;282;Sellos - AR Martilleros;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;282;Sellos - AR Martilleros;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;282;Sellos - AR Martilleros;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;282;Sellos - AR Martilleros;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;282;Sellos - AR Martilleros;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;283;Sellos - AR Contratos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;283;Sellos - AR Contratos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;283;Sellos - AR Contratos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;283;Sellos - AR Contratos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;283;Sellos - AR Contratos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;284;Sellos - AR Esc. Extra. Jurisdicción;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;284;Sellos - AR Esc. Extra. Jurisdicción;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;284;Sellos - AR Esc. Extra. Jurisdicción;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;284;Sellos - AR Esc. Extra. Jurisdicción;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;284;Sellos - AR Esc. Extra. Jurisdicción;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;285;Sellos - AR Bolsa de Comercio;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;285;Sellos - AR Bolsa de Comercio;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;285;Sellos - AR Bolsa de Comercio;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;285;Sellos - AR Bolsa de Comercio;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;285;Sellos - AR Bolsa de Comercio;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;286;Sellos - AR RNPA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;286;Sellos - AR RNPA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;286;Sellos - AR RNPA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;286;Sellos - AR RNPA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;286;Sellos - AR RNPA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;287;Sellos - AR RELIT;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;287;Sellos - AR RELIT;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;287;Sellos - AR RELIT;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;287;Sellos - AR RELIT;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;287;Sellos - AR RELIT;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;288;Sellos - AR SAR;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;288;Sellos - AR SAR;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;288;Sellos - AR SAR;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;288;Sellos - AR SAR;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2022;288;Sellos - AR SAR;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;2;IIBB - Convenio Multilateral;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;2;IIBB - Convenio Multilateral;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;2;IIBB - Convenio Multilateral;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;2;IIBB - Convenio Multilateral;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;2;IIBB - Convenio Multilateral;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;3;Anuncios Publicitarios;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;3;Anuncios Publicitarios;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;3;Anuncios Publicitarios;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;3;Anuncios Publicitarios;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;3;Anuncios Publicitarios;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;4;IIBB - Contribuyentes Locales;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;4;IIBB - Contribuyentes Locales;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;4;IIBB - Contribuyentes Locales;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;4;IIBB - Contribuyentes Locales;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;4;IIBB - Contribuyentes Locales;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;7;Inmobiliario/ABL;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;7;Inmobiliario/ABL;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;7;Inmobiliario/ABL;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;7;Inmobiliario/ABL;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;7;Inmobiliario/ABL;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;8;Automotor;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;8;Automotor;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;8;Automotor;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;8;Automotor;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;8;Automotor;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;10;Ferias;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;10;Ferias;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;10;Ferias;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;10;Ferias;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;10;Ferias;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;11;Mesas y Sillas - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;11;Mesas y Sillas - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;11;Mesas y Sillas - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;11;Mesas y Sillas - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;11;Mesas y Sillas - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;14;Vallas - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;14;Vallas - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;14;Vallas - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;14;Vallas - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;14;Vallas - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;16;Toldos - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;16;Toldos - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;16;Toldos - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;16;Toldos - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;16;Toldos - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;17;Postes - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;17;Postes - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;17;Postes - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;17;Postes - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;17;Postes - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;18;Puestos Ambulantes;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;18;Puestos Ambulantes;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;18;Puestos Ambulantes;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;18;Puestos Ambulantes;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;18;Puestos Ambulantes;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;19;Uso del Subsuelo - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;19;Uso del Subsuelo - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;19;Uso del Subsuelo - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;19;Uso del Subsuelo - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;19;Uso del Subsuelo - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;31;Antenas sobre estructuras;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;31;Antenas sobre estructuras;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;31;Antenas sobre estructuras;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;31;Antenas sobre estructuras;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;31;Antenas sobre estructuras;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;35;Visit BS AS;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;35;Visit BS AS;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;35;Visit BS AS;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;35;Visit BS AS;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;35;Visit BS AS;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;36;Compañías Eléctricas;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;36;Compañías Eléctricas;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;36;Compañías Eléctricas;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;36;Compañías Eléctricas;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;36;Compañías Eléctricas;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;40;IIBB - Régimen Simplificado;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;40;IIBB - Régimen Simplificado;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;40;IIBB - Régimen Simplificado;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;40;IIBB - Régimen Simplificado;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;40;IIBB - Régimen Simplificado;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;49;Residuos Humedos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;49;Residuos Humedos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;49;Residuos Humedos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;49;Residuos Humedos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;49;Residuos Humedos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;281;Sellos - AR Escribanos CABA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;281;Sellos - AR Escribanos CABA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;281;Sellos - AR Escribanos CABA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;281;Sellos - AR Escribanos CABA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;281;Sellos - AR Escribanos CABA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;282;Sellos - AR Martilleros;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;282;Sellos - AR Martilleros;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;282;Sellos - AR Martilleros;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;282;Sellos - AR Martilleros;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;282;Sellos - AR Martilleros;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;283;Sellos - AR Contratos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;283;Sellos - AR Contratos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;283;Sellos - AR Contratos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;283;Sellos - AR Contratos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;283;Sellos - AR Contratos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;284;Sellos - AR Esc. Extra. Jurisdicción;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;284;Sellos - AR Esc. Extra. Jurisdicción;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;284;Sellos - AR Esc. Extra. Jurisdicción;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;284;Sellos - AR Esc. Extra. Jurisdicción;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;284;Sellos - AR Esc. Extra. Jurisdicción;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;285;Sellos - AR Bolsa de Comercio;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;285;Sellos - AR Bolsa de Comercio;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;285;Sellos - AR Bolsa de Comercio;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;285;Sellos - AR Bolsa de Comercio;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;285;Sellos - AR Bolsa de Comercio;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;286;Sellos - AR RNPA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;286;Sellos - AR RNPA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;286;Sellos - AR RNPA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;286;Sellos - AR RNPA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;286;Sellos - AR RNPA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;287;Sellos - AR RELIT;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;287;Sellos - AR RELIT;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;287;Sellos - AR RELIT;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;287;Sellos - AR RELIT;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;287;Sellos - AR RELIT;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;288;Sellos - AR SAR;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;288;Sellos - AR SAR;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;288;Sellos - AR SAR;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;288;Sellos - AR SAR;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2023;288;Sellos - AR SAR;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;2;IIBB - Convenio Multilateral;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;2;IIBB - Convenio Multilateral;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;2;IIBB - Convenio Multilateral;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;2;IIBB - Convenio Multilateral;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;2;IIBB - Convenio Multilateral;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;3;Anuncios Publicitarios;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;3;Anuncios Publicitarios;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;3;Anuncios Publicitarios;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;3;Anuncios Publicitarios;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;3;Anuncios Publicitarios;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;4;IIBB - Contribuyentes Locales;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;4;IIBB - Contribuyentes Locales;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;4;IIBB - Contribuyentes Locales;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;4;IIBB - Contribuyentes Locales;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;4;IIBB - Contribuyentes Locales;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;7;Inmobiliario/ABL;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;7;Inmobiliario/ABL;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;7;Inmobiliario/ABL;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;7;Inmobiliario/ABL;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;7;Inmobiliario/ABL;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;8;Automotor;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;8;Automotor;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;8;Automotor;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;8;Automotor;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;8;Automotor;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;10;Ferias;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;10;Ferias;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;10;Ferias;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;10;Ferias;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;10;Ferias;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;11;Mesas y Sillas - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;11;Mesas y Sillas - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;11;Mesas y Sillas - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;11;Mesas y Sillas - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;11;Mesas y Sillas - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;14;Vallas - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;14;Vallas - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;14;Vallas - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;14;Vallas - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;14;Vallas - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;16;Toldos - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;16;Toldos - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;16;Toldos - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;16;Toldos - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;16;Toldos - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;17;Postes - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;17;Postes - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;17;Postes - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;17;Postes - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;17;Postes - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;18;Puestos Ambulantes;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;18;Puestos Ambulantes;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;18;Puestos Ambulantes;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;18;Puestos Ambulantes;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;18;Puestos Ambulantes;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;19;Uso del Subsuelo - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;19;Uso del Subsuelo - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;19;Uso del Subsuelo - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;19;Uso del Subsuelo - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;19;Uso del Subsuelo - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;31;Antenas sobre estructuras;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;31;Antenas sobre estructuras;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;31;Antenas sobre estructuras;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;31;Antenas sobre estructuras;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;31;Antenas sobre estructuras;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;35;Visit BS AS;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;35;Visit BS AS;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;35;Visit BS AS;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;35;Visit BS AS;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;35;Visit BS AS;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;36;Compañías Eléctricas;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;36;Compañías Eléctricas;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;36;Compañías Eléctricas;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;36;Compañías Eléctricas;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;36;Compañías Eléctricas;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;40;IIBB - Régimen Simplificado;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;40;IIBB - Régimen Simplificado;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;40;IIBB - Régimen Simplificado;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;40;IIBB - Régimen Simplificado;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;40;IIBB - Régimen Simplificado;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;49;Residuos Humedos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;49;Residuos Humedos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;49;Residuos Humedos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;49;Residuos Humedos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;49;Residuos Humedos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;281;Sellos - AR Escribanos CABA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;281;Sellos - AR Escribanos CABA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;281;Sellos - AR Escribanos CABA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;281;Sellos - AR Escribanos CABA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;281;Sellos - AR Escribanos CABA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;282;Sellos - AR Martilleros;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;282;Sellos - AR Martilleros;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;282;Sellos - AR Martilleros;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;282;Sellos - AR Martilleros;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;282;Sellos - AR Martilleros;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;283;Sellos - AR Contratos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;283;Sellos - AR Contratos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;283;Sellos - AR Contratos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;283;Sellos - AR Contratos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;283;Sellos - AR Contratos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;284;Sellos - AR Esc. Extra. Jurisdicción;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;284;Sellos - AR Esc. Extra. Jurisdicción;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;284;Sellos - AR Esc. Extra. Jurisdicción;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;284;Sellos - AR Esc. Extra. Jurisdicción;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;284;Sellos - AR Esc. Extra. Jurisdicción;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;285;Sellos - AR Bolsa de Comercio;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;285;Sellos - AR Bolsa de Comercio;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;285;Sellos - AR Bolsa de Comercio;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;285;Sellos - AR Bolsa de Comercio;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;285;Sellos - AR Bolsa de Comercio;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;286;Sellos - AR RNPA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;286;Sellos - AR RNPA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;286;Sellos - AR RNPA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;286;Sellos - AR RNPA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;286;Sellos - AR RNPA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;287;Sellos - AR RELIT;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;287;Sellos - AR RELIT;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;287;Sellos - AR RELIT;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;287;Sellos - AR RELIT;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;287;Sellos - AR RELIT;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;288;Sellos - AR SAR;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;288;Sellos - AR SAR;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;288;Sellos - AR SAR;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;288;Sellos - AR SAR;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2024;288;Sellos - AR SAR;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;2;IIBB - Convenio Multilateral;TODOS;26;26;completo;0;0;0;0;Sí;26;;Coincide
+461/AGIP/25;2025;2;IIBB - Convenio Multilateral;VIGENTE;20;20;completo;0;0;0;0;Sí;20;;Coincide
+461/AGIP/25;2025;2;IIBB - Convenio Multilateral;CANCELADO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2025;2;IIBB - Convenio Multilateral;NULO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2025;2;IIBB - Convenio Multilateral;CADUCO;2;2;completo;0;0;0;0;Sí;2;;Coincide
+461/AGIP/25;2025;3;Anuncios Publicitarios;TODOS;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2025;3;Anuncios Publicitarios;VIGENTE;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2025;3;Anuncios Publicitarios;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;3;Anuncios Publicitarios;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;3;Anuncios Publicitarios;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;4;IIBB - Contribuyentes Locales;TODOS;13;13;completo;0;0;0;0;Sí;13;;Coincide
+461/AGIP/25;2025;4;IIBB - Contribuyentes Locales;VIGENTE;11;11;completo;0;0;0;0;Sí;11;;Coincide
+461/AGIP/25;2025;4;IIBB - Contribuyentes Locales;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;4;IIBB - Contribuyentes Locales;NULO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2025;4;IIBB - Contribuyentes Locales;CADUCO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2025;7;Inmobiliario/ABL;TODOS;20;20;completo;0;0;0;0;Sí;20;;Coincide
+461/AGIP/25;2025;7;Inmobiliario/ABL;VIGENTE;19;19;completo;0;0;0;0;Sí;19;;Coincide
+461/AGIP/25;2025;7;Inmobiliario/ABL;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;7;Inmobiliario/ABL;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;7;Inmobiliario/ABL;CADUCO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2025;8;Automotor;TODOS;30;30;completo;0;0;0;0;Sí;30;1583024404 fechaAlta;Coincide
+461/AGIP/25;2025;8;Automotor;VIGENTE;27;27;completo;0;0;0;0;Sí;27;1583024404 fechaAlta;Coincide
+461/AGIP/25;2025;8;Automotor;CANCELADO;2;2;completo;0;0;0;0;Sí;2;;Coincide
+461/AGIP/25;2025;8;Automotor;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;8;Automotor;CADUCO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2025;10;Ferias;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;10;Ferias;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;10;Ferias;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;10;Ferias;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;10;Ferias;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;11;Mesas y Sillas - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;11;Mesas y Sillas - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;11;Mesas y Sillas - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;11;Mesas y Sillas - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;11;Mesas y Sillas - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;14;Vallas - Via Publica;TODOS;2;2;completo;0;0;0;0;Sí;2;;Coincide
+461/AGIP/25;2025;14;Vallas - Via Publica;VIGENTE;2;2;completo;0;0;0;0;Sí;2;;Coincide
+461/AGIP/25;2025;14;Vallas - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;14;Vallas - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;14;Vallas - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;16;Toldos - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;16;Toldos - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;16;Toldos - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;16;Toldos - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;16;Toldos - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;17;Postes - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;17;Postes - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;17;Postes - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;17;Postes - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;17;Postes - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;18;Puestos Ambulantes;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;18;Puestos Ambulantes;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;18;Puestos Ambulantes;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;18;Puestos Ambulantes;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;18;Puestos Ambulantes;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;19;Uso del Subsuelo - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;19;Uso del Subsuelo - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;19;Uso del Subsuelo - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;19;Uso del Subsuelo - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;19;Uso del Subsuelo - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;31;Antenas sobre estructuras;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;31;Antenas sobre estructuras;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;31;Antenas sobre estructuras;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;31;Antenas sobre estructuras;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;31;Antenas sobre estructuras;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;35;Visit BS AS;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;35;Visit BS AS;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;35;Visit BS AS;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;35;Visit BS AS;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;35;Visit BS AS;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;36;Compañías Eléctricas;TODOS;8;8;completo;0;0;0;0;Sí;8;;Coincide
+461/AGIP/25;2025;36;Compañías Eléctricas;VIGENTE;8;8;completo;0;0;0;0;Sí;8;;Coincide
+461/AGIP/25;2025;36;Compañías Eléctricas;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;36;Compañías Eléctricas;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;36;Compañías Eléctricas;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;40;IIBB - Régimen Simplificado;TODOS;6;6;completo;0;0;0;0;Sí;6;;Coincide
+461/AGIP/25;2025;40;IIBB - Régimen Simplificado;VIGENTE;5;5;completo;0;0;0;0;Sí;5;;Coincide
+461/AGIP/25;2025;40;IIBB - Régimen Simplificado;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;40;IIBB - Régimen Simplificado;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;40;IIBB - Régimen Simplificado;CADUCO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2025;49;Residuos Humedos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;49;Residuos Humedos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;49;Residuos Humedos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;49;Residuos Humedos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;49;Residuos Humedos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;281;Sellos - AR Escribanos CABA;TODOS;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2025;281;Sellos - AR Escribanos CABA;VIGENTE;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2025;281;Sellos - AR Escribanos CABA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;281;Sellos - AR Escribanos CABA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;281;Sellos - AR Escribanos CABA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;282;Sellos - AR Martilleros;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;282;Sellos - AR Martilleros;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;282;Sellos - AR Martilleros;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;282;Sellos - AR Martilleros;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;282;Sellos - AR Martilleros;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;283;Sellos - AR Contratos;TODOS;13;13;completo;0;0;0;0;Sí;13;;Coincide
+461/AGIP/25;2025;283;Sellos - AR Contratos;VIGENTE;9;9;completo;0;0;0;0;Sí;9;;Coincide
+461/AGIP/25;2025;283;Sellos - AR Contratos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;283;Sellos - AR Contratos;NULO;4;4;completo;0;0;0;0;Sí;4;;Coincide
+461/AGIP/25;2025;283;Sellos - AR Contratos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;284;Sellos - AR Esc. Extra. Jurisdicción;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;284;Sellos - AR Esc. Extra. Jurisdicción;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;284;Sellos - AR Esc. Extra. Jurisdicción;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;284;Sellos - AR Esc. Extra. Jurisdicción;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;284;Sellos - AR Esc. Extra. Jurisdicción;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;285;Sellos - AR Bolsa de Comercio;TODOS;2;2;completo;0;0;0;0;Sí;2;;Coincide
+461/AGIP/25;2025;285;Sellos - AR Bolsa de Comercio;VIGENTE;2;2;completo;0;0;0;0;Sí;2;;Coincide
+461/AGIP/25;2025;285;Sellos - AR Bolsa de Comercio;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;285;Sellos - AR Bolsa de Comercio;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;285;Sellos - AR Bolsa de Comercio;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;286;Sellos - AR RNPA;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;286;Sellos - AR RNPA;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;286;Sellos - AR RNPA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;286;Sellos - AR RNPA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;286;Sellos - AR RNPA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;287;Sellos - AR RELIT;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;287;Sellos - AR RELIT;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;287;Sellos - AR RELIT;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;287;Sellos - AR RELIT;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;287;Sellos - AR RELIT;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;288;Sellos - AR SAR;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;288;Sellos - AR SAR;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;288;Sellos - AR SAR;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;288;Sellos - AR SAR;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2025;288;Sellos - AR SAR;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;2;IIBB - Convenio Multilateral;TODOS;72460;72460;primera y última página;0;0;0;0;;72460;1523000141 razonSocial / 1523072991 razonSocial / 1523072992 razonSocial / 1523072993 razonSocial / 1523072999 razonSocial;Coincide
+461/AGIP/25;2026;2;IIBB - Convenio Multilateral;VIGENTE;72297;72297;primera y última página;0;0;0;0;;72297;1523072991 razonSocial / 1523072992 razonSocial / 1523072993 razonSocial / 1523072999 razonSocial;Coincide
+461/AGIP/25;2026;2;IIBB - Convenio Multilateral;CANCELADO;18;18;completo;0;0;0;0;Sí;18;;Coincide
+461/AGIP/25;2026;2;IIBB - Convenio Multilateral;NULO;30;30;completo;0;0;0;0;Sí;30;1523000141 razonSocial;Coincide
+461/AGIP/25;2026;2;IIBB - Convenio Multilateral;CADUCO;59;59;completo;0;0;0;0;Sí;59;;Coincide
+461/AGIP/25;2026;3;Anuncios Publicitarios;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;3;Anuncios Publicitarios;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;3;Anuncios Publicitarios;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;3;Anuncios Publicitarios;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;3;Anuncios Publicitarios;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;4;IIBB - Contribuyentes Locales;TODOS;190;190;completo;0;0;0;0;Sí;190;1543000057 razonSocial / 1543000058 razonSocial / 1543000059 razonSocial;Coincide
+461/AGIP/25;2026;4;IIBB - Contribuyentes Locales;VIGENTE;135;135;completo;0;0;0;0;Sí;135;1543000059 razonSocial;Coincide
+461/AGIP/25;2026;4;IIBB - Contribuyentes Locales;CANCELADO;4;4;completo;0;0;0;0;Sí;4;;Coincide
+461/AGIP/25;2026;4;IIBB - Contribuyentes Locales;NULO;14;14;completo;0;0;0;0;Sí;14;1543000057 razonSocial / 1543000058 razonSocial;Coincide
+461/AGIP/25;2026;4;IIBB - Contribuyentes Locales;CADUCO;16;16;completo;0;0;0;0;Sí;16;;Coincide
+461/AGIP/25;2026;7;Inmobiliario/ABL;TODOS;3;3;completo;0;0;0;0;Sí;3;;Coincide
+461/AGIP/25;2026;7;Inmobiliario/ABL;VIGENTE;3;3;completo;0;0;0;0;Sí;3;;Coincide
+461/AGIP/25;2026;7;Inmobiliario/ABL;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;7;Inmobiliario/ABL;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;7;Inmobiliario/ABL;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;8;Automotor;TODOS;4;4;completo;0;0;0;0;Sí;4;;Coincide
+461/AGIP/25;2026;8;Automotor;VIGENTE;2;2;completo;0;0;0;0;Sí;2;;Coincide
+461/AGIP/25;2026;8;Automotor;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;8;Automotor;NULO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2026;8;Automotor;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;10;Ferias;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;10;Ferias;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;10;Ferias;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;10;Ferias;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;10;Ferias;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;11;Mesas y Sillas - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;11;Mesas y Sillas - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;11;Mesas y Sillas - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;11;Mesas y Sillas - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;11;Mesas y Sillas - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;14;Vallas - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;14;Vallas - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;14;Vallas - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;14;Vallas - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;14;Vallas - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;16;Toldos - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;16;Toldos - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;16;Toldos - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;16;Toldos - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;16;Toldos - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;17;Postes - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;17;Postes - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;17;Postes - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;17;Postes - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;17;Postes - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;18;Puestos Ambulantes;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;18;Puestos Ambulantes;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;18;Puestos Ambulantes;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;18;Puestos Ambulantes;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;18;Puestos Ambulantes;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;19;Uso del Subsuelo - Via Publica;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;19;Uso del Subsuelo - Via Publica;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;19;Uso del Subsuelo - Via Publica;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;19;Uso del Subsuelo - Via Publica;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;19;Uso del Subsuelo - Via Publica;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;31;Antenas sobre estructuras;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;31;Antenas sobre estructuras;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;31;Antenas sobre estructuras;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;31;Antenas sobre estructuras;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;31;Antenas sobre estructuras;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;35;Visit BS AS;TODOS;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2026;35;Visit BS AS;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;35;Visit BS AS;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;35;Visit BS AS;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;35;Visit BS AS;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;36;Compañías Eléctricas;TODOS;2;2;completo;0;0;0;0;Sí;2;;Coincide
+461/AGIP/25;2026;36;Compañías Eléctricas;VIGENTE;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2026;36;Compañías Eléctricas;CANCELADO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2026;36;Compañías Eléctricas;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;36;Compañías Eléctricas;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;40;IIBB - Régimen Simplificado;TODOS;12;12;completo;0;0;0;0;Sí;12;;Coincide
+461/AGIP/25;2026;40;IIBB - Régimen Simplificado;VIGENTE;11;11;completo;0;0;0;0;Sí;11;;Coincide
+461/AGIP/25;2026;40;IIBB - Régimen Simplificado;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;40;IIBB - Régimen Simplificado;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;40;IIBB - Régimen Simplificado;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;49;Residuos Humedos;TODOS;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;49;Residuos Humedos;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;49;Residuos Humedos;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;49;Residuos Humedos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;49;Residuos Humedos;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;281;Sellos - AR Escribanos CABA;TODOS;48;48;completo;0;0;0;0;Sí;48;;Coincide
+461/AGIP/25;2026;281;Sellos - AR Escribanos CABA;VIGENTE;34;34;completo;0;0;0;0;Sí;34;;Coincide
+461/AGIP/25;2026;281;Sellos - AR Escribanos CABA;CANCELADO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2026;281;Sellos - AR Escribanos CABA;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;281;Sellos - AR Escribanos CABA;CADUCO;9;9;completo;0;0;0;0;Sí;9;;Coincide
+461/AGIP/25;2026;282;Sellos - AR Martilleros;TODOS;16;16;completo;0;0;0;0;Sí;16;;Coincide
+461/AGIP/25;2026;282;Sellos - AR Martilleros;VIGENTE;11;11;completo;0;0;0;0;Sí;11;;Coincide
+461/AGIP/25;2026;282;Sellos - AR Martilleros;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;282;Sellos - AR Martilleros;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;282;Sellos - AR Martilleros;CADUCO;3;3;completo;0;0;0;0;Sí;3;;Coincide
+461/AGIP/25;2026;283;Sellos - AR Contratos;TODOS;15;15;completo;0;0;0;0;Sí;15;;Coincide
+461/AGIP/25;2026;283;Sellos - AR Contratos;VIGENTE;9;9;completo;0;0;0;0;Sí;9;;Coincide
+461/AGIP/25;2026;283;Sellos - AR Contratos;CANCELADO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2026;283;Sellos - AR Contratos;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;283;Sellos - AR Contratos;CADUCO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2026;284;Sellos - AR Esc. Extra. Jurisdicción;TODOS;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2026;284;Sellos - AR Esc. Extra. Jurisdicción;VIGENTE;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;284;Sellos - AR Esc. Extra. Jurisdicción;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;284;Sellos - AR Esc. Extra. Jurisdicción;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;284;Sellos - AR Esc. Extra. Jurisdicción;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;285;Sellos - AR Bolsa de Comercio;TODOS;4;4;completo;0;0;0;0;Sí;4;;Coincide
+461/AGIP/25;2026;285;Sellos - AR Bolsa de Comercio;VIGENTE;4;4;completo;0;0;0;0;Sí;4;;Coincide
+461/AGIP/25;2026;285;Sellos - AR Bolsa de Comercio;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;285;Sellos - AR Bolsa de Comercio;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;285;Sellos - AR Bolsa de Comercio;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;286;Sellos - AR RNPA;TODOS;5;5;completo;0;0;0;0;Sí;5;;Coincide
+461/AGIP/25;2026;286;Sellos - AR RNPA;VIGENTE;2;2;completo;0;0;0;0;Sí;2;;Coincide
+461/AGIP/25;2026;286;Sellos - AR RNPA;CANCELADO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;286;Sellos - AR RNPA;NULO;1;1;completo;0;0;0;0;Sí;1;;Coincide
+461/AGIP/25;2026;286;Sellos - AR RNPA;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;287;Sellos - AR RELIT;TODOS;15;15;completo;0;0;0;0;Sí;15;;Coincide
+461/AGIP/25;2026;287;Sellos - AR RELIT;VIGENTE;4;4;completo;0;0;0;0;Sí;4;;Coincide
+461/AGIP/25;2026;287;Sellos - AR RELIT;CANCELADO;2;2;completo;0;0;0;0;Sí;2;;Coincide
+461/AGIP/25;2026;287;Sellos - AR RELIT;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;287;Sellos - AR RELIT;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;288;Sellos - AR SAR;TODOS;23;23;completo;0;0;0;0;Sí;23;;Coincide
+461/AGIP/25;2026;288;Sellos - AR SAR;VIGENTE;18;18;completo;0;0;0;0;Sí;18;;Coincide
+461/AGIP/25;2026;288;Sellos - AR SAR;CANCELADO;3;3;completo;0;0;0;0;Sí;3;;Coincide
+461/AGIP/25;2026;288;Sellos - AR SAR;NULO;0;0;sin planes;0;0;0;0;;;;Coincide
+461/AGIP/25;2026;288;Sellos - AR SAR;CADUCO;0;0;sin planes;0;0;0;0;;;;Coincide
