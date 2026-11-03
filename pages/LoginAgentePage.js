@@ -43,6 +43,14 @@ class LoginAgentePage {
       ),
     ]);
 
+    // Traemos la pestaña nueva al frente — el form.submit() con target="_blank"
+    // la abre en segundo plano y Playwright no la enfoca solo. Si el portal usa
+    // la Page Visibility API para medir inactividad, una pestaña que nunca gana
+    // foco real puede reportarse "oculta" todo el tiempo y disparar el logout
+    // por inactividad mucho antes de lo esperado — algo que no pasa en una
+    // sesión manual porque el usuario sí clickea/enfoca la pestaña nueva.
+    await nuevaPagina.bringToFront();
+
     await nuevaPagina.waitForLoadState('domcontentloaded', { timeout: 60000 });
 
     // Esperamos que desaparezca el "Validando Usuario" si aparece

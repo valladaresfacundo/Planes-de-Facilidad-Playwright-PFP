@@ -44,7 +44,11 @@ class LoginPage {
       ),
     ]);
 
-    // Paso 3: esperamos que la nueva pestaña termine de cargar
+    // Paso 3: traemos la pestaña nueva al frente (ver nota en LoginAgentePage.js
+    // — la pestaña abierta con target="_blank" queda en segundo plano y puede
+    // reportarse "oculta" a la Page Visibility API, disparando timeouts de
+    // inactividad antes de tiempo) y esperamos que termine de cargar
+    await nuevaPagina.bringToFront();
     await nuevaPagina.waitForLoadState('domcontentloaded', { timeout: 60000 });
 
     // Paso 4: esperamos que desaparezca el cartel "Validando Usuario"
