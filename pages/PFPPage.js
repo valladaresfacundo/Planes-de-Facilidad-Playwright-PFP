@@ -42,33 +42,134 @@ class PFPPage {
   }
 
   // Selecciona el tipo de plan en el primer dropdown
+  // getByRole('button', ...) en vez de getByText — el label "Tipo de plan"
+  // colisiona con otro texto de la pantalla en QA_AV ("Tipo de Plan" en un
+  // comprobante), rompiendo el modo estricto de Playwright. Descubierto
+  // 2026-08-19 al migrar de QA_HOMO (donde nunca se llegaba a esta pantalla
+  // por el outage) — ver memoria pfp-roadmap-fases.
   async seleccionarTipoPlan(tipoPlan) {
-    await this.page.getByText('Tipo de plan').click();
+    await this.page.getByRole('button', { name: 'Tipo de plan' }).click();
     await this.page.waitForTimeout(500);
-    await this.page.getByText(tipoPlan).click();
+    await this.page.getByText(tipoPlan).first().click();
     await this.page.waitForLoadState('networkidle');
   }
 
   // Selecciona la operación en el segundo dropdown
   async seleccionarOperacion(operacion) {
-    await this.page.getByText('Operación').click();
+    await this.page.getByRole('button', { name: 'Operación' }).click();
     await this.page.waitForTimeout(500);
-    await this.page.getByText(operacion).click();
+    await this.page.getByText(operacion).first().click();
     await this.page.waitForLoadState('networkidle');
   }
 
   // Selecciona el impuesto en el tercer dropdown
   async seleccionarImpuesto(impuesto) {
-    await this.page.getByText('Impuesto').click();
+    await this.page.getByRole('button', { name: 'Impuesto' }).click();
     await this.page.waitForTimeout(500);
-    await this.page.getByText(impuesto).click();
+    await this.page.getByText(impuesto).first().click();
     await this.page.waitForLoadState('networkidle');
+  }
+
+  /**
+   * Consulta deuda con fallback de impuesto: si el impuesto preferido no trae
+   * deuda cargada, reintenta con los de `impuestosFallback` en orden (default
+   * ["Sellos"], que en QA suele tener deuda cargada casi siempre). Evita que
+   * el acogimiento falle simplemente porque el CUIT/ambiente de turno no tiene
+   * deuda en el impuesto puntual que se le pidió.
+   * ⚠ Confirmado en vivo 2026-08-20 (QA_AV) que la consulta puede tardar más
+   * de lo que tarda networkidle en resolver — la pantalla queda mostrando
+   * "Procesando..." bastante después. El primer intento con solo 5s de
+   * espera post-Consultar daba falso negativo ("sin deuda") cuando en
+   * realidad la consulta seguía en curso. Por eso se espera explícitamente a
+   * que "Procesando..." desaparezca antes de chequear el resultado.
+   * @returns {Promise<string>} el impuesto que sí encontró deuda
+   */
+  async consultarDeudaConFallback({ tipoPlan, operacion, impuestoPreferido, impuestosFallback = ['Sellos'] }) {
+    const intentos = [impuestoPreferido, ...impuestosFallback];
+
+    for (let i = 0; i < intentos.length; i++) {
+      const impuesto = intentos[i];
+      if (i > 0) {
+        // Volvemos a la pantalla de selección para reintentar con otro impuesto
+        await this.irAPlanesYMoratoria();
+      }
+      await this.seleccionarTipoPlan(tipoPlan);
+      await this.seleccionarOperacion(operacion);
+      await this.seleccionarImpuesto(impuesto);
+      await this.page.getByRole('button', { name: 'Consultar' }).click();
+      await this.page.waitForLoadState('networkidle');
+      await this.page.getByText('Procesando...', { exact: false })
+        .waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
+
+      const hayDeuda = await this.page.getByText('Períodos a incluir en el plan')
+        .isVisible({ timeout: 20000 }).catch(() => false);
+
+      if (hayDeuda) {
+        console.log(`consultarDeudaConFallback — deuda encontrada con impuesto "${impuesto}"`);
+        return impuesto;
+      }
+      console.log(`consultarDeudaConFallback — sin deuda para "${impuesto}"${i < intentos.length - 1 ? ', probando siguiente...' : ''}`);
+    }
+
+    throw new Error(`consultarDeudaConFallback — no se encontró deuda para ningún impuesto probado: ${intentos.join(', ')}`);
   }
 
   // Hace click en Continuar
   async clickContinuar() {
     await this.page.getByRole('button', { name: 'Continuar' }).click();
     await this.page.waitForLoadState('networkidle');
+  }
+
+  // ─── Dropdown "*Cantidad de cuotas a pagar" (paso 2) ───────────────────────
+  // ⚠ El menú tiene scroll VIRTUALIZADO: Vuetify sólo renderiza las primeras
+  // ~20 opciones y agrega el resto a medida que se scrollea. Leer
+  // getByRole('option') sin scrollear devuelve "20 cuotas" como última opción
+  // aunque la norma permita más (461/AGIP/25 permite 48 — confirmado
+  // 2026-09-30 en el bundle del portal y en Param.Tables PFP_Cantidad_Cuotas).
+
+  async abrirDropdownCuotas() {
+    await this.page.getByRole('button', { name: '*Cantidad de cuotas a pagar' }).click();
+    await this.page.locator('.menuable__content__active').waitFor({ state: 'visible' });
+  }
+
+  // Scrollea el menú abierto una "página" hacia abajo. Devuelve false si ya
+  // estaba al final (no hay más opciones para cargar).
+  async _scrollearMenuCuotas() {
+    const menu = this.page.locator('.menuable__content__active');
+    const avanzo = await menu.evaluate(el => {
+      const antes = el.scrollTop;
+      el.scrollTop = el.scrollTop + el.clientHeight;
+      return el.scrollTop > antes;
+    });
+    await this.page.waitForTimeout(200);
+    return avanzo;
+  }
+
+  // Devuelve TODAS las opciones del dropdown (ej. ["1 cuota", ..., "48 cuotas"])
+  // scrolleando hasta el final, y cierra el menú.
+  async obtenerOpcionesCuotas() {
+    await this.abrirDropdownCuotas();
+    const opciones = [];
+    for (let i = 0; i < 50; i++) {
+      for (const texto of await this.page.getByRole('option').allTextContents()) {
+        if (!opciones.includes(texto.trim())) opciones.push(texto.trim());
+      }
+      if (!(await this._scrollearMenuCuotas())) break;
+    }
+    await this.page.keyboard.press('Escape');
+    await this.page.waitForTimeout(300);
+    return opciones;
+  }
+
+  // Elige una cantidad de cuotas por texto exacto (ej. "24 cuotas"),
+  // scrolleando el menú hasta que la opción esté renderizada.
+  async seleccionarCuotas(textoOpcion) {
+    await this.abrirDropdownCuotas();
+    const opcion = this.page.getByRole('option', { name: textoOpcion, exact: true });
+    for (let i = 0; i < 50 && !(await opcion.isVisible().catch(() => false)); i++) {
+      if (!(await this._scrollearMenuCuotas())) break;
+    }
+    await opcion.click();
   }
 
   // Verifica en qué paso del stepper estamos (1 al 5)
@@ -151,6 +252,30 @@ class PFPPage {
   async iniciarCancelacionAnticipada() {
     await this.page.getByRole('button', { name: 'Cancelación Anticipada' }).click();
     await this.page.waitForLoadState('networkidle');
+  }
+
+  // F3005 — Confirma la CA de verdad (MUTA: el plan pasa a CA_PENDIENTE).
+  // Wizard de 4 pasos ("Operaciones / Pagar"), confirmado en vivo 2026-08-13:
+  // 1. "Confirmar Cuotas" → botón "Continuar".
+  // 2. "Confirmación de CBU" → viene precargado con el último CBU cargado
+  //    (F3007) → botón "Continuar".
+  // 3. "Confirmación" → botón real es "Confirmar" (no "Continuar", distinto
+  //    de los pasos anteriores) → clic real, dispara la CA.
+  // Llamar después de iniciarCancelacionAnticipada() y de confirmar que el
+  // mensaje de bloqueo ("La primer cuota del plan debe estar paga") NO está
+  // presente.
+  async confirmarCancelacionAnticipada() {
+    await this.page.getByRole('button', { name: 'Continuar' }).click();
+    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(800);
+
+    await this.page.getByRole('button', { name: 'Continuar' }).click();
+    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(800);
+
+    await this.page.getByRole('button', { name: 'Confirmar' }).click();
+    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(1500);
   }
 }
 

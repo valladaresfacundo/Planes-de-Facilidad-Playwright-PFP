@@ -1,19 +1,20 @@
 // tests/regression/TC_AGENTE_002_perfiles.spec.js
 // Tests de regresión del Portal Agente — validación de perfiles y permisos
-// Perfil AgentePFP vs Consultor en DEV20
+// Perfil AgentePFP vs Consultor en QA_AV
+// (migrado de DEV20 el 2026-08-19 — DEV20 ya no se prueba más, ver memoria pfp-roadmap-fases)
 
 const { test, expect } = require('@playwright/test');
-const { LoginAgentePage } = require('../../pages/LoginAgentePage');
-const { AMBIENTES_AGENTE, AGENTE, SIGN_AGENTE } = require('../../fixtures/test-data');
+const { LoginAgentePage } = require('../../../pages/LoginAgentePage');
+const { AMBIENTES_AGENTE, AGENTE, SIGN_AGENTE } = require('../../../fixtures/test-data');
 
-const URL_AGENTE_DEV20 = AMBIENTES_AGENTE.DEV20;
+const URL_AGENTE_QA_AV = AMBIENTES_AGENTE.QA_AV;
 
-test.describe('Regresión — Portal Agente DEV20 — Perfiles y Permisos', () => {
+test.describe('Regresión — Portal Agente QA_AV — Perfiles y Permisos', () => {
 
   // ─── Helper genérico de login ──────────────────────────────────────────────
   async function loginConPerfil(page, perfil) {
     const loginPage = new LoginAgentePage(page);
-    await loginPage.login(URL_AGENTE_DEV20, AGENTE.usuario, perfil, SIGN_AGENTE);
+    await loginPage.login(URL_AGENTE_QA_AV, AGENTE.usuario, perfil, SIGN_AGENTE);
     const portalPage = loginPage.obtenerPagina();
     await portalPage.waitForLoadState('networkidle');
     return { portalPage, loginPage };
@@ -139,19 +140,23 @@ test.describe('Regresión — Portal Agente DEV20 — Perfiles y Permisos', () =
       console.log('✅ Menú Consultor verificado');
     });
 
-    test('TC_AGCONSUL_003 — Consultor NO tiene acceso a Operaciones', async ({ page }) => {
+    // 2026-10-14: confirmado por el usuario que es correcto que el Consultor
+    // vea "Operaciones" (antes el test esperaba que no). Relevado en vivo: su
+    // submenú tiene SOLO "Anular SAF" — ninguna de las operaciones de
+    // AgentePFP (Riesgo Fiscal) ni de AgenteRec (Anular Operación, Deb/Cred
+    // Especiales, Devolución SAF).
+    test('TC_AGCONSUL_003 — Consultor ve Operaciones sólo con "Anular SAF"', async ({ page }) => {
       const { portalPage } = await loginConPerfil(page, AGENTE.perfiles.Consultor);
 
-      // Operaciones no debe estar en el menú del Consultor
-      const operacionesVisible = await portalPage
-        .getByRole('button', { name: 'Operaciones' })
-        .isVisible()
-        .catch(() => false);
+      await portalPage.getByRole('button', { name: 'Operaciones' }).click();
+      await portalPage.waitForTimeout(800);
+      await portalPage.screenshot({ path: 'screenshots/TC_AGCONSUL_003_operaciones.png', fullPage: true });
 
-      await portalPage.screenshot({ path: 'screenshots/TC_AGCONSUL_003_sin_operaciones.png', fullPage: true });
-
-      expect(operacionesVisible, 'Consultor NO debe ver Operaciones').toBe(false);
-      console.log('✅ Operaciones correctamente oculto para Consultor');
+      await expect(portalPage.getByRole('link', { name: 'Anular SAF' })).toBeVisible();
+      for (const opcion of ['Riesgo Fiscal', 'Anular Operación', 'Deb / Cred Especiales', 'Devolucion SAF']) {
+        await expect(portalPage.getByRole('link', { name: opcion }), `Consultor NO debe ver "${opcion}"`).toHaveCount(0);
+      }
+      console.log('✅ Operaciones del Consultor: sólo "Anular SAF"');
     });
 
     test('TC_AGCONSUL_004 — Consultor accede a Consultas → Contribuyentes → Consultar PF', async ({ page }) => {
