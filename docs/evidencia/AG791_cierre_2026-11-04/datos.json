@@ -1,0 +1,352 @@
+{
+ "C01": {
+  "fecha": "4/11/2026, 16:24:08",
+  "instrumentos": [
+   "461/AGIP/25",
+   "890/MHFGC/20"
+  ],
+  "porInstrumento": {
+   "890/MHFGC/20": {
+    "anios": [
+     "2026",
+     "2025",
+     "2024",
+     "2023",
+     "2022"
+    ],
+    "estados": [
+     "Todos",
+     "Caduco",
+     "Cancelado",
+     "Nulo",
+     "Vigente"
+    ]
+   },
+   "461/AGIP/25": {
+    "anios": [
+     "2026",
+     "2025",
+     "2024",
+     "2023",
+     "2022"
+    ],
+    "estados": [
+     "Todos",
+     "Caduco",
+     "Cancelado",
+     "Nulo",
+     "Vigente"
+    ]
+   }
+  },
+  "aniosCA01": [
+   "2022",
+   "2023",
+   "2024",
+   "2025",
+   "2026"
+  ],
+  "asteriscos": {
+   "Reporte": true,
+   "Instrumento Legal": true,
+   "Año": true,
+   "Impuesto": true,
+   "Estado": false
+  },
+  "leyenda": true
+ },
+ "C02": {
+  "fecha": "4/11/2026, 16:24:29",
+  "890/MHFGC/20": {
+   "tabla": 11,
+   "porAnio": {
+    "2022": {
+     "cantidad": 11,
+     "faltan": [],
+     "sobran": []
+    },
+    "2023": {
+     "cantidad": 11,
+     "faltan": [],
+     "sobran": []
+    },
+    "2024": {
+     "cantidad": 11,
+     "faltan": [],
+     "sobran": []
+    },
+    "2025": {
+     "cantidad": 11,
+     "faltan": [],
+     "sobran": []
+    },
+    "2026": {
+     "cantidad": 11,
+     "faltan": [],
+     "sobran": []
+    }
+   }
+  },
+  "461/AGIP/25": {
+   "tabla": 25,
+   "porAnio": {
+    "2022": {
+     "cantidad": 25,
+     "faltan": [],
+     "sobran": []
+    },
+    "2023": {
+     "cantidad": 25,
+     "faltan": [],
+     "sobran": []
+    },
+    "2024": {
+     "cantidad": 25,
+     "faltan": [],
+     "sobran": []
+    },
+    "2025": {
+     "cantidad": 25,
+     "faltan": [],
+     "sobran": []
+    },
+    "2026": {
+     "cantidad": 25,
+     "faltan": [],
+     "sobran": []
+    }
+   }
+  }
+ },
+ "C03": {
+  "fecha": "4/11/2026, 16:24:34",
+  "asterisco": true,
+  "consultarDeshabilitado": true
+ },
+ "C04": {
+  "fecha": "4/11/2026, 16:24:39",
+  "vacio": true,
+  "sinAnio": true,
+  "sinImpuesto": true,
+  "completoHabilitado": true
+ },
+ "C05": {
+  "fecha": "4/11/2026, 16:24:47",
+  "consulta": {
+   "instrumento": "890/MHFGC/20",
+   "anio": 2026,
+   "estado": "Todos",
+   "impuesto": "IIBB - Convenio Multilateral"
+  },
+  "segundos": 1.56,
+  "codigo": 1,
+  "encabezados": [
+   "N° Solicitud",
+   "Instrumento Legal",
+   "CUIT",
+   "Razón Social",
+   "Impuesto",
+   "Fecha de Alta",
+   "Cant. de Cuotas",
+   "Deuda nominal",
+   "Interés resarcitorio",
+   "Interés financiero"
+  ],
+  "filasGrilla": 21,
+  "filasBase": 21,
+  "posicion2223000125": 2,
+  "diferencias": [],
+  "ejemplo": [
+   "2223000107",
+   "890/MHFGC/20",
+   "30-68685586-0",
+   "AR CAP SRL",
+   "CM",
+   "18/02/2026",
+   "3",
+   "$ 9.000,00",
+   "$ 1.155,94",
+   "$ 615,37"
+  ]
+ },
+ "C06": {
+  "0": {
+   "consulta": {
+    "instrumento": "461/AGIP/25",
+    "anio": 2026,
+    "estado": "Caduco",
+    "impuesto": "IIBB - Contribuyentes Locales"
+   },
+   "total": 16,
+   "base": 16,
+   "primeraPaginaIgual": true
+  },
+  "1": {
+   "consulta": {
+    "instrumento": "461/AGIP/25",
+    "anio": 2026,
+    "estado": "Nulo",
+    "impuesto": "IIBB - Convenio Multilateral"
+   },
+   "total": 30,
+   "base": 30,
+   "primeraPaginaIgual": true
+  },
+  "2": {
+   "consulta": {
+    "instrumento": "461/AGIP/25",
+    "anio": 2026,
+    "estado": "Cancelado",
+    "impuesto": "IIBB - Convenio Multilateral"
+   },
+   "total": 18,
+   "base": 18,
+   "primeraPaginaIgual": true
+  },
+  "fecha": "4/11/2026, 16:25:05"
+ },
+ "C07": {
+  "fecha": "4/11/2026, 16:25:20",
+  "consulta": {
+   "instrumento": "890/MHFGC/20",
+   "anio": 2025,
+   "estado": "Todos",
+   "impuesto": "IIBB - Contribuyentes Locales"
+  },
+  "total": 81,
+  "base": 81,
+  "totalPaginas": 2,
+  "p1": {
+   "filas": 50,
+   "igual": true,
+   "primeraDeshab": true,
+   "anteriorDeshab": true
+  },
+  "siguiente": {
+   "pagina": 2,
+   "igual": true
+  },
+  "primera": {
+   "pagina": 1
+  },
+  "ultima": {
+   "pagina": 2,
+   "siguienteDeshab": true,
+   "ultimaDeshab": true
+  },
+  "anterior": {
+   "pagina": 1
+  }
+ },
+ "C08": {
+  "fecha": "4/11/2026, 16:25:36",
+  "consulta": {
+   "instrumento": "461/AGIP/25",
+   "anio": 2026,
+   "estado": "Todos",
+   "impuesto": "IIBB - Convenio Multilateral"
+  },
+  "total": 72460,
+  "segundos": 1.437,
+  "paginas": [
+   {
+    "pagina": 2,
+    "codigo": 1,
+    "filas": 50,
+    "cuitsFueraDelPadron": 15
+   },
+   {
+    "pagina": 3,
+    "codigo": 1,
+    "filas": 50,
+    "cuitsFueraDelPadron": 10
+   },
+   {
+    "pagina": 4,
+    "codigo": 1,
+    "filas": 50,
+    "cuitsFueraDelPadron": 6
+   }
+  ]
+ },
+ "C09": {
+  "fecha": "4/11/2026, 16:25:44",
+  "consulta": {
+   "instrumento": "890/MHFGC/20",
+   "anio": 2026,
+   "estado": "Todos",
+   "impuesto": "Sellos - AR RELIT"
+  },
+  "base": 0,
+  "textoCA06": true,
+  "filas": 0,
+  "descargar": 0
+ },
+ "C10": {
+  "fecha": "4/11/2026, 16:25:54",
+  "visible": true,
+  "habilitado": true
+ },
+ "C11": {
+  "fecha": "4/11/2026, 16:26:01",
+  "consulta": {
+   "instrumento": "890/MHFGC/20",
+   "anio": 2026,
+   "estado": "Todos",
+   "impuesto": "IIBB - Convenio Multilateral"
+  },
+  "status": 200,
+  "segundos": 0.106,
+  "archivo": "ReportePlanFacilidades_2026_11_04.xlsx",
+  "encabezado": [
+   "Nro Solicitud",
+   "Instrumento Legal",
+   "CUIT",
+   "Razón Social",
+   "Impuesto",
+   "Fecha Alta",
+   "Cant. Cuotas",
+   "Deuda Nominal",
+   "Int. Resarcitorio",
+   "Int. Financiero"
+  ],
+  "filasExcel": 21,
+  "filasBase": 21,
+  "diferencias": [],
+  "fecha2223000125": "30/04/2026"
+ },
+ "C12": {
+  "fecha": "4/11/2026, 16:26:38",
+  "consulta": {
+   "instrumento": "461/AGIP/25",
+   "anio": 2026,
+   "estado": "Todos",
+   "impuesto": "IIBB - Convenio Multilateral"
+  },
+  "total": 72460,
+  "status": 200,
+  "segundos": 22.862,
+  "archivo": "ReportePlanFacilidades_2026_11_04.xlsx",
+  "filasExcel": 72460,
+  "distintos": 72460
+ },
+ "C13": {
+  "fecha": "4/11/2026, 16:26:50",
+  "textoCA09": true,
+  "filasAntes": 21,
+  "filasDespues": 21
+ },
+ "C14": {
+  "fecha": "4/11/2026, 16:26:59",
+  "consulta": {
+   "instrumento": "461/AGIP/25",
+   "anio": 2025,
+   "estado": "Todos",
+   "impuesto": "Automotor"
+  },
+  "total": 30,
+  "base": 30,
+  "aparece1583024404": true,
+  "igualBase": true
+ }
+}

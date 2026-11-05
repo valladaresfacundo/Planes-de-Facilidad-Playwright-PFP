@@ -1,0 +1,72 @@
+[
+ {
+  "consulta": "890/MHFGC/20 2025 IIBB - Contribuyentes Locales",
+  "status": 200,
+  "filasExcel": 81,
+  "filasBase": 81,
+  "ticket": [
+   "2243000089 Excel 20/08/2025 / esperado 20/08/2025"
+  ],
+  "mal": []
+ },
+ {
+  "consulta": "461/AGIP/25 2025 Inmobiliario/ABL",
+  "status": 200,
+  "filasExcel": 20,
+  "filasBase": 20,
+  "ticket": [
+   "1573000083 Excel 25/10/2025 / esperado 25/10/2025"
+  ],
+  "mal": []
+ },
+ {
+  "consulta": "461/AGIP/25 2025 Sellos - AR Contratos",
+  "status": 200,
+  "filasExcel": 13,
+  "filasBase": 13,
+  "ticket": [
+   "1783000037 Excel 28/10/2025 / esperado 28/10/2025"
+  ],
+  "mal": []
+ },
+ {
+  "consulta": "461/AGIP/25 2025 IIBB - Convenio Multilateral",
+  "status": 200,
+  "filasExcel": 26,
+  "filasBase": 26,
+  "ticket": [
+   "1523000035 Excel 03/11/2025 / esperado 03/11/2025"
+  ],
+  "mal": []
+ },
+ {
+  "consulta": "890/MHFGC/20 2025 IIBB - Convenio Multilateral",
+  "status": 200,
+  "filasExcel": 45,
+  "filasBase": 45,
+  "ticket": [
+   "2223000104 Excel 12/11/2025 / esperado 12/11/2025"
+  ],
+  "mal": []
+ },
+ {
+  "consulta": "461/AGIP/25 2026 Sellos - AR Martilleros",
+  "status": 200,
+  "filasExcel": 16,
+  "filasBase": 16,
+  "ticket": [
+   "1783000105 Excel 16/05/2026 / esperado 16/05/2026"
+  ],
+  "mal": []
+ },
+ {
+  "consulta": "890/MHFGC/20 2026 IIBB - Convenio Multilateral",
+  "status": 200,
+  "filasExcel": 21,
+  "filasBase": 21,
+  "ticket": [
+   "2223000125 Excel 30/04/2026 / esperado 30/04/2026"
+  ],
+  "mal": []
+ }
+]
