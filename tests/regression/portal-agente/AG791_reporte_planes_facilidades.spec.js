@@ -9,9 +9,7 @@
 // Solo lectura: no modifica datos (la descarga es un GET de reporte).
 //
 // Los defectos encontrados (AG-897 a AG-901, AG-944, AG-949) se verificaron
-// corregidos el 2026-10-30. El único test.fail() que queda documenta una
-// observación no cargada (orden de la grilla); si aparece como fallido en el
-// reporte es porque lo corrigieron: sacarle el test.fail().
+// corregidos el 2026-10-30, y AG-998/AG-999 el 2026-11-03.
 //
 // ⚠ Las consultas tardan 1–21 s en QA_AV (461/2026/CM: ~20 s, 72.392 planes).
 const { test, expect } = require('@playwright/test');
@@ -135,8 +133,9 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     await r.portal.screenshot({ path: 'screenshots/AG791_CA03_CA04_grilla.png', fullPage: true });
   });
 
+  // AG-999 (corregido 03/11): ordenaba por orden de inserción y no por created
+  // (2223000125, con created editado a 01/05/2026, salía 19.º en vez de 2.º).
   test('CA03 — orden ascendente por fecha de creación (890/2026/CM)', async ({ page }) => {
-    test.fail(true, 'Observación (no cargada en Jira): la grilla ordena por orden de inserción (_id), no por created. Solo se nota en 2223000125, cuyo created fue editado a mano (01/05/2026): aparece 19.º en vez de 2.º.');
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
     await r.consultarCon(CONSULTA_CHICA);
     const esperados = await planesEsperados(CONSULTA_CHICA);
@@ -246,8 +245,9 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     });
   });
 
+  // AG-998 (corregido 03/11): el Excel guardaba la Fecha Alta en UTC, un día más que
+  // la grilla para altas entre las 21:00 y las 23:59 (2223000125: 30/04 vs 01/05/2026).
   test('CA08 — Excel: Fecha Alta igual a la grilla (alta entre 21:00 y 23:59, plan 2223000125)', async ({ page }) => {
-    test.fail(true, 'Defecto (02/11): el Excel guarda la Fecha Alta en UTC con formato dd/MM/yyyy, así que un alta entre las 21:00 y las 23:59 hora argentina sale con un día más que en la grilla. Ej. 2223000125: grilla 30/04/2026, Excel 01/05/2026. 7 planes de QA en esa franja.');
     const r = await new ReportePlanesFacilidadesPage(page).abrir();
     await r.consultarCon(CONSULTA_CHICA);
     const enGrilla = (await r.leerGrilla()).find(f => f[0] === '2223000125');
@@ -256,7 +256,9 @@ test.describe('AG-791 — Reporte Planes de Facilidades (Portal Agente)', () => 
     await descarga.saveAs(archivo);
     const [, ...filas] = leerXlsx(archivo);
     // Excel muestra el serial tal cual (sin zona horaria) con el formato dd/MM/yyyy de la celda
-    const iso = new Date(Math.round((Number(filas.find(f => String(f[0]) === '2223000125')[5]) - 25569) * 86400000)).toISOString();
+    const celda = filas.find(f => String(f[0]) === '2223000125')[5];
+    if (/^\d{2}\/\d{2}\/\d{4}/.test(String(celda))) return expect(String(celda).slice(0, 10)).toBe(enGrilla[5]);
+    const iso = new Date(Math.round((Number(celda) - 25569) * 86400000)).toISOString();
     expect(`${iso.slice(8, 10)}/${iso.slice(5, 7)}/${iso.slice(0, 4)}`).toBe(enGrilla[5]);
   });
 

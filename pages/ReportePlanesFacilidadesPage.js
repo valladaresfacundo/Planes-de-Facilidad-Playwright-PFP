@@ -38,6 +38,8 @@ class ReportePlanesFacilidadesPage {
     await this.campo(nombre).click();
     const menu = this.portal.locator('.menuable__content__active');
     await menu.waitFor({ state: 'visible' });
+    // Las opciones llegan del backend: recién abierta la pantalla el menú puede estar vacío
+    await menu.getByRole('option').first().waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
     const vistas = [];
     for (let i = 0; i < 20; i++) {
       for (const t of await menu.getByRole('option').allInnerTexts()) if (!vistas.includes(t.trim())) vistas.push(t.trim());
