@@ -15,23 +15,25 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage }    = require('../../../pages/LoginPage');
 const { PFPPage }      = require('../../../pages/PFPPage');
-const { AMBIENTES, CONTRIBUYENTES, SIGN_CCT, PFP } = require('../../../fixtures/test-data');
+const { cuitConDeuda } = require('../../../lib/deudaEjecucion');
+const { AMBIENTES, SIGN_CCT, PFP } = require('../../../fixtures/test-data');
 
 test.describe('F3001 — Acogimiento (Planes / Moratoria)', () => {
 
+  // 2026-11-12: cada acogimiento consume un período de deuda — el CUIT sale del
+  // pool CUITS_EJECUCION, que se recarga solo si le quedan pocos períodos.
   async function loginYNavegar(page) {
     const loginPage = new LoginPage(page);
-    await loginPage.login(AMBIENTES.QA_AV, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
+    await loginPage.login(AMBIENTES.QA_AV, await cuitConDeuda(page.request), SIGN_CCT);
     const portalPage = loginPage.obtenerPagina();
     const pfpPage = new PFPPage(portalPage);
     await pfpPage.irAPlanesYMoratoria();
     return { portalPage, pfpPage };
   }
 
-  // Consulta deuda — 2026-08-20: CONTRIBUYENTES.conPlan.cuit se reemplazó por
-  // 27236036044, que sí tiene deuda real en "IIBB - Convenio Multilateral"
-  // (a diferencia del CUIT anterior). Por ahora sin fallback a Sellos — el
-  // usuario pidió probar puntualmente con Convenio Multilateral primero.
+  // Consulta deuda en "IIBB - Convenio Multilateral" (la que carga la DJ 5866).
+  // Sin fallback a Sellos — el usuario pidió probar puntualmente con Convenio
+  // Multilateral primero.
   async function consultarDeuda(portalPage, pfpPage) {
     await pfpPage.consultarDeudaConFallback({
       tipoPlan: '461/AGIP/25',

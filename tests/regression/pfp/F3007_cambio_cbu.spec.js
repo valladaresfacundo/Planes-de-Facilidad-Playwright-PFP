@@ -10,8 +10,8 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../../pages/LoginPage');
 const { PFPPage }   = require('../../../pages/PFPPage');
-const { planSinTocar } = require('../../../lib/fabricaPlanes');
-const { AMBIENTES, CONTRIBUYENTES, SIGN_CCT } = require('../../../fixtures/test-data');
+const { planSinTocar, cuitDelPlan } = require('../../../lib/fabricaPlanes');
+const { AMBIENTES, SIGN_CCT } = require('../../../fixtures/test-data');
 
 test.describe('F3007 — Cambio de CBU', () => {
 
@@ -19,7 +19,7 @@ test.describe('F3007 — Cambio de CBU', () => {
 
   async function loginYBuscarPlan(page, nroSolicitud) {
     const loginPage = new LoginPage(page);
-    await loginPage.login(AMBIENTES.QA_AV, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
+    await loginPage.login(AMBIENTES.QA_AV, await cuitDelPlan(nroSolicitud), SIGN_CCT);
     const portalPage = loginPage.obtenerPagina();
     const pfpPage = new PFPPage(portalPage);
     await pfpPage.irAPlanesDeFacilidades();
@@ -43,7 +43,7 @@ test.describe('F3007 — Cambio de CBU', () => {
     await expect(btnConfirmar).toBeDisabled();
 
     await portalPage.getByRole('textbox', { name: 'Titular de Cuenta' }).fill('test cambio cbu');
-    await portalPage.getByRole('textbox', { name: 'CUIT' }).fill(CONTRIBUYENTES.conPlan.cuit);
+    await portalPage.getByRole('textbox', { name: 'CUIT' }).fill(await cuitDelPlan(solicitud));
     await portalPage.getByRole('textbox', { name: 'CBU' }).fill('0065639511100051073131');
     await expect(btnConfirmar).toBeEnabled();
     await btnConfirmar.click();

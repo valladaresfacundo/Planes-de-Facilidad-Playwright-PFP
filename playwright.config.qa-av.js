@@ -7,6 +7,8 @@ const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
   testDir: './tests',
+  // Carga deuda a los CUITS_EJECUCION si les quedan pocos períodos (SIN_CARGA_DEUDA=1 lo saltea)
+  globalSetup: require.resolve('./lib/globalSetupDeuda.js'),
   retries: 2,
   workers: 1,
   use: {

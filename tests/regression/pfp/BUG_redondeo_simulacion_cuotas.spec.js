@@ -39,7 +39,8 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../../pages/LoginPage');
 const { PFPPage } = require('../../../pages/PFPPage');
-const { AMBIENTES, CONTRIBUYENTES, SIGN_CCT } = require('../../../fixtures/test-data');
+const { AMBIENTES, SIGN_CCT } = require('../../../fixtures/test-data');
+const { cuitConDeuda } = require('../../../lib/deudaEjecucion');
 
 function parsearMoneda(texto) {
   const limpio = texto.replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.');
@@ -103,7 +104,7 @@ test('BUG_REDONDEO_CUOTAS — Importe Nominal + Interés financiero debe coincid
   test.fail(true, 'Bug real confirmado 2026-09-16 — la columna "Importe total" del detalle de simulación usa un promedio en vez del cálculo real por fila.');
 
   const loginPage = new LoginPage(page);
-  await loginPage.login(AMBIENTES.QA_AV, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
+  await loginPage.login(AMBIENTES.QA_AV, await cuitConDeuda(page.request), SIGN_CCT);
   const portalPage = loginPage.obtenerPagina();
   const pfpPage = new PFPPage(portalPage);
 

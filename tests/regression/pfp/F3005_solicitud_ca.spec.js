@@ -19,8 +19,8 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../../pages/LoginPage');
 const { PFPPage }   = require('../../../pages/PFPPage');
-const { planSinTocar, planCuota1Paga } = require('../../../lib/fabricaPlanes');
-const { AMBIENTES, CONTRIBUYENTES, SIGN_CCT } = require('../../../fixtures/test-data');
+const { planSinTocar, planCuota1Paga, cuitDelPlan } = require('../../../lib/fabricaPlanes');
+const { AMBIENTES, SIGN_CCT } = require('../../../fixtures/test-data');
 
 test.describe('F3005 — Solicitud de Cancelación Anticipada', () => {
 
@@ -28,7 +28,7 @@ test.describe('F3005 — Solicitud de Cancelación Anticipada', () => {
 
   async function loginYBuscarPlan(page, nroSolicitud) {
     const loginPage = new LoginPage(page);
-    await loginPage.login(AMBIENTES.QA_AV, CONTRIBUYENTES.conPlan.cuit, SIGN_CCT);
+    await loginPage.login(AMBIENTES.QA_AV, await cuitDelPlan(nroSolicitud), SIGN_CCT);
     const portalPage = loginPage.obtenerPagina();
     const pfpPage = new PFPPage(portalPage);
     await pfpPage.irAPlanesDeFacilidades();

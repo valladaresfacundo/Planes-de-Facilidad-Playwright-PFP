@@ -17,6 +17,18 @@ const AMBIENTES_AGENTE = {
   DEV20:   'http://portal-agente20-dev.apps.ocp-test-hc.agip.gob.ar/',
 };
 
+// ─── CUITs de ejecución ───────────────────────────────────────────────────────
+// Los tests que GENERAN planes (F3001, fábrica de planes, BUG_REDONDEO) consumen
+// un período de deuda por plan. Usan este pool en orden: lib/deudaEjecucion.js
+// les carga deuda (DJ 5866) cuando les quedan pocos períodos y pasa al siguiente
+// cuando uno agota la ventana de la 5866 (2020/01–2022/07, 31 períodos).
+// 2026-11-12: elegidos de GET api-publicador /publicador/PlanEspecial/cuits, sin
+// planes PFP previos (20245605677 GUSTAVO MITELMAN, 27191402451 ANDREI
+// KRAMARENKO, 20318911194 GABRIEL DE LUNARDO). Se puede cambiar con
+// CUITS_EJECUCION=cuit1,cuit2 en .env.
+const CUITS_EJECUCION = (process.env.CUITS_EJECUCION || '20245605677,27191402451,20318911194')
+  .split(',').map(c => c.trim()).filter(Boolean);
+
 // ─── Contribuyentes de prueba ─────────────────────────────────────────────────
 // Reemplazá los CUITs con contribuyentes reales del padrón de QA
 const CONTRIBUYENTES = {
@@ -342,4 +354,4 @@ const EXPEDIENTE_REVERSA = {
   reparticion: 'DGR',
 };
 
-module.exports = { AMBIENTES, AMBIENTES_AGENTE, AMBIENTES_API, CONTRIBUYENTES, SIGN_CCT, CUIT_AUTENTICADO, PFP, AGENTE, SIGN_AGENTE, PLANES_CONOCIDOS, EXPEDIENTE_REVERSA };
+module.exports = { AMBIENTES, AMBIENTES_AGENTE, AMBIENTES_API, CONTRIBUYENTES, CUITS_EJECUCION, SIGN_CCT, CUIT_AUTENTICADO, PFP, AGENTE, SIGN_AGENTE, PLANES_CONOCIDOS, EXPEDIENTE_REVERSA };
