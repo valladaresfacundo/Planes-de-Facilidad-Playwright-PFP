@@ -26,3 +26,6 @@ fixtures/planes-runtime.json
 
 # Archivos de bloqueo de Office (documento abierto)
 ~$*
+
+# Salidas del piloto de enmascaramiento (se regeneran; la tabla de equivalencias vive fuera del proyecto)
+enmascarado/salida/
