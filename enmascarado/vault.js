@@ -65,6 +65,10 @@ class Vault {
     if (valor === null || valor === undefined) return valor;
     let norm = Vault.normalizar(valor);
     if (norm.trim() === '') return valor;
+    // Valores de relleno (0, "0", "000") no identifican a nadie: si se
+    // tokenizaran, todos los registros sin dato compartirían el mismo alias y
+    // el asistente los tomaría como el mismo valor.
+    if (/^\s*0+\s*$/.test(norm)) return valor;
     // Un valor que ya es un alias de esta bóveda no se vuelve a enmascarar.
     if (this.aliasAReal.has(norm)) return norm;
     if (categoria === 'CUIT') norm = norm.replace(/-/g, '');
